@@ -31,7 +31,9 @@ class AssignmentTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return dataSourse.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,10 +41,13 @@ class AssignmentTableController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
         
         cell.course.text = dataSourse[indexPath.row].0
+        
         cell.assignment.text = dataSourse[indexPath.row].1
+        
         cell.time.text = dataSourse[indexPath.row].2
         
         let alpha = ((CGFloat(dataSourse.count - indexPath.row)) / CGFloat(dataSourse.count)) * 0.5
+        
         cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha)
         
         return cell;
