@@ -14,6 +14,4 @@ class AssignmentCell : UITableViewCell {
     @IBOutlet weak var assignment: UILabel!
     @IBOutlet weak var time: UILabel!
     
-    
-    
 }

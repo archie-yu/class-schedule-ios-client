@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
+		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
 		11E8970E1DE0189C00226CF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8970D1DE0189C00226CF1 /* AppDelegate.swift */; };
-		11E897101DE0189C00226CF1 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8970F1DE0189C00226CF1 /* CourseViewController.swift */; };
 		11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E897111DE0189C00226CF1 /* AssignmentTableController.swift */; };
 		11E897151DE0189C00226CF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E897131DE0189C00226CF1 /* Main.storyboard */; };
 		11E897171DE0189C00226CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E897161DE0189C00226CF1 /* Assets.xcassets */; };
@@ -19,9 +19,9 @@
 
 /* Begin PBXFileReference section */
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
+		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		11E8970A1DE0189C00226CF1 /* Course.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Course.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E8970D1DE0189C00226CF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11E8970F1DE0189C00226CF1 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		11E897111DE0189C00226CF1 /* AssignmentTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableController.swift; sourceTree = "<group>"; };
 		11E897141DE0189C00226CF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11E897161DE0189C00226CF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,14 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
-				11E8970F1DE0189C00226CF1 /* CourseViewController.swift */,
-				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
 				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
+				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
+				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
+				119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
 				11E8971B1DE0189C00226CF1 /* Info.plist */,
-				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -147,10 +147,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */,
+				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
 				11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */,
 				11E8970E1DE0189C00226CF1 /* AppDelegate.swift in Sources */,
-				11E897101DE0189C00226CF1 /* CourseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

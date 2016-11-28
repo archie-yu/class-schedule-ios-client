@@ -46,7 +46,7 @@ class AssignmentTableController: UITableViewController {
         cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha)
         
         return cell;
+        
     }
     
 }
-
