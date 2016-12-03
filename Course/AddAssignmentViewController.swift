@@ -8,16 +8,19 @@
 
 import UIKit
 
-class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     var year = 0
     let max = 16384
+    var firstEditing = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         coursePicker.delegate = self
         coursePicker.selectRow(max / 2, inComponent: 0, animated: false)
+        
         timePicker.delegate = self
         let date = Date()
         let timeFormatter = DateFormatter()
@@ -36,6 +39,11 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         timePicker.selectRow(max / 2 + day - 1, inComponent: 2, animated: true)
         timePicker.selectRow(max / 2 + hour, inComponent: 3, animated: true)
         timePicker.selectRow(max / 2 + minute, inComponent: 4, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddAssignmentViewController.keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        assignmentText.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,5 +105,61 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         }
         return title
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        //        print("show")
+        if let userInfo = notification.userInfo, let value = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue, let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double, let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            let frame = value.cgRectValue
+            let intersection = frame.intersection(self.view.frame)
+            
+            let deltaY = intersection.height
+            
+            //            if keyBoardNeedLayout {
+            UIView.animate(withDuration: duration, delay: 0.0,
+                           options: UIViewAnimationOptions(rawValue: curve),
+                           animations: { _ in
+                            self.view.frame = CGRect(x: 0, y: -deltaY, width: self.view.bounds.width, height: self.view.bounds.height)
+                            //                                            self.keyBoardNeedLayout = false
+                            self.view.layoutIfNeeded()
+            }, completion: nil)
+            //            }
+            
+            
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+//        print("hide")
+        if let userInfo = notification.userInfo, let value = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue,let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double, let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            let frame = value.cgRectValue
+            let intersection = frame.intersection(self.view.frame)
+            
+            let deltaY = intersection.height
+            
+            UIView.animate(withDuration: duration, delay: 0.0,
+                                       options: UIViewAnimationOptions(rawValue: curve),
+                                       animations: { _ in
+                                        self.view.frame = CGRect(x: 0,y: deltaY, width: self.view.bounds.width,height: self.view.bounds.height)
+//                                        self.keyBoardNeedLayout = true
+                                        self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func editingDidBegin(_ sender: UITextField) {
+        if firstEditing {
+            sender.text = ""
+            sender.textColor = UIColor.white
+            sender.alpha = 1
+            firstEditing = false
+        }
+    }
+    
     
 }
