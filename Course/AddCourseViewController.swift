@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCourseViewController: UIViewController , UIPickerViewDelegate,UIPickerViewDataSource{
+class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     let DAY_OF_WEEK = 7
     
