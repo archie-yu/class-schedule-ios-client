@@ -11,11 +11,13 @@ import UIKit
 class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var year = 0
+    let max = 16384
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         coursePicker.delegate = self
+        coursePicker.selectRow(max / 2, inComponent: 0, animated: false)
         timePicker.delegate = self
         let date = Date()
         let timeFormatter = DateFormatter()
@@ -29,11 +31,11 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         let hour = Int(timeFormatter.string(from: date))!
         timeFormatter.dateFormat = "mm"
         let minute = Int(timeFormatter.string(from: date))!
-        timePicker.selectRow(0, inComponent: 0, animated: true)
-        timePicker.selectRow(month - 1, inComponent: 1, animated: true)
-        timePicker.selectRow(day - 1, inComponent: 2, animated: true)
-        timePicker.selectRow(hour, inComponent: 3, animated: true)
-        timePicker.selectRow(minute, inComponent: 4, animated: true)
+        timePicker.selectRow(max / 2, inComponent: 0, animated: true)
+        timePicker.selectRow(max / 2 + month - 1, inComponent: 1, animated: true)
+        timePicker.selectRow(max / 2 + day - 1, inComponent: 2, animated: true)
+        timePicker.selectRow(max / 2 + hour, inComponent: 3, animated: true)
+        timePicker.selectRow(max / 2 + minute, inComponent: 4, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,33 +60,37 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerView {
-        case coursePicker: return courseList.count
-        case timePicker:
-            switch component {
-            case 0: return 4
-            case 1: return 12
-            case 2: return 31
-            case 3: return 24
-            case 4: return 60
-            default: return 0
-            }
-        default: return 0
-        }
+        return max
+//        switch pickerView {
+//        case coursePicker: return courseList.count
+//        case timePicker:
+//            switch component {
+//            case 0: return 4
+//            case 1: return 12
+//            case 2: return 31
+//            case 3: return 24
+//            case 4: return 60
+//            default: return 0
+//            }
+//        default: return 0
+//        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int,
                     reusing view: UIView?) -> UIView {
         let title = UILabel()
         title.textColor = UIColor.white
-        title.textAlignment = NSTextAlignment.center
         switch pickerView {
-        case coursePicker: title.text = courseList[row].courseName
+        case coursePicker:
+            title.text = "   " + courseList[(row - max / 2 % courseList.count) % courseList.count].courseName
         case timePicker:
+            title.textAlignment = NSTextAlignment.center
             switch component {
-            case 0: title.text = String(row + year)
-            case 1, 2: title.text = String(row + 1)
-            case 3, 4: title.text = String(row)
+            case 0: title.text = String((row - max / 2 % 4) % 4 + year)
+            case 1: title.text = String((row - max / 2 % 12) % 12 + 1)
+            case 2: title.text = String((row - max / 2 % 31) % 31 + 1)
+            case 3: title.text = String((row - max / 2 % 24) % 24)
+            case 4: title.text = String((row - max / 2 % 60) % 60)
             default: title.text = ""
             }
         default: title.text = ""
