@@ -175,7 +175,7 @@
         <!--View Controller-->
         <scene sceneID="fYz-uy-mcS">
             <objects>
-                <viewController id="Vwz-Gn-cJy" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Vwz-Gn-cJy" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3KZ-hd-DNX"/>
                         <viewControllerLayoutGuide type="bottom" id="2Kl-pL-jPO"/>
@@ -183,12 +183,12 @@
                     <view key="view" contentMode="scaleToFill" id="xN8-na-d1c">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.16621512174606323" green="0.46288818120956421" blue="0.81888490915298462" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qwd-2c-7Qd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2489" y="675"/>
+            <point key="canvasLocation" x="2489" y="685"/>
         </scene>
         <!--课程-->
         <scene sceneID="J7z-ln-uFs">

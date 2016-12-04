@@ -17,8 +17,9 @@ class AssignmentTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //assignmentTable.delegate = self
-        //assignmentTable.dataSource = self
+//        assignmentTable.delegate = self
+//        assignmentTable.dataSource = self
+//        self.hidesBottomBarWhenPushed = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +47,8 @@ class AssignmentTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
+        
+        cell.selectionStyle = .none
         
         cell.course.text = assignmentList[indexPath.row].courseName
         
