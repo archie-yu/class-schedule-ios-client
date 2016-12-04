@@ -40,11 +40,11 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         let hour = Int(timeFormatter.string(from: date))!
         timeFormatter.dateFormat = "mm"
         let minute = Int(timeFormatter.string(from: date))!
-        timePicker.selectRow(max / 2, inComponent: 0, animated: true)
-        timePicker.selectRow(max / 2 + month - 1, inComponent: 1, animated: true)
-        timePicker.selectRow(max / 2 + day - 1, inComponent: 2, animated: true)
-        timePicker.selectRow(max / 2 + hour, inComponent: 3, animated: true)
-        timePicker.selectRow(max / 2 + minute, inComponent: 4, animated: true)
+        timePicker.selectRow(max / 2 - (max / 2 % 4), inComponent: 0, animated: true)
+        timePicker.selectRow(max / 2 - (max / 2 % 12) + month - 1, inComponent: 1, animated: true)
+        timePicker.selectRow(max / 2 - (max / 2 % 31) + day - 1, inComponent: 2, animated: true)
+        timePicker.selectRow(max / 2 - (max / 2 % 24) + hour, inComponent: 3, animated: true)
+        timePicker.selectRow(max / 2 - (max / 2 % 60) + minute, inComponent: 4, animated: true)
         
         assignmentText.delegate = self
         
@@ -104,11 +104,11 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         case timePicker:
             title.textAlignment = NSTextAlignment.center
             switch component {
-            case 0: title.text = String((row - max / 2 % 4) % 4 + year)
-            case 1: title.text = String((row - max / 2 % 12) % 12 + 1)
-            case 2: title.text = String((row - max / 2 % 31) % 31 + 1)
-            case 3: title.text = String((row - max / 2 % 24) % 24)
-            case 4: title.text = String((row - max / 2 % 60) % 60)
+            case 0: title.text = String(row % 4 + year)
+            case 1: title.text = String(row % 12 + 1)
+            case 2: title.text = String(row % 31 + 1)
+            case 3: title.text = String(row % 24)
+            case 4: title.text = String(row % 60)
             default: title.text = ""
             }
         default: title.text = ""
