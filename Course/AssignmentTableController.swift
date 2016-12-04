@@ -17,7 +17,7 @@ class AssignmentTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        assignmentTable.delegate = self
+        assignmentTable.delegate = self
 //        assignmentTable.dataSource = self
 //        self.hidesBottomBarWhenPushed = true
     }
@@ -78,6 +78,16 @@ class AssignmentTableController: UITableViewController {
         if editingStyle == .delete {
             assignmentList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAssignmentDetail" {
+            let controller = segue.destination as! AssignmentDetailViewController
+//            if let assignment = sender as? AssignmentCell {
+//                controller.courseName = assignment.course.text!
+                controller.assignmentNo = (assignmentTable.indexPathForSelectedRow?.row)!
+//            }
         }
     }
     
