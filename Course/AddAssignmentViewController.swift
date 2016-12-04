@@ -161,5 +161,57 @@ class AddAssignmentViewController : UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
+    @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {
+        if firstEditing == false && assignmentText.text != "" {
+            let courseName = courseList[coursePicker.selectedRow(inComponent: 0) % courseList.count].courseName
+            let content = assignmentText.text!
+            let month = 1 + timePicker.selectedRow(inComponent: 1) % 12
+            var monthString : String
+            if month >= 10 {
+                monthString = String(month)
+            }
+            else {
+                monthString = "0" + String(month)
+            }
+            let day = 1 + timePicker.selectedRow(inComponent: 2) % 31
+            var dayString : String
+            if day >= 10 {
+                dayString = String(day)
+            }
+            else {
+                dayString = "0" + String(day)
+            }
+            let hour = timePicker.selectedRow(inComponent: 3) % 24
+            var hourString : String
+            if hour >= 10 {
+                hourString = String(hour)
+            }
+            else {
+                hourString = "0" + String(hour)
+            }
+            let minute = timePicker.selectedRow(inComponent: 4) % 60
+            var minuteString : String
+            if minute >= 10 {
+                minuteString = String(minute)
+            }
+            else {
+                minuteString = "0" + String(minute)
+            }
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "yyyyMMddHHmm"
+            let time = timeFormatter.date(from: String(year + timePicker.selectedRow(inComponent: 0) % 4)
+                + monthString + dayString + hourString + minuteString)
+            assignmentList.append(AssignmentModel(courseName, content, time!))
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
+        else {
+//            let malert = UIAlertView(title: "提示", message: "未输入作业内容！", delegate: self, cancelButtonTitle: "确定")
+//            alert.alertViewStyle = UIAlertViewStyle.default
+            let alertController = UIAlertController(title: "提示", message: "未输入作业内容！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
     
 }

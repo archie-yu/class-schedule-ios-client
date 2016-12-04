@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11280D1B1DF3446800ADE782 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11280D1A1DF3446800ADE782 /* AssignmentModel.swift */; };
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
 		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11280D1A1DF3446800ADE782 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
 		118D27501DEC1236009BFA17 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
 				118D27501DEC1236009BFA17 /* CourseModel.swift */,
 				119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */,
+				11280D1A1DF3446800ADE782 /* AssignmentModel.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
 				11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */,
+				11280D1B1DF3446800ADE782 /* AssignmentModel.swift in Sources */,
 				11E8970E1DE0189C00226CF1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

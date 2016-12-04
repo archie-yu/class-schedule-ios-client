@@ -12,10 +12,17 @@ class AssignmentTableController: UITableViewController {
     
     let identifier = "assignment"
 
+    @IBOutlet var assignmentTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        //assignmentTable.delegate = self
+        //assignmentTable.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        assignmentTable.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,8 +30,8 @@ class AssignmentTableController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    var dataSourse = [("移动互联应用技术","App构思展示","Mon. 14:00"),
-                      ("计算机图形学","大作业第一阶段","Mon. 24:00")]
+//    var dataSourse = [("移动互联应用技术","App构思展示","Mon. 14:00"),
+//                      ("计算机图形学","大作业第一阶段","Mon. 24:00")]
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -32,7 +39,7 @@ class AssignmentTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return dataSourse.count
+        return assignmentList.count
         
     }
     
@@ -40,18 +47,35 @@ class AssignmentTableController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
         
-        cell.course.text = dataSourse[indexPath.row].0
+        cell.course.text = assignmentList[indexPath.row].courseName
         
-        cell.assignment.text = dataSourse[indexPath.row].1
+        cell.assignment.text = assignmentList[indexPath.row].content
         
-        cell.time.text = dataSourse[indexPath.row].2
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "E HH:mm"
+        cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].time)
         
-        let alpha = ((CGFloat(dataSourse.count - indexPath.row)) / CGFloat(dataSourse.count)) * 0.5
+        let alpha = ((CGFloat(assignmentList.count - indexPath.row)) / CGFloat(assignmentList.count)) * 0.5
         
         cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha)
         
         return cell;
         
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            assignmentList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
     }
     
 }
