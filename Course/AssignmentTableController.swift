@@ -84,9 +84,9 @@ class AssignmentTableController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowAssignmentDetail" {
             let controller = segue.destination as! AssignmentDetailViewController
+            controller.assignmentNo = (assignmentTable.indexPathForSelectedRow?.row)!
 //            if let assignment = sender as? AssignmentCell {
 //                controller.courseName = assignment.course.text!
-                controller.assignmentNo = (assignmentTable.indexPathForSelectedRow?.row)!
 //            }
         }
     }
