@@ -18,6 +18,9 @@
 		11E897171DE0189C00226CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E897161DE0189C00226CF1 /* Assets.xcassets */; };
 		11E8971A1DE0189C00226CF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */; };
 		11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E897211DE021F400226CF1 /* AddCourseViewController.swift */; };
+		CA90B33D1DF95ABF006785DC /* DisplayCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */; };
+		CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */; };
+		CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		11E897191DE0189C00226CF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11E8971B1DE0189C00226CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11E897211DE021F400226CF1 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayCoursesViewController.swift; path = ../DisplayCoursesViewController.swift; sourceTree = "<group>"; };
+		CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMainViewController.swift; sourceTree = "<group>"; };
+		CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
+				CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */,
 				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
 				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
 				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
@@ -75,6 +82,8 @@
 				11280D1A1DF3446800ADE782 /* AssignmentModel.swift */,
 				115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
+				CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */,
+				CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */,
 				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
 				11E8971B1DE0189C00226CF1 /* Info.plist */,
@@ -155,7 +164,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA90B33D1DF95ABF006785DC /* DisplayCoursesViewController.swift in Sources */,
+				CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */,
 				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
+				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,
 				1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */,
 				115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */,
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,

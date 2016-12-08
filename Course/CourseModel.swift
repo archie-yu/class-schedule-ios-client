@@ -8,13 +8,21 @@
 
 import Foundation
 
-var courseList : [CourseModel] = [.init("移动互联应用设计"), .init("概率论")]
+var courseList : [CourseModel] = []
 
 class CourseModel : NSObject {
     
     var courseName = "";
     
-    init(_ courseName : String) {
+    var teacherName = "";
+    
+    var date = "";
+    
+    var begin_class = 1;
+    
+    var end_class = 2;
+    
+    init(courseName : String,teacherName : String,date : String,begin_class:Int,end_class:Int) {
         self.courseName = courseName
     }
     

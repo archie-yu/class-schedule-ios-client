@@ -69,4 +69,44 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         return nil
     }
+    @IBOutlet weak var CourseName: UITextField!
+    
+    @IBAction func ReadyToTyping(_ sender: UITextField) {
+        if CourseName.text == "请输入课程名"{
+            CourseName.text = ""
+        }
+        
+    }
+    
+    @IBAction func TypingEnded(_ sender: UITextField) {
+        if CourseName.text == ""{
+            CourseName.text = "请输入课程名"
+        }
+    }
+    @IBOutlet weak var TeacherName: UITextField!
+    
+    @IBAction func TeacherNameEnterBegin(_ sender: UITextField) {
+        if TeacherName.text == "请输入老师姓名"{
+            TeacherName.text = ""
+        }
+    }
+    
+    @IBAction func TeacherNameEnterEnded(_ sender: UITextField) {
+        if TeacherName.text == ""{
+            TeacherName.text = "请输入老师姓名"
+        }
+    }
+    
+    @IBAction func AddCourse(_ sender: UIBarButtonItem) {
+        
+        let newCourse = CourseModel(courseName: CourseName.text!,
+                                    teacherName: "",
+                            date: weekday[PickerView.selectedRow(inComponent: 0)],
+                            begin_class: PickerView.selectedRow(inComponent: 1),
+                            end_class: PickerView.selectedRow(inComponent: 2));
+        
+        courseList.append(newCourse)
+        
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
 }
