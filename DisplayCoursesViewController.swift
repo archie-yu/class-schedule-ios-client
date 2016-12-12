@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisplayCoursesViewController: UIViewController {
+class DisplayCoursesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var dayID = 0
     
@@ -16,8 +16,10 @@ class DisplayCoursesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        CoursesTableList.delegate = self
+        CoursesTableList.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +30,7 @@ class DisplayCoursesViewController: UIViewController {
     func getdayID()->Int{
         return dayID
     }
+    
     /*
     // MARK: - Navigation
 
@@ -37,5 +40,19 @@ class DisplayCoursesViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as UITableViewCell
+        cell.textLabel?.text = "test"
+        return cell;
+    }
+    
 }

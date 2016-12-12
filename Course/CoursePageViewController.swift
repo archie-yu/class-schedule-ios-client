@@ -10,30 +10,35 @@ import UIKit
 
 class CoursePageViewController: UIPageViewController {
     
-    public var mondayController = DisplayCoursesViewController()
+    var mondayController : DisplayCoursesViewController?
     
-    var tuesdayController = DisplayCoursesViewController()
+    var tuesdayController : DisplayCoursesViewController?
     
-    var wednesdayController = DisplayCoursesViewController()
+    var wednesdayController : DisplayCoursesViewController?
     
-    var thursdayController = DisplayCoursesViewController()
+    var thursdayController : DisplayCoursesViewController?
     
-    var fridayController = DisplayCoursesViewController()
+    var fridayController : DisplayCoursesViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        mondayController.dayID = 1
+        mondayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
+        mondayController?.dayID = 1
         
-        tuesdayController.dayID = 2
+        tuesdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
+        tuesdayController?.dayID = 2
         
-        wednesdayController.dayID = 3
+        wednesdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
+        wednesdayController?.dayID = 3
         
-        thursdayController.dayID = 4
+        thursdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
+        thursdayController?.dayID = 4
         
-        fridayController.dayID = 5
+        fridayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
+        fridayController?.dayID = 5
         
     }
 

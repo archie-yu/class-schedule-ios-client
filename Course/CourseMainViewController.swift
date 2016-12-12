@@ -10,14 +10,18 @@ import UIKit
 
 class CourseMainViewController: UIViewController, UIPageViewControllerDataSource {
     
-    var pageViewController:CoursePageViewController!
+    var PageViewController:CoursePageViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        pageViewController = self.childViewControllers.first as!
+        PageViewController = self.childViewControllers.first as!
         CoursePageViewController
+        
+        PageViewController.dataSource = self
+        
+        PageViewController.setViewControllers([PageViewController.mondayController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +41,25 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
     */
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if let daycontroller = viewController as? DisplayCoursesViewController{
+            let dayid = daycontroller.getdayID()
+            
+            switch dayid {
+            case 1:
+                return PageViewController.tuesdayController
+            case 2:
+                return PageViewController.wednesdayController
+            case 3:
+                return PageViewController.thursdayController
+            case 4:
+                return PageViewController.fridayController
+            case 5:
+                return PageViewController.mondayController
+            default:
+                return nil
+            }
+            
+        }
         return nil
     }
     
