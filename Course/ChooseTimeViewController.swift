@@ -21,6 +21,9 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.layer.cornerRadius = 4
+        self.view.clipsToBounds = true
+        
         timePicker.delegate = self
         timePicker.dataSource = self
         let curDate = Date()

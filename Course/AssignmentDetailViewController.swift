@@ -21,4 +21,8 @@ class AssignmentDetailViewController : UIViewController {
         assignmentContent.text = assignmentList[assignmentNo].content
     }
     
+    @IBAction func checkRemainingTime(_ sender: Any) {
+        
+    }
+    
 }

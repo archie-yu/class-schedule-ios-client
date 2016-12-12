@@ -13,6 +13,7 @@ class AssignmentCell : UITableViewCell {
     @IBOutlet weak var course: UILabel!
     @IBOutlet weak var assignment: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var card: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
