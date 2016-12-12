@@ -24,7 +24,10 @@ class DisplayCoursesViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func getdayID()->Int{
+        return dayID
+    }
     /*
     // MARK: - Navigation
 

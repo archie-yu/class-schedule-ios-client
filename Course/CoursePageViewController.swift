@@ -10,7 +10,7 @@ import UIKit
 
 class CoursePageViewController: UIPageViewController {
     
-    var mondayController = DisplayCoursesViewController()
+    public var mondayController = DisplayCoursesViewController()
     
     var tuesdayController = DisplayCoursesViewController()
     
