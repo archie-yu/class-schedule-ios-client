@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		11280D1B1DF3446800ADE782 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11280D1A1DF3446800ADE782 /* AssignmentModel.swift */; };
 		115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */; };
+		1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B22A1DFE9E5E0026046C /* CourseCell.swift */; };
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
 		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		11280D1A1DF3446800ADE782 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
+		1179B22A1DFE9E5E0026046C /* CourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCell.swift; sourceTree = "<group>"; };
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
 		118D27501DEC1236009BFA17 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,81 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1179B2271DFE9DDB0026046C /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				118D27501DEC1236009BFA17 /* CourseModel.swift */,
+				1179B22F1DFEA09E0026046C /* Add */,
+				1179B2291DFE9DFA0026046C /* Page */,
+			);
+			name = Course;
+			sourceTree = "<group>";
+		};
+		1179B2281DFE9DED0026046C /* Assignment */ = {
+			isa = PBXGroup;
+			children = (
+				11280D1A1DF3446800ADE782 /* AssignmentModel.swift */,
+				1179B22E1DFEA06E0026046C /* Add */,
+				1179B22C1DFEA0210026046C /* Table */,
+				1179B2301DFEA0B40026046C /* Detail */,
+			);
+			name = Assignment;
+			sourceTree = "<group>";
+		};
+		1179B2291DFE9DFA0026046C /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */,
+				CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */,
+				1179B22D1DFEA0500026046C /* Table */,
+			);
+			name = Page;
+			sourceTree = "<group>";
+		};
+		1179B22C1DFEA0210026046C /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
+				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		1179B22D1DFEA0500026046C /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */,
+				1179B22A1DFE9E5E0026046C /* CourseCell.swift */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		1179B22E1DFEA06E0026046C /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */,
+				11C4FE0B1DF9002200ACC7FD /* ChooseCourseViewController.swift */,
+				11C4FE0D1DF92F2700ACC7FD /* ChooseTimeViewController.swift */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		1179B22F1DFEA09E0026046C /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		1179B2301DFEA0B40026046C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
 		11E897011DE0189B00226CF1 = {
 			isa = PBXGroup;
 			children = (
@@ -77,21 +154,11 @@
 			isa = PBXGroup;
 			children = (
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
-				CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */,
-				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
-				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
-				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
-				118D27501DEC1236009BFA17 /* CourseModel.swift */,
-				119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */,
-				11280D1A1DF3446800ADE782 /* AssignmentModel.swift */,
-				115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
-				CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */,
-				CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */,
-				11C4FE0B1DF9002200ACC7FD /* ChooseCourseViewController.swift */,
-				11C4FE0D1DF92F2700ACC7FD /* ChooseTimeViewController.swift */,
-				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
+				1179B2271DFE9DDB0026046C /* Course */,
+				1179B2281DFE9DED0026046C /* Assignment */,
+				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E8971B1DE0189C00226CF1 /* Info.plist */,
 			);
 			path = Course;
@@ -180,6 +247,7 @@
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
 				11C4FE0E1DF92F2700ACC7FD /* ChooseTimeViewController.swift in Sources */,
+				1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */,
 				11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */,
 				11280D1B1DF3446800ADE782 /* AssignmentModel.swift in Sources */,
 				11E8970E1DE0189C00226CF1 /* AppDelegate.swift in Sources */,

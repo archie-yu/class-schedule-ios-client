@@ -8,18 +8,14 @@
 
 import UIKit
 
-class DisplayCoursesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DisplayCoursesViewController: UITableViewController {
     
     var dayID = 0
-    
-    @IBOutlet weak var CoursesTableList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        CoursesTableList.delegate = self
-        CoursesTableList.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,17 +37,19 @@ class DisplayCoursesViewController: UIViewController, UITableViewDelegate, UITab
     }
     */
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = "test"
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
+        cell.timeLabel.text = "time"
+        cell.courseLabel.text = "courseName"
+        cell.placeLabel.text = "place"
         return cell;
     }
     

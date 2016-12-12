@@ -20,6 +20,9 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.view.layer.cornerRadius = 4
+        self.view.clipsToBounds = true
+        
         coursePicker.delegate = self
         coursePicker.dataSource = self
         coursePicker.selectRow(max / 2, inComponent: 0, animated: false)
@@ -34,6 +37,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         infoLabel.isHidden = true
         self.view.addSubview(coursePicker)
         coursePicker.frame.size = CGSize(width: self.view.frame.width, height: coursePicker.frame.height)
+        coursePicker
         return CGSize(width: self.view.frame.width, height: coursePicker.frame.height)
     }
     
