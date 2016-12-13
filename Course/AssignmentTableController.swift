@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class AssignmentTableController: UITableViewController {
+class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate {
     
     let identifier = "assignment"
 
@@ -93,15 +94,37 @@ class AssignmentTableController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
         
+        let height = cell.card.frame.size.height
+        let deltaY = cell.frame.height - height
+        
+        let buttonRect = CGRect(x: 0, y: deltaY, width: 140, height: height)
+        let cardRect = CGRect(x: 6, y: deltaY, width: 120, height: height)
+        
+        let finishCard = UILabel(frame: cardRect)
+        finishCard.backgroundColor = .white
+        finishCard.layer.cornerRadius = 3
+        finishCard.clipsToBounds = true
+        finishCard.text = "完成"
+        finishCard.textColor = .darkGray
+        finishCard.textAlignment = .center
+        
+        let finishButton = MGSwipeButton(frame: buttonRect)
+        finishButton.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        
+        finishButton.addSubview(finishCard)
+        cell.rightButtons = [finishButton]
+        cell.rightSwipeSettings.transition = .drag
+        
         cell.selectionStyle = .none
         
         var color : CGFloat
-        if assignmentList.count == 1 {
-            color = 1
+        if assignmentList.count <= 6 {
+            color = 1 - 0.05 * CGFloat(indexPath.row)
         }
         else {
-            color = 1 - CGFloat(indexPath.row) / CGFloat(assignmentList.count - 1) * 0.25
+            color = 1 - CGFloat(indexPath.row) / CGFloat(assignmentList.count - 1) * 0.30
         }
+        
         cell.card.backgroundColor = UIColor(red: color, green: color, blue: color, alpha: 1)
         
         cell.course.text = assignmentList[indexPath.row].courseName
@@ -119,20 +142,57 @@ class AssignmentTableController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+//        return "完成"
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let finish = UITableViewRowAction(style: .default, title: "完成") { (action, indexPath) in
+//            assignmentList.remove(at: indexPath.row)
+//        }
+//        let delete = UITableViewRowAction(style: .destructive, title: "删除") { (action, indexPath) in
+//            assignmentList.remove(at: indexPath.row)
+//        }
+//        finish.backgroundColor = .green
+//        return [finish, delete]
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            assignmentList.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+//        }
+//    }
     
-    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "删除"
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            assignmentList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        }
-    }
+//    func swipeTableCell(_ cell: MGSwipeTableCell, canSwipe direction: MGSwipeDirection, from point: CGPoint) -> Bool {
+//        if direction == .rightToLeft {
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
+//    
+//    func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
+//        
+//        swipeSettings.transition = .drag
+//        expansionSettings.buttonIndex = 0
+//        
+//        expansionSettings.fillOnTrigger = true;
+//        expansionSettings.threshold = 1.1;
+//        let padding = 15
+//        let bgColor = UIColor.green
+//        return [
+//            MGSwipeButton(title: "完成", backgroundColor: bgColor, padding: padding, callback: { (cell) -> Bool in
+//                return false; //don't autohide to improve delete animation
+//            })
+//        ]
+//        
+//    }
     
     @IBAction func addAssignment(_ sender: UIBarButtonItem) {
         if courseList.count > 0 {
