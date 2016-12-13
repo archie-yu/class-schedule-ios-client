@@ -11,14 +11,17 @@ import Foundation
 var assignmentList : [AssignmentModel] = []
 
 class AssignmentModel {
+    
     var courseName : String
     var content : String
-    var time : Date
+    var beginTime : Date
+    var endTime : Date
     
     init(_ courseName : String, _ content : String, _ time : Date) {
         self.courseName = courseName
         self.content = content
-        self.time = time
+        beginTime = Date()
+        endTime = time
     }
     
 }

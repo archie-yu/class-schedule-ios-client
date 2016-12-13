@@ -65,7 +65,7 @@ class AssignmentTableController: UITableViewController {
         
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "E HH:mm"
-        cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].time)
+        cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].endTime)
         
 //        let alpha = ((CGFloat(assignmentList.count - indexPath.row)) / CGFloat(assignmentList.count)) * 0.5
 //        cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha)
