@@ -29,23 +29,16 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
         // Do any additional setup after loading the view, typically from a nib.
         
-//        assignmentTable.delegate = self
-//        assignmentTable.dataSource = self
-//        self.hidesBottomBarWhenPushed = true
-        
         let filePath = dataFilePath()
-//        print("check file")
-        //检查数据文件是否存在：不存在就不加载，存在就用该文件的内容实例化数组，并将数组中的对象复制到4个文本框。
         if (FileManager.default.fileExists(atPath: filePath)) {
-//            print("read file")
             assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
         }
         
         let app = UIApplication.shared
-        //第一个self参数，View Contoller实例会作为观察者接受通知。
-        //第二个参数将一个选择器传入applicationWillResignActive方法，告诉通知中心在发布该通知后调用这个方法。
-        //第三个参数UIApplicationWillResignActiveNotification，是接受通知的名称，他是由UIApplication类定义的字符串常量
-        //第四哥参数app是要从中获取通知的对象
+        // 第一个self参数，View Contoller实例会作为观察者接受通知。
+        // 第二个参数将一个选择器传入applicationWillResignActive方法，告诉通知中心在发布该通知后调用这个方法。
+        // 第三个参数UIApplicationWillResignActiveNotification，是接受通知的名称，他是由UIApplication类定义的字符串常量
+        // 第四哥参数app是要从中获取通知的对象
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationWillResignActive(notification:)),
                                                name: NSNotification.Name.UIApplicationWillResignActive,
@@ -53,16 +46,13 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
     }
     
-    //通过调用lineFields数组中每个文本框的text方法构建一个字符串数组，调用valueForKey方法，传递文本text作为参数。
-    //NSArray类的valueForKey方法实现了迭代获取UITextField实例变量的text值，返回包含这些值的NSString。
+    // 程序挂起前，保存数据
     func applicationWillResignActive(notification: NSNotification) {
         
-//        print("save file")
+        let filePath = dataFilePath()
         
 //        let array = (assignmentList as NSArray)
 //        array.write(toFile: filePath, atomically: true)
-        
-        let filePath = dataFilePath()
         
         NSKeyedArchiver.archiveRootObject(assignmentList, toFile: filePath)
         
@@ -80,6 +70,11 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
 //    var dataSourse = [("移动互联应用技术","App构思展示","Mon. 14:00"),
 //                      ("计算机图形学","大作业第一阶段","Mon. 24:00")]
     
+    func finishAssignment(at indexPath: IndexPath) {
+        assignmentList.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -94,49 +89,59 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
         
+        // 计算按钮高度
         let height = cell.card.frame.size.height
         let deltaY = cell.frame.height - height
         
         let buttonRect = CGRect(x: 0, y: deltaY, width: 140, height: height)
-        let cardRect = CGRect(x: 6, y: deltaY, width: 120, height: height)
+        let cardRect = CGRect(x: 5, y: deltaY, width: 126, height: height)
         
+        // 定义渐变灰色
+        var rgb : CGFloat
+        if assignmentList.count <= 6 {
+            rgb = 1 - 0.06 * CGFloat(indexPath.row)
+        }
+        else {
+            rgb = 1 - CGFloat(indexPath.row) / CGFloat(assignmentList.count - 1) * 0.36
+        }
+        let color = UIColor(red: rgb, green: rgb, blue: rgb, alpha: 1)
+        
+        // 生成'完成'按钮（透明）
+        let finishButton = MGSwipeButton(frame: buttonRect)
+        finishButton.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        
+        // 定义'完成'按钮的回调函数，负责删除assignmentList中的数据，以及更新AssignmentTable
+        finishButton.callback = { (cell) -> Bool in
+            self.finishAssignment(at: self.tableView.indexPath(for: cell)!)
+            return true
+        }
+        
+        // 定义'完成'按钮的界面（圆角矩形卡片）
         let finishCard = UILabel(frame: cardRect)
-        finishCard.backgroundColor = .white
+        finishCard.backgroundColor = color
         finishCard.layer.cornerRadius = 3
         finishCard.clipsToBounds = true
         finishCard.text = "完成"
         finishCard.textColor = .darkGray
         finishCard.textAlignment = .center
-        
-        let finishButton = MGSwipeButton(frame: buttonRect)
-        finishButton.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-        
         finishButton.addSubview(finishCard)
+        
+        // 将按钮添加到cell右侧
         cell.rightButtons = [finishButton]
         cell.rightSwipeSettings.transition = .drag
         
+        /*  定义cell属性:
+         *  颜色
+         *  点击颜色
+         *  文本
+         */
+        cell.card.backgroundColor = color
         cell.selectionStyle = .none
-        
-        var color : CGFloat
-        if assignmentList.count <= 6 {
-            color = 1 - 0.05 * CGFloat(indexPath.row)
-        }
-        else {
-            color = 1 - CGFloat(indexPath.row) / CGFloat(assignmentList.count - 1) * 0.30
-        }
-        
-        cell.card.backgroundColor = UIColor(red: color, green: color, blue: color, alpha: 1)
-        
         cell.course.text = assignmentList[indexPath.row].courseName
-        
         cell.assignment.text = assignmentList[indexPath.row].content
-        
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "E HH:mm"
         cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].endTime)
-        
-//        let alpha = ((CGFloat(assignmentList.count - indexPath.row)) / CGFloat(assignmentList.count)) * 0.5
-//        cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha)
         
         return cell;
         
@@ -145,11 +150,11 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
 //    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 //        return true
 //    }
-//    
+    
 //    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
 //        return "完成"
 //    }
-//    
+    
 //    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let finish = UITableViewRowAction(style: .default, title: "完成") { (action, indexPath) in
 //            assignmentList.remove(at: indexPath.row)
@@ -160,7 +165,7 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
 //        finish.backgroundColor = .green
 //        return [finish, delete]
 //    }
-//    
+    
 //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == .delete {
 //            assignmentList.remove(at: indexPath.row)
@@ -176,7 +181,7 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
 //            return false
 //        }
 //    }
-//    
+    
 //    func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
 //        
 //        swipeSettings.transition = .drag
@@ -212,9 +217,6 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
             case "ShowAssignmentDetail":
                 let controller = segue.destination as! AssignmentDetailViewController
                 controller.assignmentNo = (assignmentTable.indexPathForSelectedRow?.row)!
-                //            if let assignment = sender as? AssignmentCell {
-                //                controller.courseName = assignment.course.text!
-                //            }
             default: break;
             }
         }
