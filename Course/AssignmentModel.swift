@@ -10,7 +10,7 @@ import Foundation
 
 var assignmentList : [AssignmentModel] = []
 
-class AssignmentModel {
+class AssignmentModel : NSObject, NSCoding {
     
     var courseName : String
     var content : String
@@ -22,6 +22,20 @@ class AssignmentModel {
         self.content = content
         beginTime = Date()
         endTime = time
+    }
+    
+    func encode(with: NSCoder){
+        with.encode(courseName, forKey: "name")
+        with.encode(content, forKey: "content")
+        with.encode(beginTime, forKey: "begin")
+        with.encode(endTime, forKey: "end")
+    }
+    
+    required init?(coder: NSCoder) {
+        courseName = coder.decodeObject(forKey: "name") as! String
+        content = coder.decodeObject(forKey: "content") as! String
+        beginTime = coder.decodeObject(forKey: "begin") as! Date
+        endTime = coder.decodeObject(forKey: "end") as! Date
     }
     
 }

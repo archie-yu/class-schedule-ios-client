@@ -30,6 +30,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
         for vc in self.childViewControllers {
             switch vc {
             case is ChooseCourseViewController: courseVC = vc as? ChooseCourseViewController

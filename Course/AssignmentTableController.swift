@@ -14,12 +14,57 @@ class AssignmentTableController: UITableViewController {
 
     @IBOutlet var assignmentTable: UITableView!
     
+    func dataFilePath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(
+            FileManager.SearchPathDirectory.documentDirectory,
+            FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentsDirectory = paths[0] as NSString
+        return documentsDirectory.appendingPathComponent("assignment.dat") as String
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
+        
 //        assignmentTable.delegate = self
 //        assignmentTable.dataSource = self
 //        self.hidesBottomBarWhenPushed = true
+        
+        let filePath = dataFilePath()
+//        print("check file")
+        //检查数据文件是否存在：不存在就不加载，存在就用该文件的内容实例化数组，并将数组中的对象复制到4个文本框。
+        if (FileManager.default.fileExists(atPath: filePath)) {
+//            print("read file")
+            assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
+        }
+        
+        let app = UIApplication.shared
+        //第一个self参数，View Contoller实例会作为观察者接受通知。
+        //第二个参数将一个选择器传入applicationWillResignActive方法，告诉通知中心在发布该通知后调用这个方法。
+        //第三个参数UIApplicationWillResignActiveNotification，是接受通知的名称，他是由UIApplication类定义的字符串常量
+        //第四哥参数app是要从中获取通知的对象
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillResignActive(notification:)),
+                                               name: NSNotification.Name.UIApplicationWillResignActive,
+                                               object: app)
+        
+    }
+    
+    //通过调用lineFields数组中每个文本框的text方法构建一个字符串数组，调用valueForKey方法，传递文本text作为参数。
+    //NSArray类的valueForKey方法实现了迭代获取UITextField实例变量的text值，返回包含这些值的NSString。
+    func applicationWillResignActive(notification: NSNotification) {
+        
+//        print("save file")
+        
+//        let array = (assignmentList as NSArray)
+//        array.write(toFile: filePath, atomically: true)
+        
+        let filePath = dataFilePath()
+        
+        NSKeyedArchiver.archiveRootObject(assignmentList, toFile: filePath)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
