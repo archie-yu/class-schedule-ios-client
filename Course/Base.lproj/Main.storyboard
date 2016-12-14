@@ -15,7 +15,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="05U-IS-gbQ" customClass="CoursePageViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bE9-md-4tJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="-1437"/>
+            <point key="canvasLocation" x="2502" y="-778"/>
         </scene>
         <!--Display Courses View Controller-->
         <scene sceneID="VdM-tc-119">
@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0QZ-8t-3zQ" id="ACY-EV-yaL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSP-rQ-EFb">
@@ -72,7 +72,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6V-cX-mXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2489" y="-1437"/>
+            <point key="canvasLocation" x="3257" y="-777"/>
         </scene>
         <!--课程-->
         <scene sceneID="phk-Bo-isS">
@@ -87,7 +87,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yvZ-vt-JRQ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="05U-IS-gbQ" kind="embed" id="y6g-75-eGk"/>
@@ -97,6 +97,11 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="课程" id="kL7-U4-k4G">
+                        <barButtonItem key="leftBarButtonItem" title="|||" id="sfN-c0-N2X">
+                            <connections>
+                                <segue destination="BYb-i5-Gr8" kind="show" id="305-Xf-M9X"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="FGr-iV-uty">
                             <connections>
                                 <segue destination="6Vt-d3-cTx" kind="showDetail" id="mUQ-QN-Khp"/>
@@ -106,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Znb-Bo-tZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="-708.39580209895053"/>
+            <point key="canvasLocation" x="1764" y="-776.76161919040487"/>
         </scene>
         <!--Add Course View Controller-->
         <scene sceneID="cu5-Jy-HPe">
@@ -180,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ny-h1-JgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2488.8000000000002" y="-708.39580209895053"/>
+            <point key="canvasLocation" x="2502" y="-1531"/>
         </scene>
         <!--Add Assignment View Controller-->
         <scene sceneID="M5z-Bv-geI">
@@ -290,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNI-1X-F8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2488.8000000000002" y="-15.742128935532236"/>
+            <point key="canvasLocation" x="2489" y="779"/>
         </scene>
         <!--course-->
         <scene sceneID="fYz-uy-mcS">
@@ -386,7 +391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qwd-2c-7Qd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2488.8000000000002" y="698.5007496251875"/>
+            <point key="canvasLocation" x="1764" y="779"/>
         </scene>
         <!--课程-->
         <scene sceneID="J7z-ln-uFs">
@@ -409,7 +414,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0R-kZ-YpC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038" y="-708"/>
+            <point key="canvasLocation" x="1038" y="-777"/>
         </scene>
         <!--作业-->
         <scene sceneID="mrB-lM-6nN">
@@ -480,6 +485,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="作业" id="L6b-6e-bQk">
+                        <barButtonItem key="leftBarButtonItem" title="|||" id="MUD-zx-O94">
+                            <connections>
+                                <segue destination="BYb-i5-Gr8" kind="show" id="1Jc-vv-fCc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="iBc-7N-EDq">
                             <connections>
                                 <action selector="addAssignment:" destination="pXz-SS-0GM" id="h1c-1Z-6mt"/>
@@ -537,7 +547,39 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="-355"/>
+            <point key="canvasLocation" x="110" y="-413"/>
+        </scene>
+        <!--设置-->
+        <scene sceneID="bdC-jo-4wc">
+            <objects>
+                <tableViewController title="设置" hidesBottomBarWhenPushed="YES" id="BYb-i5-Gr8" customClass="SettingsViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="eD4-dH-adL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="kww-xf-xvT">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kww-xf-xvT" id="fCg-U8-J51">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BYb-i5-Gr8" id="bpf-aS-pb8"/>
+                            <outlet property="delegate" destination="BYb-i5-Gr8" id="wUj-Nb-Cqb"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="hfL-Lr-Aym" kind="show" identifier="ShowAbout" id="gvd-WQ-U7c"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sSq-9A-vO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2502" y="-16"/>
         </scene>
         <!--Choose Course View Controller-->
         <scene sceneID="I35-jK-8V6">
@@ -567,7 +609,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAM-ex-KQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-224"/>
+            <point key="canvasLocation" x="3258" y="533"/>
         </scene>
         <!--Choose Time View Controller-->
         <scene sceneID="uUC-JP-TLl">
@@ -597,11 +639,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZV-W8-a5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-64"/>
+            <point key="canvasLocation" x="3257" y="755"/>
+        </scene>
+        <!--关于-->
+        <scene sceneID="asd-4c-3S0">
+            <objects>
+                <viewController title="关于" hidesBottomBarWhenPushed="YES" id="hfL-Lr-Aym" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ThJ-8P-5p4"/>
+                        <viewControllerLayoutGuide type="bottom" id="XUj-De-d2R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rop-AY-4F5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9nC-L8-WHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3257" y="-17"/>
         </scene>
     </scenes>
     <resources>
         <image name="assignment" width="25" height="25"/>
         <image name="course" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="305-Xf-M9X"/>
+    </inferredMetricsTieBreakers>
 </document>
