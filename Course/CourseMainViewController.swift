@@ -8,6 +8,8 @@
 
 import UIKit
 
+var coursemainController : CourseMainViewController?
+
 class CourseMainViewController: UIViewController, UIPageViewControllerDataSource {
     
     var PageViewController:CoursePageViewController!
@@ -23,7 +25,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
         
         PageViewController.setViewControllers([PageViewController.mondayController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
         
-        
+        coursemainController = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,5 +92,9 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
             
         }
         return nil
+    }
+    
+    func updateCourse(){
+        PageViewController.add_Course()
     }
 }

@@ -10,11 +10,19 @@ import UIKit
 
 class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    let DAY_OF_WEEK = 7
+    let DAY_OF_WEEK = 5
     
     let LESSONS_A_DAY = 8
     
-    let weekday = ["Mon","Tue","Wes","Thu","Fri","Sat","Sun"]
+    let weekday = ["Mon","Tue","Wes","Thu","Fri"]
+    
+    @IBOutlet weak var CourseName: UITextField!
+    
+    @IBOutlet weak var PickerView: UIPickerView!
+    
+    @IBOutlet weak var Location: UITextField!
+    
+    @IBOutlet weak var TeacherName: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +35,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         PickerView.selectRow(3, inComponent: 2, animated: true)
     }
     
-    @IBOutlet weak var PickerView: UIPickerView!
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,7 +77,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         return nil
     }
-    @IBOutlet weak var CourseName: UITextField!
+    
     
     @IBAction func ReadyToTyping(_ sender: UITextField) {
         if CourseName.text == "请输入课程名"{
@@ -83,7 +91,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             CourseName.text = "请输入课程名"
         }
     }
-    @IBOutlet weak var TeacherName: UITextField!
+    
     
     @IBAction func TeacherNameEnterBegin(_ sender: UITextField) {
         if TeacherName.text == "请输入老师姓名"{
@@ -97,15 +105,33 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    @IBAction func LocationEnterBegin(_ sender: UITextField) {
+        if Location.text == "请输入地点"{
+            Location.text = ""
+        }
+    }
+    
+    
+    @IBAction func LocationEnterEnd(_ sender: UITextField) {
+        if Location.text == ""{
+            Location.text = "请输入地点"
+        }
+    }
+    
     @IBAction func AddCourse(_ sender: UIBarButtonItem) {
         
         let newCourse = CourseModel(courseName: CourseName.text!,
-                                    teacherName: "",
+                                    teacherName: TeacherName.text!,
+                                    location:Location.text!,
                             date: weekday[PickerView.selectedRow(inComponent: 0)],
                             begin_class: PickerView.selectedRow(inComponent: 1),
                             end_class: PickerView.selectedRow(inComponent: 2));
         
+        
+        
         courseList.append(newCourse)
+        
+        coursemainController?.updateCourse()
         
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }

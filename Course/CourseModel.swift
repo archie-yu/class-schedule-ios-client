@@ -22,8 +22,17 @@ class CourseModel : NSObject {
     
     var end_class = 2;
     
-    init(courseName : String,teacherName : String,date : String,begin_class:Int,end_class:Int) {
+    var location = ""
+    
+    var isNew = true
+    
+    init(courseName : String,teacherName : String,location:String,date : String,begin_class:Int,end_class:Int) {
         self.courseName = courseName
+        self.teacherName = teacherName
+        self.date = date
+        self.begin_class = begin_class
+        self.end_class = end_class
+        self.location = location
     }
     
 }

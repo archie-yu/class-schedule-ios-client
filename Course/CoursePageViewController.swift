@@ -57,5 +57,30 @@ class CoursePageViewController: UIPageViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func add_Course(){
+        for course in courseList{
+            if(course.isNew == true){
+                switch course.date{
+                    case "Mon":
+                        mondayController?.addCourse(course: course)
+                        break
+                    case "Tue":
+                        tuesdayController?.addCourse(course: course)
+                        break
+                    case "Wes":
+                        wednesdayController?.addCourse(course: course)
+                        break
+                    case "Thu":
+                        thursdayController?.addCourse(course: course)
+                        break
+                    case "Fri":
+                        fridayController?.addCourse(course: course)
+                        break
+                default:
+                    break
+                }
+            }
+        }
+    }
 }

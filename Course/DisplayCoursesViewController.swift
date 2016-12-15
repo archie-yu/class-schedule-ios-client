@@ -12,6 +12,10 @@ class DisplayCoursesViewController: UITableViewController {
     
     var dayID = 0
     
+    var numCourses = 0;
+    
+    var thisdaycourseList : [CourseModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,12 +46,21 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return numCourses
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
+    
+        cell.CourseName.text = thisdaycourseList[indexPath.row].courseName
+        cell.TeacherName.text = thisdaycourseList[indexPath.row].teacherName
+        cell.Location.text = thisdaycourseList[indexPath.row].location
+        
         return cell;
     }
     
+    public func addCourse(course:CourseModel){
+        thisdaycourseList.append(course)
+        numCourses += 1
+    }
 }
