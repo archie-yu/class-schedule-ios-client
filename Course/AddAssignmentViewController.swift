@@ -16,6 +16,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var timeButton: UIButton!
     @IBOutlet weak var assignmentText: UITextField!
+    @IBOutlet weak var assignmentBackground: UILabel!
     
     var year = 0
     let max = 16384
@@ -43,6 +44,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         shadow.backgroundColor = UIColor.black
         shadow.alpha = 0
+        
+        assignmentText.tintColor = .black
         
 //        coursePicker.delegate = self
 //        coursePicker.selectRow(max / 2, inComponent: 0, animated: false)
@@ -144,6 +147,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             shadow.alpha = 0
             timeView.frame = timeButton.frame
             UIView.commitAnimations()
+        case "content":
+            textFieldShouldReturn(assignmentText)
         default: break
         }
         
@@ -259,17 +264,39 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+//        self.view.bringSubview(toFront: courseButton)
+//        self.view.bringSubview(toFront: timeButton)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.1)
+        shadow.alpha = 0
+        UIView.commitAnimations()
+        
         textField.resignFirstResponder()
+        
         return true
     }
     
     @IBAction func editingDidBegin(_ sender: UITextField) {
+        
+        editingItem = "content"
+        
+        self.view.bringSubview(toFront: shadow)
+        self.view.bringSubview(toFront: assignmentBackground)
+        self.view.bringSubview(toFront: assignmentText)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.2)
+        shadow.alpha = 0.5
         if firstEditing {
             sender.text = ""
             sender.textColor = UIColor.black
             sender.alpha = 1
             firstEditing = false
         }
+        UIView.commitAnimations()
+        
     }
     
     @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {

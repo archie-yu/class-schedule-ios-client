@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0QZ-8t-3zQ" id="ACY-EV-yaL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSP-rQ-EFb">
@@ -97,12 +97,12 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="课程" id="kL7-U4-k4G">
-                        <barButtonItem key="leftBarButtonItem" title="|||" id="sfN-c0-N2X">
+                        <barButtonItem key="leftBarButtonItem" image="Setting" id="sfN-c0-N2X">
                             <connections>
                                 <segue destination="BYb-i5-Gr8" kind="show" id="305-Xf-M9X"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="+" id="FGr-iV-uty">
+                        <barButtonItem key="rightBarButtonItem" image="Add" id="FGr-iV-uty">
                             <connections>
                                 <segue destination="6Vt-d3-cTx" kind="showDetail" id="mUQ-QN-Khp"/>
                             </connections>
@@ -285,6 +285,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="assignmentBackground" destination="ZSL-Rw-ys4" id="7Yo-cH-OvX"/>
                         <outlet property="assignmentText" destination="V8H-T2-z6r" id="SvR-1e-Z5s"/>
                         <outlet property="courseButton" destination="TJk-M5-UgY" id="UtK-t4-2du"/>
                         <outlet property="courseView" destination="qed-tI-hWV" id="W03-U6-5aF"/>
@@ -485,12 +486,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="作业" id="L6b-6e-bQk">
-                        <barButtonItem key="leftBarButtonItem" title="|||" id="MUD-zx-O94">
+                        <barButtonItem key="leftBarButtonItem" image="Setting" id="MUD-zx-O94">
                             <connections>
                                 <segue destination="BYb-i5-Gr8" kind="show" id="1Jc-vv-fCc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="+" id="iBc-7N-EDq">
+                        <barButtonItem key="rightBarButtonItem" image="Add" id="iBc-7N-EDq">
                             <connections>
                                 <action selector="addAssignment:" destination="pXz-SS-0GM" id="h1c-1Z-6mt"/>
                             </connections>
@@ -661,6 +662,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add" width="17" height="19"/>
+        <image name="Setting" width="17" height="19"/>
         <image name="assignment" width="25" height="25"/>
         <image name="course" width="25" height="25"/>
     </resources>
