@@ -37,7 +37,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         infoLabel.isHidden = true
         self.view.addSubview(coursePicker)
         coursePicker.frame.size = CGSize(width: self.view.frame.width, height: coursePicker.frame.height)
-        coursePicker
+        
         return CGSize(width: self.view.frame.width, height: coursePicker.frame.height)
     }
     

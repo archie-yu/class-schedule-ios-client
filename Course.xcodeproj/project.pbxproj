@@ -12,7 +12,12 @@
 		1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B22A1DFE9E5E0026046C /* CourseCell.swift */; };
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
 		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
+		118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FF0F91E00E83F00B28487 /* SettingsViewController.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
+		11C27E151DFFDBF300C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
+		11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
+		11C27E171DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */; };
 		11C4FE0C1DF9002200ACC7FD /* ChooseCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4FE0B1DF9002200ACC7FD /* ChooseCourseViewController.swift */; };
 		11C4FE0E1DF92F2700ACC7FD /* ChooseTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4FE0D1DF92F2700ACC7FD /* ChooseTimeViewController.swift */; };
 		11E8970E1DE0189C00226CF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8970D1DE0189C00226CF1 /* AppDelegate.swift */; };
@@ -21,10 +26,23 @@
 		11E897171DE0189C00226CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E897161DE0189C00226CF1 /* Assets.xcassets */; };
 		11E8971A1DE0189C00226CF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */; };
 		11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E897211DE021F400226CF1 /* AddCourseViewController.swift */; };
-		CA90B33D1DF95ABF006785DC /* DisplayCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */; };
 		CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */; };
 		CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		11C27E181DFFDBFA00C8FC9D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				11C27E171DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		11280D1A1DF3446800ADE782 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
@@ -32,7 +50,10 @@
 		1179B22A1DFE9E5E0026046C /* CourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCell.swift; sourceTree = "<group>"; };
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
 		118D27501DEC1236009BFA17 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
+		118FF0F91E00E83F00B28487 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
+		11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSwipeTableCell.framework; sourceTree = SOURCE_ROOT; };
+		11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCoursesViewController.swift; sourceTree = "<group>"; };
 		11C4FE0B1DF9002200ACC7FD /* ChooseCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCourseViewController.swift; sourceTree = "<group>"; };
 		11C4FE0D1DF92F2700ACC7FD /* ChooseTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTimeViewController.swift; sourceTree = "<group>"; };
 		11E8970A1DE0189C00226CF1 /* Course.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Course.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +64,6 @@
 		11E897191DE0189C00226CF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11E8971B1DE0189C00226CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11E897211DE021F400226CF1 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
-		CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayCoursesViewController.swift; path = ../DisplayCoursesViewController.swift; sourceTree = "<group>"; };
 		CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMainViewController.swift; sourceTree = "<group>"; };
 		CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */,
+				11C27E151DFFDBF300C8FC9D /* MGSwipeTableCell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +115,8 @@
 		1179B22C1DFEA0210026046C /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
 				1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */,
+				11E897111DE0189C00226CF1 /* AssignmentTableController.swift */,
 			);
 			name = Table;
 			sourceTree = "<group>";
@@ -102,8 +124,8 @@
 		1179B22D1DFEA0500026046C /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				CA90B33C1DF95ABF006785DC /* DisplayCoursesViewController.swift */,
 				1179B22A1DFE9E5E0026046C /* CourseCell.swift */,
+				11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */,
 			);
 			name = Table;
 			sourceTree = "<group>";
@@ -134,6 +156,14 @@
 			name = Detail;
 			sourceTree = "<group>";
 		};
+		118FF0F61E00E6CC00B28487 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				118FF0F91E00E83F00B28487 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		11E897011DE0189B00226CF1 = {
 			isa = PBXGroup;
 			children = (
@@ -153,11 +183,13 @@
 		11E8970C1DE0189C00226CF1 /* Course */ = {
 			isa = PBXGroup;
 			children = (
+				11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */,
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
 				1179B2271DFE9DDB0026046C /* Course */,
 				1179B2281DFE9DED0026046C /* Assignment */,
+				118FF0F61E00E6CC00B28487 /* Settings */,
 				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				11E8971B1DE0189C00226CF1 /* Info.plist */,
 			);
@@ -174,6 +206,7 @@
 				11E897061DE0189B00226CF1 /* Sources */,
 				11E897071DE0189B00226CF1 /* Frameworks */,
 				11E897081DE0189B00226CF1 /* Resources */,
+				11C27E181DFFDBFA00C8FC9D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,6 +230,7 @@
 					11E897091DE0189B00226CF1 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Y68KHR2W8X;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -237,7 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA90B33D1DF95ABF006785DC /* DisplayCoursesViewController.swift in Sources */,
+				11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */,
 				CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */,
 				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
 				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,
@@ -245,6 +279,7 @@
 				11C4FE0C1DF9002200ACC7FD /* ChooseCourseViewController.swift in Sources */,
 				115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */,
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
+				118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
 				11C4FE0E1DF92F2700ACC7FD /* ChooseTimeViewController.swift in Sources */,
 				1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */,
@@ -373,11 +408,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Course/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -386,7 +428,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Course/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course;
