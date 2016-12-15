@@ -32,24 +32,28 @@ class SettingsViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch(section) {
         case 0: return 2
-        case 1: return 2
+        case 1: return 1
+        case 2: return 2
         default: return 0
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        switch section {
+        case 0: return 40
+        default: return 20
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 20
     }
     
     /*
@@ -80,10 +84,17 @@ class SettingsViewController: UITableViewController {
         
         switch indexPath.section {
         case 0:
-            cell.selectionStyle = .none
             switch indexPath.row {
             case 0:
+                cell.textLabel?.text = "课程时间"
+                cell.accessoryType = .disclosureIndicator
+                let selectedColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+                let selectedBackground = UIView()
+                selectedBackground.backgroundColor = selectedColor
+                cell.selectedBackgroundView = selectedBackground
+            case 1:
                 cell.textLabel?.text = "黑色主题"
+                cell.selectionStyle = .none
                 let themeSwitch = UISwitch()
                 let cellSize = cell.frame.size
                 let switchSize = themeSwitch.frame.size
@@ -92,24 +103,31 @@ class SettingsViewController: UITableViewController {
                 themeSwitch.onTintColor = UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1)
                 themeSwitch.setOn(true, animated: false)
                 cell.addSubview(themeSwitch)
-            case 1:
-                cell.textLabel?.text = ""
             default:
                 break
             }
         case 1:
-            cell.accessoryType = .disclosureIndicator
-            
-            let selectedColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
-            let selectedBackground = UIView()
-            selectedBackground.backgroundColor = selectedColor
-            cell.selectedBackgroundView = selectedBackground
-            
+            cell.textLabel?.text = "iCloud同步"
+            cell.selectionStyle = .none
+            let icloudSwitch = UISwitch()
+            let cellSize = cell.frame.size
+            let switchSize = icloudSwitch.frame.size
+            let rect = CGRect(x: cellSize.width - switchSize.width - 15, y: (cellSize.height - switchSize.height) / 2, width: switchSize.width, height: switchSize.height)
+            icloudSwitch.frame = rect
+            icloudSwitch.onTintColor = UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1)
+            icloudSwitch.setOn(false, animated: false)
+            cell.addSubview(icloudSwitch)
+        case 2:
             switch indexPath.row {
             case 0: cell.textLabel?.text = "反馈"
             case 1: cell.textLabel?.text = "关于"
             default: break
             }
+            cell.accessoryType = .disclosureIndicator
+            let selectedColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+            let selectedBackground = UIView()
+            selectedBackground.backgroundColor = selectedColor
+            cell.selectedBackgroundView = selectedBackground
         default:
             break
         }
@@ -160,9 +178,14 @@ class SettingsViewController: UITableViewController {
         
         // 跳转
         switch indexPath.section {
-        case 1:
+        case 0:
             switch indexPath.row {
-            case 0: break
+            case 0: performSegue(withIdentifier: "EditCourseTime", sender: self)
+            default: break
+            }
+        case 2:
+            switch indexPath.row {
+            case 0: performSegue(withIdentifier: "SendFeedback", sender: self)
             case 1: performSegue(withIdentifier: "ShowAbout", sender: self)
             default: break
             }

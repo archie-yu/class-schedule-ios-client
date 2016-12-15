@@ -124,8 +124,8 @@
 		1179B22D1DFEA0500026046C /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */,
 				1179B22A1DFE9E5E0026046C /* CourseCell.swift */,
+				11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */,
 			);
 			name = Table;
 			sourceTree = "<group>";

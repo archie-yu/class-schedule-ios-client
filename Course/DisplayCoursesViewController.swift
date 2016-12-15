@@ -42,14 +42,11 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
-        cell.timeLabel.text = "time"
-        cell.courseLabel.text = "courseName"
-        cell.placeLabel.text = "place"
         return cell;
     }
     
