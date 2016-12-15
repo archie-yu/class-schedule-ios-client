@@ -90,6 +90,9 @@
                             <outlet property="delegate" destination="KOD-lb-YAF" id="Wq1-PL-eMw"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="courseCell" destination="vhP-6P-zTR" id="RGv-1z-h1Q"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6V-cX-mXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

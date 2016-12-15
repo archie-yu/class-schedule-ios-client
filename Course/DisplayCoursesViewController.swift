@@ -16,6 +16,8 @@ class DisplayCoursesViewController: UITableViewController {
     
     var thisdaycourseList : [CourseModel] = []
     
+    @IBOutlet weak var courseCell: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,7 +53,9 @@ class DisplayCoursesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
-    
+        
+        //print(indexPath.row)
+        
         cell.CourseName.text = thisdaycourseList[indexPath.row].courseName
         cell.TeacherName.text = thisdaycourseList[indexPath.row].teacherName
         cell.Location.text = thisdaycourseList[indexPath.row].location
@@ -59,8 +63,17 @@ class DisplayCoursesViewController: UITableViewController {
         return cell;
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        courseCell.reloadData()
+    }
+    
     public func addCourse(course:CourseModel){
+        
         thisdaycourseList.append(course)
+        
         numCourses += 1
+        
+        //print(numCourses)
+        
     }
 }

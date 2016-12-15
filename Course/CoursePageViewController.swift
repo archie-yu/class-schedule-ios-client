@@ -80,6 +80,7 @@ class CoursePageViewController: UIPageViewController {
                 default:
                     break
                 }
+                course.isNew = false
             }
         }
     }

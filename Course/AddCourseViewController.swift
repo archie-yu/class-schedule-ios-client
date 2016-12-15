@@ -131,7 +131,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         courseList.append(newCourse)
         
-        coursemainController?.updateCourse()
+        //coursemainController?.updateCourse()
         
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
