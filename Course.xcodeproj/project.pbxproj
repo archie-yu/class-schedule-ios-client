@@ -313,11 +313,11 @@
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
+				11E8971B1DE0189C00226CF1 /* Info.plist */,
+				11E897161DE0189C00226CF1 /* Assets.xcassets */,
 				1179B2271DFE9DDB0026046C /* Course */,
 				1179B2281DFE9DED0026046C /* Assignment */,
 				118FF0F61E00E6CC00B28487 /* Settings */,
-				11E897161DE0189C00226CF1 /* Assets.xcassets */,
-				11E8971B1DE0189C00226CF1 /* Info.plist */,
 			);
 			path = Course;
 			sourceTree = "<group>";

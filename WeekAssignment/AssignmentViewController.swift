@@ -13,7 +13,10 @@ import CourseModel
 var assignmentList : [AssignmentModel] = []
 
 class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITableViewDelegate, UITableViewDataSource {
-        
+    
+//    let weekday = ["Sun.", "Mon.", "Tue.", "Thur.", "Fri.", "Sat."]
+    let weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+    
     @IBOutlet weak var assignmentTable: UITableView!
     
     var weekAssignmentList : [AssignmentModel] = []
@@ -78,7 +81,9 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         } else {
             let assignment = weekAssignmentList[indexPath.row]
             cell.assignmentContent.text = assignment.courseName + "：" + assignment.content
-            cell.assignmentTime.text = "周一 23:00"
+            let calender = Calendar.current
+            let dateComponents = calender.dateComponents([.weekday, .hour, .minute], from: assignment.endTime)
+            cell.assignmentTime.text = weekday[dateComponents.weekday! - 1] + String(format: " %02d:%02d", dateComponents.hour!, dateComponents.minute!)
         }
         
         return cell
