@@ -14,7 +14,6 @@
 		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
 		118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FF0F91E00E83F00B28487 /* SettingsViewController.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
-		11C27E151DFFDBF300C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
 		11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
 		11C27E171DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */; };
@@ -74,7 +73,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */,
-				11C27E151DFFDBF300C8FC9D /* MGSwipeTableCell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

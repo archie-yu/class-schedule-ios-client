@@ -19,9 +19,16 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     var timePicker : UIPickerView?
     
     @IBOutlet weak var assignmentContent: UILabel!
+    @IBOutlet weak var battery: UILabel!
+    @IBOutlet weak var remainingTime: UILabel!
+    
+    var batteryWidth : Double = 250
+    var batteryX : CGFloat = 62
+    var batteryY : CGFloat = 263
+    
+    var timer: Timer!
     
     override func viewWillAppear(_ animated: Bool) {
-//        courseNameLabel.text = courseName
         self.title = assignmentList[assignmentNo].courseName
         assignmentContent.text = assignmentList[assignmentNo].content
     }
@@ -37,13 +44,44 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         timePicker?.delegate = self
         timePicker?.dataSource = self
         
+        fresh()
+        
+        // 启用计时器，控制每秒执行一次tickDown方法
+        timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector:#selector(AssignmentDetailViewController.fresh), userInfo:nil, repeats:true)
+        
         // 得到当前年份
-        
         let curTime = Date()
-        
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyy"
         year = Int(timeFormatter.string(from: curTime))!
+        
+    }
+    
+    func fresh() {
+        
+        // 计算电量显示条长度
+        let current = Date()
+        let fromNow = assignmentList[assignmentNo].endTime.timeIntervalSince(current)
+        let fromBegin = assignmentList[assignmentNo].endTime.timeIntervalSince(assignmentList[assignmentNo].beginTime)
+        let ratio = fromNow / fromBegin
+        let frame = CGRect(x: batteryX, y: batteryY, width: CGFloat(batteryWidth * ratio), height: battery.bounds.height)
+        battery.frame = frame
+        
+        // 计算剩余时间
+        var sec = Int(fromNow)
+        var min = sec / 60
+        sec %= 60
+        var hour = min / 60
+        min %= 60
+        let day = hour / 24
+        hour %= 24
+        if day > 0 {
+            remainingTime.text = String(format: "%d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
+        } else if hour > 0 {
+            remainingTime.text = String(format: "%02dh %02dm %02ds", arguments: [day, hour, min, sec])
+        } else {
+            remainingTime.text = String(format: "%02dm %02ds", arguments: [day, hour, min, sec])
+        }
         
     }
     
