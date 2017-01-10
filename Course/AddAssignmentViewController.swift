@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseModel
 
 class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     

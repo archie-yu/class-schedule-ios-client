@@ -8,6 +8,7 @@
 
 import UIKit
 import MGSwipeTableCell
+import CourseModel
 
 class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate {
     
@@ -16,11 +17,9 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
     @IBOutlet var assignmentTable: UITableView!
     
     func dataFilePath() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(
-            FileManager.SearchPathDirectory.documentDirectory,
-            FileManager.SearchPathDomainMask.userDomainMask, true)
-        let documentsDirectory = paths[0] as NSString
-        return documentsDirectory.appendingPathComponent("assignment.dat") as String
+        let manager = FileManager()
+        let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
+        return (containerURL?.appendingPathComponent("assignment.dat").path)!
     }
     
     override func viewDidLoad() {
@@ -50,10 +49,6 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
     func applicationWillResignActive(notification: NSNotification) {
         
         let filePath = dataFilePath()
-        
-//        let array = (assignmentList as NSArray)
-//        array.write(toFile: filePath, atomically: true)
-        
         NSKeyedArchiver.archiveRootObject(assignmentList, toFile: filePath)
         
     }

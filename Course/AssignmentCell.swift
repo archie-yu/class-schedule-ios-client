@@ -13,6 +13,7 @@ class AssignmentCell : MGSwipeTableCell {
     
     @IBOutlet weak var course: UILabel!
     @IBOutlet weak var assignment: UILabel!
+    @IBOutlet weak var assignmentContent: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var card: UILabel!
     
