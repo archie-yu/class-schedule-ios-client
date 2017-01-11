@@ -9,13 +9,21 @@
 import UIKit
 
 class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    let max = 16384
-    var year = 0
-    let timePicker = UIPickerView()
-    var time : Date?
     
-    @IBOutlet weak var infoLabel: UILabel!
+    let max = 16384
+    
+    var year = 0
+    
+    let timePicker = UIPickerView()
+    
+    var editingItem = ""
+    var beginTime : Date!
+    var endTime : Date!
+    
+    var finish = false
+    
+    @IBOutlet weak var beginTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +34,16 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         timePicker.delegate = self
         timePicker.dataSource = self
-        let curDate = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyyy"
-        year = Int(timeFormatter.string(from: curDate))!
-        timeFormatter.dateFormat = "MM"
-        let month = Int(timeFormatter.string(from: curDate))!
-        timeFormatter.dateFormat = "dd"
-        let day = Int(timeFormatter.string(from: curDate))!
-        timeFormatter.dateFormat = "HH"
-        let hour = Int(timeFormatter.string(from: curDate))!
-        timeFormatter.dateFormat = "mm"
-        let minute = Int(timeFormatter.string(from: curDate))!
-        timePicker.selectRow(max / 2 - (max / 2 % 4), inComponent: 0, animated: true)
-        timePicker.selectRow(max / 2 - (max / 2 % 12) + month - 1, inComponent: 1, animated: true)
-        timePicker.selectRow(max / 2 - (max / 2 % 31) + day - 1, inComponent: 2, animated: true)
-        timePicker.selectRow(max / 2 - (max / 2 % 24) + hour, inComponent: 3, animated: true)
-        timePicker.selectRow(max / 2 - (max / 2 % 60) + minute, inComponent: 4, animated: true)
+        
+        beginTime = Date()
+        endTime = Date()
+        
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: beginTime)
+        beginTimeLabel.text = "开始：" + String(format: "%d.%02d.%02d %02d:%02d",
+                                              dateComponents.year!, dateComponents.month!,
+                                              dateComponents.day!, dateComponents.hour!,
+                                              dateComponents.minute!)
 
     }
 
@@ -52,10 +53,53 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func beginChooseTime() -> CGSize {
-        infoLabel.isHidden = true
+        
+        // 隐藏开始时间和结束时间
+        beginTimeLabel.isHidden = true
+        endTimeLabel.isHidden = true
+        
+        // 获取初始时间
+        var timeComponents : DateComponents!
+        switch(editingItem) {
+        case "beginTime":
+            let calendar = Calendar.current
+            timeComponents = calendar.dateComponents(
+                [.year, .month, .day, .hour, .minute], from: beginTime)
+        case "endTime":
+            let calendar = Calendar.current
+            timeComponents = calendar.dateComponents(
+                [.year, .month, .day, .hour, .minute], from: endTime)
+        default: break
+        }
+        
+        // 计算初始行数
+        let middle = max / 2
+        year = timeComponents.year!
+        let yearRow = middle - (middle % 4)
+        let monthRow = middle - (middle % 12) + timeComponents.month! - 1
+        let dayRow = middle - (middle % 31) + timeComponents.day! - 1
+        let hourRow = middle - (middle % 24) + timeComponents.hour!
+        let minuteRow = middle - (middle % 60) + timeComponents.minute!
+        
+        // 选择初始行数
+        timePicker.selectRow(yearRow, inComponent: 0, animated: true)
+        timePicker.selectRow(monthRow, inComponent: 1, animated: true)
+        timePicker.selectRow(dayRow, inComponent: 2, animated: true)
+        timePicker.selectRow(hourRow, inComponent: 3, animated: true)
+        timePicker.selectRow(minuteRow, inComponent: 4, animated: true)
+        
+        // 显示时间选择器
         self.view.addSubview(timePicker)
-        timePicker.frame.size = CGSize(width: self.view.frame.width, height: timePicker.frame.height)
+        
+        // 计算选择器需要的区域大小
+        let size = CGSize(width: self.view.frame.width, height: timePicker.frame.height)
+        
+        // 设置选择器的区域
+        timePicker.frame.size = size
+        
+        // 返回显示选择器需要的区域大小
         return CGSize(width: self.view.frame.width, height: timePicker.frame.height)
+        
     }
     
     func endChooseTime() {
@@ -91,13 +135,30 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         else {
             minuteString = "0" + String(minute)
         }
-        let timeString = String(year + timePicker.selectedRow(inComponent: 0) % 4) + " " + monthString + " " + dayString + " " + hourString + " " + minuteString
+        
+        let timeString = String(year + timePicker.selectedRow(inComponent: 0) % 4) + "." + monthString + "." + dayString + " " + hourString + ":" + minuteString
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyyy MM dd HH mm"
-        time = timeFormatter.date(from: timeString)
-        infoLabel.text = timeString
-        infoLabel.isHidden = false
+        
+        timeFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        
+        switch(editingItem) {
+        case "beginTime":
+            beginTime = timeFormatter.date(from: timeString)
+            beginTimeLabel.text = "开始：" + timeString
+        case "endTime":
+            endTime = timeFormatter.date(from: timeString)
+            endTimeLabel.text = "结束：" + timeString
+            finish = true
+        default: break
+        }
+        
+        // 重新显示开始时间和结束时间
+        beginTimeLabel.isHidden = false
+        endTimeLabel.isHidden = false
+        
+        // 隐藏时间选择器
         timePicker.removeFromSuperview()
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -15,11 +15,11 @@ public class AssignmentModel : NSObject, NSCoding {
     public var beginTime : Date
     public var endTime : Date
     
-    public init(_ courseName : String, _ content : String, _ time : Date) {
+    public init(in courseName : String, todo content : String, from beginTime : Date, to endTime : Date) {
         self.courseName = courseName
         self.content = content
-        beginTime = Date()
-        endTime = time
+        self.beginTime = beginTime
+        self.endTime = endTime
     }
     
     public func encode(with: NSCoder){

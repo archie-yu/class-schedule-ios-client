@@ -22,7 +22,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var battery: UILabel!
     @IBOutlet weak var remainingTime: UILabel!
     
-    var batteryWidth : Double = 250
+    var batteryWidth : CGFloat = 250
     var batteryX : CGFloat = 62
     var batteryY : CGFloat = 263
     
@@ -63,28 +63,41 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     
     func fresh() {
         
-        // 计算电量显示条长度
         let current = Date()
         let fromNow = assignmentList[assignmentNo].endTime.timeIntervalSince(current)
-        let fromBegin = assignmentList[assignmentNo].endTime.timeIntervalSince(assignmentList[assignmentNo].beginTime)
-        let ratio = fromNow / fromBegin
-        let frame = CGRect(x: batteryX, y: batteryY, width: CGFloat(batteryWidth * ratio), height: battery.bounds.height)
-        battery.frame = frame
         
-        // 计算剩余时间
-        var sec = Int(fromNow)
-        var min = sec / 60
-        sec %= 60
-        var hour = min / 60
-        min %= 60
-        let day = hour / 24
-        hour %= 24
-        if day > 0 {
-            remainingTime.text = String(format: "%d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
-        } else if hour > 0 {
-            remainingTime.text = String(format: "%02d:%02d:%02d", arguments: [hour, min, sec])
+        // 处理过期任务
+        if fromNow < 0 {
+            // 电量显示条长度为0
+            let frame = CGRect(x: batteryX, y: batteryY, width: 0, height: battery.bounds.height)
+            battery.frame = frame
+            // 无剩余时间
+            remainingTime.text = "任务过期"
         } else {
-            remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
+            let fromBegin = assignmentList[assignmentNo].endTime.timeIntervalSince(assignmentList[assignmentNo].beginTime)
+            // 计算电量显示条长度和剩余时间
+            var ratio : CGFloat = 1
+            if fromNow > fromBegin {
+                remainingTime.text = "任务还未开始"
+            } else {
+                ratio = CGFloat(fromNow / fromBegin)
+                var sec = Int(fromNow)
+                var min = sec / 60
+                sec %= 60
+                var hour = min / 60
+                min %= 60
+                let day = hour / 24
+                hour %= 24
+                if day > 0 {
+                    remainingTime.text = String(format: "%d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
+                } else if hour > 0 {
+                    remainingTime.text = String(format: "%02d:%02d:%02d", arguments: [hour, min, sec])
+                } else {
+                    remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
+                }
+            }
+            let frame = CGRect(x: batteryX, y: batteryY, width: batteryWidth * ratio, height: battery.bounds.height)
+            battery.frame = frame
         }
         
     }

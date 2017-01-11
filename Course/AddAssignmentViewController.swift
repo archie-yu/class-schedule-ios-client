@@ -11,22 +11,27 @@ import CourseModel
 
 class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     
+    var year = 0
+    let max = 16384
+    
+    var editingItem = ""
+    
+    var courseOldFrame : CGRect!
+    var timeOldFrame : CGRect!
+    
+    var courseVC : ChooseCourseViewController!
+    var timeVC : ChooseTimeViewController!
+    
     @IBOutlet weak var shadow: UIButton!
     @IBOutlet weak var courseView: UIView!
     @IBOutlet weak var courseButton: UIButton!
     @IBOutlet weak var timeView: UIView!
-    @IBOutlet weak var timeButton: UIButton!
+    @IBOutlet weak var beginTimeButton: UIButton!
+    @IBOutlet weak var endTimeButton: UIButton!
     @IBOutlet weak var contentField: UITextField!
     @IBOutlet weak var contentBackground: UILabel!
     @IBOutlet weak var noteField: UITextField!
     @IBOutlet weak var noteBackground: UILabel!
-    
-    var year = 0
-    let max = 16384
-    var courseVC : ChooseCourseViewController?
-    var timeVC : ChooseTimeViewController?
-    var courseOldFrame : CGRect?
-    var editingItem = ""
     
     override func viewDidLoad() {
         
@@ -42,6 +47,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             }
         }
         
+        timeOldFrame = timeView.frame
         courseOldFrame = courseView.frame
         
         shadow.backgroundColor = UIColor.black
@@ -91,9 +97,29 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func beginChooseTime(_ sender: UIButton) {
+    @IBAction func chooseBeginTime(_ sender: UIButton) {
         
-        editingItem = "time"
+        editingItem = "beginTime"
+        timeVC?.editingItem = "beginTime"
+        
+        self.view.bringSubview(toFront: shadow)
+        self.view.bringSubview(toFront: timeView)
+        
+        let newSize = timeVC!.beginChooseTime()
+        let newFrame = CGRect(origin: CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2), size: newSize)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.2)
+        shadow.alpha = 0.5
+        timeView.frame = newFrame
+        UIView.commitAnimations()
+        
+    }
+    
+    @IBAction func chooseEndTime(_ sender: UIButton) {
+        
+        editingItem = "endTime"
+        timeVC?.editingItem = "endTime"
         
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: timeView)
@@ -142,7 +168,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBAction func endChoose(_ sender: UIControl) {
         
         self.view.bringSubview(toFront: courseButton)
-        self.view.bringSubview(toFront: timeButton)
+        self.view.bringSubview(toFront: beginTimeButton)
+        self.view.bringSubview(toFront: endTimeButton)
         
         switch editingItem {
         case "course":
@@ -150,19 +177,19 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationDuration(0.3)
             shadow.alpha = 0
-            courseView.frame = courseOldFrame!
+            courseView.frame = courseOldFrame
             UIView.commitAnimations()
-        case "time":
+        case "beginTime", "endTime":
             timeVC!.endChooseTime()
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationDuration(0.2)
             shadow.alpha = 0
-            timeView.frame = timeButton.frame
+            timeView.frame = timeOldFrame
             UIView.commitAnimations()
         case "content":
-            textFieldShouldReturn(contentField)
+            finishInput(contentField)
         case "note":
-            textFieldShouldReturn(noteField)
+            finishInput(noteField)
         default: break
         }
         
@@ -196,11 +223,9 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         self.view.frame = frame
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func finishInput(_ textField: UITextField) {
         
-//        self.view.bringSubview(toFront: courseButton)
-//        self.view.bringSubview(toFront: timeButton)
-        
+        // 隐藏阴影
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.1)
         shadow.alpha = 0
@@ -208,24 +233,54 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         textField.resignFirstResponder()
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        finishInput(textField)
         return true
-        
     }
     
     @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {
-        if contentField.text != "" {
-            let courseName = courseVC?.courseName
-            let content = contentField.text!
-            let time = timeVC?.time
-            assignmentList.append(AssignmentModel(courseName!, content, time!))
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        
+        // 检查是否选择了课程
+        if courseVC?.courseName == "" {
+            let alertController = UIAlertController(title: "提示", message: "未选择课程！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        else {
+        
+        // 检查结束时间是否有效
+        else if !timeVC.finish {
+            let alertController = UIAlertController(title: "提示", message: "未选择结束时间！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else if timeVC.beginTime.compare(timeVC.endTime) != ComparisonResult.orderedAscending {
+            let alertController = UIAlertController(title: "提示", message: "任务结束时间不能晚于开始时间！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        // 检查是否输入了作业内容
+        else if contentField.text == "" {
             let alertController = UIAlertController(title: "提示", message: "未输入作业内容！", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
             alertController.addAction(confirmAction)
             self.present(alertController, animated: true, completion: nil)
         }
+        
+        else {
+            let courseName = courseVC.courseName
+            let content = contentField.text!
+            let beginTime = timeVC.beginTime!
+            let endTime = timeVC.endTime!
+            assignmentList.append(AssignmentModel(in: courseName, todo: content, from: beginTime, to: endTime))
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
 }

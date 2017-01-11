@@ -266,7 +266,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSL-Rw-ys4">
-                                <rect key="frame" x="16" y="313" width="343" height="60"/>
+                                <rect key="frame" x="16" y="293" width="343" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -280,7 +280,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入作业内容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8H-T2-z6r">
-                                <rect key="frame" x="31" y="318" width="309" height="50"/>
+                                <rect key="frame" x="31" y="298" width="309" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
@@ -291,35 +291,28 @@
                                 </connections>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qed-tI-hWV">
-                                <rect key="frame" x="16" y="80" width="343" height="100"/>
+                                <rect key="frame" x="16" y="80" width="343" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="ElP-93-8Vq" kind="embed" id="nLu-gN-3m0"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJk-M5-UgY">
-                                <rect key="frame" x="16" y="80" width="343" height="100"/>
+                                <rect key="frame" x="16" y="80" width="343" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="beginChooseCourse:" destination="PUB-aP-hiz" eventType="touchUpInside" id="fcI-wG-faz"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DGb-5k-rRt">
-                                <rect key="frame" x="16" y="196" width="343" height="100"/>
+                                <rect key="frame" x="16" y="176" width="343" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="wtn-5W-FU0" kind="embed" id="VNA-Ns-cZj"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFq-uJ-GXd">
-                                <rect key="frame" x="16" y="196" width="343" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="beginChooseTime:" destination="PUB-aP-hiz" eventType="touchUpInside" id="1Kr-ar-scs"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwu-MD-Qbb">
-                                <rect key="frame" x="16" y="390" width="343" height="316"/>
+                                <rect key="frame" x="16" y="370" width="343" height="316"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -333,7 +326,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="输入备注" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fI0-ob-bnP">
-                                <rect key="frame" x="31" y="408" width="309" height="239"/>
+                                <rect key="frame" x="31" y="388" width="309" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -342,18 +335,33 @@
                                     <action selector="editNote:" destination="PUB-aP-hiz" eventType="editingDidBegin" id="kD7-KU-gar"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfE-jq-sKP">
+                                <rect key="frame" x="16" y="176" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="chooseBeginTime:" destination="PUB-aP-hiz" eventType="touchUpInside" id="gim-V6-fmm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFq-uJ-GXd">
+                                <rect key="frame" x="16" y="226" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="chooseEndTime:" destination="PUB-aP-hiz" eventType="touchUpInside" id="JjF-6d-3h0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="beginTimeButton" destination="SfE-jq-sKP" id="47e-99-7U3"/>
                         <outlet property="contentBackground" destination="ZSL-Rw-ys4" id="hSZ-UU-BSm"/>
                         <outlet property="contentField" destination="V8H-T2-z6r" id="jVN-Ru-Tlv"/>
                         <outlet property="courseButton" destination="TJk-M5-UgY" id="UtK-t4-2du"/>
                         <outlet property="courseView" destination="qed-tI-hWV" id="W03-U6-5aF"/>
+                        <outlet property="endTimeButton" destination="tFq-uJ-GXd" id="CxG-tF-HMd"/>
                         <outlet property="noteBackground" destination="Gwu-MD-Qbb" id="o15-6k-VqS"/>
                         <outlet property="noteField" destination="fI0-ob-bnP" id="3ym-JT-oWK"/>
                         <outlet property="shadow" destination="OdP-w2-UdR" id="J2H-EL-c0h"/>
-                        <outlet property="timeButton" destination="tFq-uJ-GXd" id="h7h-vm-e4Q"/>
                         <outlet property="timeView" destination="DGb-5k-rRt" id="e16-iM-URt"/>
                     </connections>
                 </viewController>
@@ -625,10 +633,10 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="kww-xf-xvT">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kww-xf-xvT" id="fCg-U8-J51">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
@@ -658,11 +666,11 @@
                         <viewControllerLayoutGuide type="bottom" id="UUG-W5-rlw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UMP-18-8lf">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择相应课程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q2R-8k-JNM">
-                                <rect key="frame" x="16" y="20" width="311" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="课程：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q2R-8k-JNM">
+                                <rect key="frame" x="16" y="16" width="311" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
@@ -677,7 +685,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAM-ex-KQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3258" y="533"/>
+            <point key="canvasLocation" x="3256.8000000000002" y="532.53373313343332"/>
         </scene>
         <!--Choose Time View Controller-->
         <scene sceneID="uUC-JP-TLl">
@@ -691,10 +699,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="343" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择截止时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8dT-KB-maf">
-                                <rect key="frame" x="16" y="20" width="311" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="结束：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-kK-CRa">
+                                <rect key="frame" x="16" y="52" width="311" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开始：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8dT-KB-maf">
+                                <rect key="frame" x="16" y="8" width="311" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -702,12 +717,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="infoLabel" destination="8dT-KB-maf" id="ALm-DY-r0a"/>
+                        <outlet property="beginTimeLabel" destination="8dT-KB-maf" id="fXt-od-Bfr"/>
+                        <outlet property="endTimeLabel" destination="QVM-kK-CRa" id="OpU-Dw-Dx0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZV-W8-a5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3257" y="755"/>
+            <point key="canvasLocation" x="3256.8000000000002" y="754.72263868065977"/>
         </scene>
         <!--关于-->
         <scene sceneID="asd-4c-3S0">

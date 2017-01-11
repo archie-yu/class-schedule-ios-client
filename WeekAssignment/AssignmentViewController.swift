@@ -46,7 +46,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         print(assignmentList.count)
         let current = Date()
         for assignment in assignmentList {
-            print(assignment.endTime.timeIntervalSince(current))
+//            print(assignment.endTime.timeIntervalSince(current))
             if assignment.endTime.timeIntervalSince(current) < 60 * 60 * 24 * 7 {
                 weekAssignmentList.append(assignment)
             }
