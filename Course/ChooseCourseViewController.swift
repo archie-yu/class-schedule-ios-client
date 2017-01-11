@@ -25,7 +25,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         coursePicker.delegate = self
         coursePicker.dataSource = self
-        coursePicker.selectRow(max / 2, inComponent: 0, animated: false)
+        coursePicker.selectRow(max / 2 - max / 2 % courseList.count, inComponent: 0, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +60,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
     reusing view: UIView?) -> UIView {
         let title = UILabel()
         title.textColor = UIColor.black
-        title.text = courseList[(row - max / 2 % courseList.count) % courseList.count].course
+        title.text = courseList[row % courseList.count].course
         title.textAlignment = NSTextAlignment.center
         return title
     }
