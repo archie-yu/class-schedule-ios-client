@@ -25,7 +25,7 @@ public class AssignmentModel : NSObject, NSCoding {
     }
     
     public func encode(with: NSCoder){
-        with.encode(course, forKey: "name")
+        with.encode(course, forKey: "course")
         with.encode(content, forKey: "content")
         with.encode(note, forKey: "note")
         with.encode(beginTime, forKey: "begin")
@@ -33,7 +33,7 @@ public class AssignmentModel : NSObject, NSCoding {
     }
     
     required public init?(coder: NSCoder) {
-        course = coder.decodeObject(forKey: "name") as! String
+        course = coder.decodeObject(forKey: "course") as! String
         content = coder.decodeObject(forKey: "content") as! String
         note = coder.decodeObject(forKey: "note") as! String
         beginTime = coder.decodeObject(forKey: "begin") as! Date

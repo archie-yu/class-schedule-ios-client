@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 import CourseModel
 
-var assignmentList : [AssignmentModel] = []
+
 
 class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,6 +19,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     
     @IBOutlet weak var assignmentTable: UITableView!
     
+    var assignmentList : [AssignmentModel] = []
     var weekAssignmentList : [AssignmentModel] = []
     
     func dataFilePath() -> String {
@@ -38,12 +39,10 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
         let filePath = dataFilePath()
-        print(filePath)
         if (FileManager.default.fileExists(atPath: filePath)) {
             assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
         }
         
-        print(assignmentList.count)
         let current = Date()
         for assignment in assignmentList {
 //            print(assignment.endTime.timeIntervalSince(current))
@@ -57,9 +56,13 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         switch activeDisplayMode {
         case .compact:
-            self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: 37 * 3)
+            self.preferredContentSize = CGSize(
+                width: self.view.bounds.size.width,
+                height: 37 * 3)
         case .expanded:
-            self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: CGFloat(37 * (weekAssignmentList.count > 6 ? weekAssignmentList.count : 6)))
+            self.preferredContentSize = CGSize(
+                width: self.view.bounds.size.width,
+                height: CGFloat(37 * (weekAssignmentList.count > 6 ? weekAssignmentList.count : 6)))
         }
     }
     
