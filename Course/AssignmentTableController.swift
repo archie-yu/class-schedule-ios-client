@@ -11,8 +11,6 @@ import MGSwipeTableCell
 import CourseModel
 
 class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate {
-    
-    let identifier = "assignment"
 
     @IBOutlet var assignmentTable: UITableView!
     
@@ -22,30 +20,30 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
         // Do any additional setup after loading the view, typically from a nib.
         
+        // 载入保存的数据
         let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
         }
         
+        // 注册应用程序进入后台的消息
         let app = UIApplication.shared
-        // 第一个self参数，View Contoller实例会作为观察者接受通知。
-        // 第二个参数将一个选择器传入applicationWillResignActive方法，告诉通知中心在发布该通知后调用这个方法。
-        // 第三个参数UIApplicationWillResignActiveNotification，是接受通知的名称，他是由UIApplication类定义的字符串常量
-        // 第四哥参数app是要从中获取通知的对象
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(applicationWillResignActive(notification:)),
-                                               name: NSNotification.Name.UIApplicationWillResignActive,
-                                               object: app)
+        let NC = NotificationCenter.default
+        NC.addObserver(self,
+                       selector: #selector(applicationWillResignActive(notification:)),
+                       name: NSNotification.Name.UIApplicationWillResignActive,
+                       object: app)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // 添加新任务／载入数据后，刷新table的数据
         assignmentTable.reloadData()
     }
     
-    // 程序挂起前，保存数据
     func applicationWillResignActive(notification: NSNotification) {
         
+        // 程序挂起前，保存数据
         let filePath = assignmentDataFilePath()
         NSKeyedArchiver.archiveRootObject(assignmentList, toFile: filePath)
         
@@ -55,11 +53,9 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-//    var dataSourse = [("移动互联应用技术","App构思展示","Mon. 14:00"),
-//                      ("计算机图形学","大作业第一阶段","Mon. 24:00")]
     
     func finishAssignment(at indexPath: IndexPath) {
+        // 删除一项任务
         assignmentList.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
     }
@@ -69,14 +65,12 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return assignmentList.count
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as! AssignmentCell;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignment", for: indexPath) as! AssignmentCell;
         
         // 计算按钮高度
         let height = cell.card.frame.size.height

@@ -39,17 +39,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         
+        // 在子控制器中找到课程选择界面和时间选择界面对应的控制器
         for vc in self.childViewControllers {
             switch vc {
-            case is ChooseCourseViewController: courseVC = vc as? ChooseCourseViewController
-            case is ChooseTimeViewController: timeVC = vc as? ChooseTimeViewController
+            case is ChooseCourseViewController: courseVC = vc as! ChooseCourseViewController
+            case is ChooseTimeViewController: timeVC = vc as! ChooseTimeViewController
             default: break
             }
         }
         
+        // 保存课程选择界面和时间选择界面的初始大小，方便视图变化结束后恢复
         timeOldFrame = timeView.frame
         courseOldFrame = courseView.frame
         
+        // 在编辑某一项信息时，用阴影遮盖其他部分
         shadow.backgroundColor = UIColor.black
         shadow.alpha = 0
         
@@ -60,13 +63,19 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AddAssignmentViewController.keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        // 注册键盘出现和键盘消失的通知
+        let NC = NotificationCenter.default
+        NC.addObserver(self,
+                       selector: #selector(AddAssignmentViewController.keyboardWillShow(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NC.addObserver(self,
+                       selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        // 注销键盘出现和键盘消失的通知
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -79,16 +88,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func beginChooseCourse(_ sender: UIButton) {
+    @IBAction func chooseCourse(_ sender: UIButton) {
         
         editingItem = "course"
         
+        // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: courseView)
         
+        // 计算视图弹出时应该变化的大小
         let newSize = courseVC!.beginChooseCourse()
-        let newFrame = CGRect(origin: CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2), size: newSize)
+        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+        let newFrame = CGRect(origin: newPos, size: newSize)
         
+        // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.3)
         shadow.alpha = 0.5
@@ -100,14 +113,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBAction func chooseBeginTime(_ sender: UIButton) {
         
         editingItem = "beginTime"
+        
+        // 开始时间选择器和结束时间选择器共享，利用editingItem进行区分
         timeVC?.editingItem = "beginTime"
         
+        // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: timeView)
         
+        // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-        let newFrame = CGRect(origin: CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2), size: newSize)
+        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+        let newFrame = CGRect(origin: newPos, size: newSize)
         
+        // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
         shadow.alpha = 0.5
@@ -119,14 +138,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBAction func chooseEndTime(_ sender: UIButton) {
         
         editingItem = "endTime"
+        
+        // 开始时间选择器和结束时间选择器共享，利用editingItem进行区分
         timeVC?.editingItem = "endTime"
         
+        // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: timeView)
         
+        // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-        let newFrame = CGRect(origin: CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2), size: newSize)
+        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+        let newFrame = CGRect(origin: newPos, size: newSize)
         
+        // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
         shadow.alpha = 0.5
@@ -135,14 +160,16 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func editingDidBegin(_ sender: UITextField) {
+    @IBAction func editContent(_ sender: UITextField) {
         
         editingItem = "content"
         
+        // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: contentBackground)
         self.view.bringSubview(toFront: contentField)
         
+        // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
         shadow.alpha = 0.5
@@ -154,10 +181,12 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         editingItem = "note"
         
+        // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: noteBackground)
         self.view.bringSubview(toFront: noteField)
         
+        // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
         shadow.alpha = 0.5
@@ -165,12 +194,14 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func endChoose(_ sender: UIControl) {
+    @IBAction func endEdit(_ sender: UIControl) {
         
+        // 恢复前置区域
         self.view.bringSubview(toFront: courseButton)
         self.view.bringSubview(toFront: beginTimeButton)
         self.view.bringSubview(toFront: endTimeButton)
         
+        // 根据正在编辑的区域恢复视图
         switch editingItem {
         case "course":
             courseVC!.endChooseCourse()
@@ -197,6 +228,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            // 计算可能需要上移的距离
             let keyboardHeight = keyboardFrame.origin.y
             var deltaY : CGFloat = 0
             switch(editingItem) {
@@ -208,6 +240,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
                 deltaY = keyboardHeight - noteHeight
             default: break
             }
+            // 需要上移时，变化视图位置
             if deltaY < 0 {
                 var frame = self.view.frame
                 frame.origin.y = deltaY
@@ -240,6 +273,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // 用于比较两个任务先后次序
     func endTimeOrder(a: AssignmentModel, b: AssignmentModel) ->Bool {
         return a.endTime.compare(b.endTime) == .orderedAscending
     }
@@ -276,14 +310,21 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
         
+        // 信息完整
         else {
+            
+            // 将信息保存到assignmentList中
             let course = courseVC.course
             let content = contentField.text!
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
             assignmentList.append(AssignmentModel(in: course, todo: content, note: "", from: beginTime, to: endTime))
+            
+            // 插入列表后按结束时间重新排序
             assignmentList.sort(by: endTimeOrder)
+            
             self.presentingViewController?.dismiss(animated: true, completion: nil)
+            
         }
         
     }

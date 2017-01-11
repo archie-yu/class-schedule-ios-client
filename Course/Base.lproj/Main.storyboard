@@ -253,7 +253,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="endChoose:" destination="PUB-aP-hiz" eventType="touchUpInside" id="br3-t8-UTI"/>
+                                    <action selector="endEdit:" destination="PUB-aP-hiz" eventType="touchUpInside" id="hlK-zj-jgG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSL-Rw-ys4">
@@ -278,7 +278,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="editingDidBegin:" destination="PUB-aP-hiz" eventType="editingDidBegin" id="55J-bI-hti"/>
+                                    <action selector="editContent:" destination="PUB-aP-hiz" eventType="editingDidBegin" id="5Fb-8f-5xN"/>
                                 </connections>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qed-tI-hWV">
@@ -292,7 +292,7 @@
                                 <rect key="frame" x="16" y="80" width="343" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="beginChooseCourse:" destination="PUB-aP-hiz" eventType="touchUpInside" id="fcI-wG-faz"/>
+                                    <action selector="chooseCourse:" destination="PUB-aP-hiz" eventType="touchUpInside" id="fMJ-2Z-qJ4"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DGb-5k-rRt">

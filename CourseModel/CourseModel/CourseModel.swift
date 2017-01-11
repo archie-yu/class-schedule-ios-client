@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 保存课程信息的单元
 public class CourseModel : NSObject, NSCoding {
     
     public var course: String
@@ -46,6 +47,7 @@ public class CourseModel : NSObject, NSCoding {
     
 }
 
+// 获取共享空间中保存课程信息的文件地址
 public func courseDataFilePath() -> String {
     let manager = FileManager()
     let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")

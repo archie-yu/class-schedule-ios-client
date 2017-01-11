@@ -29,21 +29,26 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // 设置圆角
         self.view.layer.cornerRadius = 4
         self.view.clipsToBounds = true
         
         timePicker.delegate = self
         timePicker.dataSource = self
         
+        // 初始化开始与结束时间
         beginTime = Date()
         endTime = Date()
         
+        // 默认选择当前时间为开始时间
         let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: beginTime)
-        beginTimeLabel.text = "开始：" + String(format: "%d.%02d.%02d %02d:%02d",
-                                              dateComponents.year!, dateComponents.month!,
-                                              dateComponents.day!, dateComponents.hour!,
-                                              dateComponents.minute!)
+        let dateComponents = calendar.dateComponents(
+            [.year, .month, .day, .hour, .minute], from: beginTime)
+        beginTimeLabel.text = "开始：" + String(
+            format: "%d.%02d.%02d %02d:%02d", dateComponents.year!,
+            dateComponents.month!, dateComponents.day!,
+            dateComponents.hour!, dateComponents.minute!)
 
     }
 
@@ -103,51 +108,35 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func endChooseTime() {
+        
+        // 根据时间选择器的行数，计算所选时间对应的字符串
+        let yearStr = "\(year + timePicker.selectedRow(inComponent: 0) % 9 - 4)"
+        
         let month = 1 + timePicker.selectedRow(inComponent: 1) % 12
-        var monthString : String
-        if month >= 10 {
-            monthString = String(month)
-        }
-        else {
-            monthString = "0" + String(month)
-        }
+        let monthStr = String(format: "%02d", month)
+        
         let day = 1 + timePicker.selectedRow(inComponent: 2) % 31
-        var dayString : String
-        if day >= 10 {
-            dayString = String(day)
-        }
-        else {
-            dayString = "0" + String(day)
-        }
+        let dayStr = String(format: "%02d", day)
+        
         let hour = timePicker.selectedRow(inComponent: 3) % 24
-        var hourString : String
-        if hour >= 10 {
-            hourString = String(hour)
-        }
-        else {
-            hourString = "0" + String(hour)
-        }
+        let hourStr = String(format: "%02d", hour)
+        
         let minute = timePicker.selectedRow(inComponent: 4) % 60
-        var minuteString : String
-        if minute >= 10 {
-            minuteString = String(minute)
-        }
-        else {
-            minuteString = "0" + String(minute)
-        }
+        let minuteStr = String(format: "%02d", minute)
         
-        let timeString = String(year + timePicker.selectedRow(inComponent: 0) % 9 - 4) + "." + monthString + "." + dayString + " " + hourString + ":" + minuteString
+        let timeStr = "\(yearStr).\(monthStr).\(dayStr) \(hourStr):\(minuteStr)"
+        
         let timeFormatter = DateFormatter()
-        
         timeFormatter.dateFormat = "yyyy.MM.dd HH:mm"
         
+        // 计算开始时间和结束时间
         switch(editingItem) {
         case "beginTime":
-            beginTime = timeFormatter.date(from: timeString)
-            beginTimeLabel.text = "开始：" + timeString
+            beginTime = timeFormatter.date(from: timeStr)
+            beginTimeLabel.text = "开始：" + timeStr
         case "endTime":
-            endTime = timeFormatter.date(from: timeString)
-            endTimeLabel.text = "结束：" + timeString
+            endTime = timeFormatter.date(from: timeStr)
+            endTimeLabel.text = "结束：" + timeStr
             finish = true
         default: break
         }
@@ -171,6 +160,7 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int,
                     reusing view: UIView?) -> UIView {
+        // 为某行某列设置对应的时间
         let title = UILabel()
         title.textColor = UIColor.black
         title.textAlignment = NSTextAlignment.center
