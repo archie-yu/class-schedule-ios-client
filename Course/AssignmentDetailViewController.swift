@@ -33,6 +33,10 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         assignmentContent.text = assignmentList[assignmentNo].content
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -78,9 +82,9 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         if day > 0 {
             remainingTime.text = String(format: "%d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
         } else if hour > 0 {
-            remainingTime.text = String(format: "%02dh %02dm %02ds", arguments: [day, hour, min, sec])
+            remainingTime.text = String(format: "%02d:%02d:%02d", arguments: [hour, min, sec])
         } else {
-            remainingTime.text = String(format: "%02dm %02ds", arguments: [day, hour, min, sec])
+            remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
         }
         
     }

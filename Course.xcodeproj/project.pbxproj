@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1133CDD31E25DC2600270ECC /* CourseModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; };
+		1133CDD41E25DC2600270ECC /* CourseModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1134E8BA1E24BCC2007FB8C7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E8B91E24BCC2007FB8C7 /* NotificationCenter.framework */; };
 		1134E8BD1E24BCC2007FB8C7 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E8BC1E24BCC2007FB8C7 /* CourseViewController.swift */; };
 		1134E8C01E24BCC2007FB8C7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1134E8BE1E24BCC2007FB8C7 /* MainInterface.storyboard */; };
@@ -18,7 +20,6 @@
 		1134E8E71E24C2D3007FB8C7 /* WeekAssignment.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1134E8DC1E24C2D2007FB8C7 /* WeekAssignment.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1134E8EC1E24C5CF007FB8C7 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E8EB1E24C5CF007FB8C7 /* AssignmentCell.swift */; };
 		1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E9151E24F5E6007FB8C7 /* Assignment.swift */; };
-		1134E9351E24FAB5007FB8C7 /* CourseModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1134E93A1E24FF5B007FB8C7 /* CourseModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; };
 		115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */; };
 		1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B22A1DFE9E5E0026046C /* CourseCell.swift */; };
@@ -42,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1133CDD51E25DC2600270ECC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1134E92C1E24F74F007FB8C7 /* CourseModel.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1134E9201E24F74F007FB8C7;
+			remoteInfo = CourseModel;
+		};
 		1134E8C21E24BCC2007FB8C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 11E897021DE0189B00226CF1 /* Project object */;
@@ -84,8 +92,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1134E9351E24FAB5007FB8C7 /* CourseModel.framework in Embed Frameworks */,
 				11C27E171DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Embed Frameworks */,
+				1133CDD41E25DC2600270ECC /* CourseModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */,
+				1133CDD31E25DC2600270ECC /* CourseModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +383,7 @@
 			dependencies = (
 				1134E8C31E24BCC2007FB8C7 /* PBXTargetDependency */,
 				1134E8E61E24C2D3007FB8C7 /* PBXTargetDependency */,
+				1133CDD61E25DC2600270ECC /* PBXTargetDependency */,
 			);
 			name = Course;
 			productName = Course;
@@ -387,7 +397,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Archie Yu";
 				TargetAttributes = {
 					1134E8B61E24BCC2007FB8C7 = {
@@ -532,6 +542,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1133CDD61E25DC2600270ECC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CourseModel;
+			targetProxy = 1133CDD51E25DC2600270ECC /* PBXContainerItemProxy */;
+		};
 		1134E8C31E24BCC2007FB8C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1134E8B61E24BCC2007FB8C7 /* TodayCourse */;
@@ -613,6 +628,7 @@
 		1134E8E91E24C2D3007FB8C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CODE_SIGN_ENTITLEMENTS = WeekAssignment/WeekAssignment.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
@@ -628,6 +644,7 @@
 		1134E8EA1E24C2D3007FB8C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CODE_SIGN_ENTITLEMENTS = WeekAssignment/WeekAssignment.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
@@ -658,6 +675,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -708,6 +726,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
