@@ -135,8 +135,15 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         cell.course.text = assignmentList[indexPath.row].courseName
         cell.assignment.text = assignmentList[indexPath.row].content
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "E HH:mm"
-        cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].endTime)
+        let curDate = Date()
+        let endDate = assignmentList[indexPath.row].endTime
+        let remainingSec = Int(endDate.timeIntervalSince(curDate))
+        if remainingSec < 60 * 60 * 24 * 7 {
+            timeFormatter.dateFormat = "E HH:mm"
+            cell.time.text = timeFormatter.string(from: assignmentList[indexPath.row].endTime)
+        } else {
+            cell.time.text = String(format: "%d天后", remainingSec / 60 / 60 / 24)
+        }
         
         return cell;
         

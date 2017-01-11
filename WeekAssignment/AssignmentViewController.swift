@@ -57,7 +57,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         switch activeDisplayMode {
         case .compact:
-            self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: 37 * 4)
+            self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: 37 * 3)
         case .expanded:
             self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: CGFloat(37 * (weekAssignmentList.count > 6 ? weekAssignmentList.count : 6)))
         }

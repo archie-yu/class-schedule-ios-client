@@ -240,6 +240,10 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func endTimeOrder(a: AssignmentModel, b: AssignmentModel) ->Bool {
+        return a.endTime.compare(b.endTime) == .orderedAscending
+    }
+    
     @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {
         
         // 检查是否选择了课程
@@ -278,6 +282,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
             assignmentList.append(AssignmentModel(in: courseName, todo: content, from: beginTime, to: endTime))
+            assignmentList.sort(by: endTimeOrder)
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         }
         
