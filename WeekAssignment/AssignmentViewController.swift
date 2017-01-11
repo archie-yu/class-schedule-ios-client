@@ -22,12 +22,6 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     var assignmentList : [AssignmentModel] = []
     var weekAssignmentList : [AssignmentModel] = []
     
-    func dataFilePath() -> String {
-        let manager = FileManager()
-        let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
-        return (containerURL?.appendingPathComponent("assignment.dat").path)!
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -38,7 +32,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        let filePath = dataFilePath()
+        let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
         }

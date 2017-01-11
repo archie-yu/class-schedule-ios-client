@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseModel
 
 class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -25,17 +26,17 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var TeacherName: UITextField!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         PickerView.delegate = self
         
-        PickerView.selectRow(1, inComponent: 0, animated: true)
-        PickerView.selectRow(2, inComponent: 1, animated: true)
-        PickerView.selectRow(3, inComponent: 2, animated: true)
+        PickerView.selectRow(0, inComponent: 0, animated: true)
+        PickerView.selectRow(0, inComponent: 1, animated: true)
+        PickerView.selectRow(1, inComponent: 2, animated: true)
+        
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,7 +72,6 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             return weekday[row]
         case 1, 2:
             return String(row + 1)
-            
         default:
             break
         }
@@ -111,7 +111,6 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    
     @IBAction func LocationEnterEnd(_ sender: UITextField) {
         if Location.text == ""{
             Location.text = "请输入地点"
@@ -120,19 +119,19 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func AddCourse(_ sender: UIBarButtonItem) {
         
-        let newCourse = CourseModel(courseName: CourseName.text!,
-                                    teacherName: TeacherName.text!,
-                                    location:Location.text!,
-                            date: weekday[PickerView.selectedRow(inComponent: 0)],
-                            begin_class: PickerView.selectedRow(inComponent: 1),
-                            end_class: PickerView.selectedRow(inComponent: 2));
+        let course = CourseModel(course: CourseName.text!, teacher: TeacherName.text!, in: Location.text!,
+                            on: PickerView.selectedRow(inComponent: 0) + 2,
+                            from: PickerView.selectedRow(inComponent: 1) + 1,
+                            to: PickerView.selectedRow(inComponent: 2) + 1)
         
+        courseList.append(course)
+        everydayCourseList[course.weekday - 2].append(course)
         
-        
-        courseList.append(newCourse)
-        
-        //coursemainController?.updateCourse()
+        let filePath = courseDataFilePath()
+        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
         
         self.presentingViewController?.dismiss(animated: true, completion: nil)
+        
     }
+    
 }

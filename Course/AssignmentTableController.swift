@@ -16,19 +16,13 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
 
     @IBOutlet var assignmentTable: UITableView!
     
-    func dataFilePath() -> String {
-        let manager = FileManager()
-        let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
-        return (containerURL?.appendingPathComponent("assignment.dat").path)!
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        let filePath = dataFilePath()
+        let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
         }
@@ -45,18 +39,18 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        assignmentTable.reloadData()
+    }
+    
     // 程序挂起前，保存数据
     func applicationWillResignActive(notification: NSNotification) {
         
-        let filePath = dataFilePath()
+        let filePath = assignmentDataFilePath()
         NSKeyedArchiver.archiveRootObject(assignmentList, toFile: filePath)
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        assignmentTable.reloadData()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

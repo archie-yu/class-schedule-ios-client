@@ -7,21 +7,21 @@
 //
 
 import UIKit
+import CourseModel
 
 class DisplayCoursesViewController: UITableViewController {
     
-    var dayID = 0
-    
-    var numCourses = 0;
-    
-    var thisdaycourseList : [CourseModel] = []
+    var weekday = 0
     
     @IBOutlet weak var courseCell: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        courseCell.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,8 +29,8 @@ class DisplayCoursesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getdayID()->Int{
-        return dayID
+    func getWeekday() -> Int{
+        return weekday
     }
     
     /*
@@ -48,32 +48,20 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numCourses
+        return everydayCourseList[weekday - 1].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
         
-        //print(indexPath.row)
+        let course = everydayCourseList[weekday - 1][indexPath.row]
+        cell.CourseName.text = course.course
+        cell.CourseTime.text = "\(course.begin)-\(course.end)"
+        cell.Location.text = course.location
         
-        cell.CourseName.text = thisdaycourseList[indexPath.row].courseName
-        cell.TeacherName.text = thisdaycourseList[indexPath.row].teacherName
-        cell.Location.text = thisdaycourseList[indexPath.row].location
+        return cell
         
-        return cell;
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        courseCell.reloadData()
-    }
-    
-    public func addCourse(course:CourseModel){
-        
-        thisdaycourseList.append(course)
-        
-        numCourses += 1
-        
-        //print(numCourses)
-        
-    }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseModel
 
 class CoursePageViewController: UIPageViewController {
     
@@ -26,19 +27,19 @@ class CoursePageViewController: UIPageViewController {
         // Do any additional setup after loading the view.
         
         mondayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
-        mondayController?.dayID = 1
+        mondayController?.weekday = 1
         
         tuesdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
-        tuesdayController?.dayID = 2
+        tuesdayController?.weekday = 2
         
         wednesdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
-        wednesdayController?.dayID = 3
+        wednesdayController?.weekday = 3
         
         thursdayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
-        thursdayController?.dayID = 4
+        thursdayController?.weekday = 4
         
         fridayController = storyboard?.instantiateViewController(withIdentifier: "DayCourse") as? DisplayCoursesViewController
-        fridayController?.dayID = 5
+        fridayController?.weekday = 5
         
     }
 
@@ -58,30 +59,4 @@ class CoursePageViewController: UIPageViewController {
     }
     */
     
-    func add_Course(){
-        for course in courseList{
-            if(course.isNew == true){
-                switch course.date{
-                    case "Mon":
-                        mondayController?.addCourse(course: course)
-                        break
-                    case "Tue":
-                        tuesdayController?.addCourse(course: course)
-                        break
-                    case "Wes":
-                        wednesdayController?.addCourse(course: course)
-                        break
-                    case "Thu":
-                        thursdayController?.addCourse(course: course)
-                        break
-                    case "Fri":
-                        fridayController?.addCourse(course: course)
-                        break
-                default:
-                    break
-                }
-                course.isNew = false
-            }
-        }
-    }
 }

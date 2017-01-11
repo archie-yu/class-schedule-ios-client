@@ -41,3 +41,9 @@ public class AssignmentModel : NSObject, NSCoding {
     }
     
 }
+
+public func assignmentDataFilePath() -> String {
+    let manager = FileManager()
+    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
+    return (containerURL?.appendingPathComponent("assignment.dat").path)!
+}

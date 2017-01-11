@@ -17,12 +17,6 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
     var courseList : [CourseModel] = []
     var todayCourseList : [CourseModel] = []
     
-    func dataFilePath() -> String {
-        let manager = FileManager()
-        let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
-        return (containerURL?.appendingPathComponent("course.dat").path)!
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -33,7 +27,7 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        let filePath = dataFilePath()
+        let filePath = courseDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
         }
@@ -42,7 +36,7 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         let calendar = Calendar.current
         let weekday = calendar.dateComponents([.weekday], from: curDate).weekday
         for course in courseList {
-            if course.day == weekday {
+            if course.weekday == weekday {
                 todayCourseList.append(course)
             }
         }
@@ -74,14 +68,9 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodayCourseCell", for: indexPath) as! CourseCell
         
-        if indexPath.row >= todayCourseList.count {
-            cell.courseName.text = "nil"
-            cell.courseTime.text = "nil"
-        } else {
-            let course = todayCourseList[indexPath.row]
-            cell.courseName.text = course.course
-            cell.courseTime.text = "\(course.begin)-\(course.end)"
-        }
+        let course = todayCourseList[indexPath.row]
+        cell.courseName.text = "\(course.course)(\(course.location))"
+        cell.courseTime.text = "\(course.begin) - \(course.end)"
         
         return cell
         

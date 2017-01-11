@@ -42,7 +42,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     func endChooseCourse() {
-        course = courseList[coursePicker.selectedRow(inComponent: 0) % courseList.count].courseName
+        course = courseList[coursePicker.selectedRow(inComponent: 0) % courseList.count].course
         infoLabel.text = course
         infoLabel.isHidden = false
         coursePicker.removeFromSuperview()
@@ -60,7 +60,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
     reusing view: UIView?) -> UIView {
         let title = UILabel()
         title.textColor = UIColor.black
-        title.text = courseList[(row - max / 2 % courseList.count) % courseList.count].courseName
+        title.text = courseList[(row - max / 2 % courseList.count) % courseList.count].course
         title.textAlignment = NSTextAlignment.center
         return title
     }

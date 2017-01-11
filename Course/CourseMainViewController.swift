@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import CourseModel
 
 class CourseMainViewController: UIViewController, UIPageViewControllerDataSource {
     
     var PageViewController:CoursePageViewController!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let filePath = courseDataFilePath()
+        if (FileManager.default.fileExists(atPath: filePath)) {
+            courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
+        }
+        for course in courseList {
+            everydayCourseList[course.weekday - 2].append(course)
+        }
+        
         PageViewController = self.childViewControllers.first as!
         CoursePageViewController
         
@@ -45,9 +55,9 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
         
         if let daycontroller = viewController as? DisplayCoursesViewController{
             
-            let dayid = daycontroller.getdayID()
+            let weekday = daycontroller.getWeekday()
             
-            switch dayid {
+            switch weekday {
             case 1:
                 return PageViewController.tuesdayController
             case 2:
@@ -58,21 +68,22 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
                 return PageViewController.fridayController
             case 5:
                 return PageViewController.mondayController
-            default:
-                return nil
+            default: break
             }
             
         }
+        
         return nil
+        
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         if let daycontroller = viewController as? DisplayCoursesViewController{
             
-            let dayid = daycontroller.getdayID()
+            let weekday = daycontroller.getWeekday()
             
-            switch dayid {
+            switch weekday {
             case 1:
                 return PageViewController.fridayController
             case 2:
@@ -83,19 +94,14 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
                 return PageViewController.wednesdayController
             case 5:
                 return PageViewController.thursdayController
-            default:
-                return nil
+            default: break
+                
             }
             
         }
+        
         return nil
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        updateCourse()
-    }
-    
-    func updateCourse(){
-        PageViewController.add_Course()
-    }
 }

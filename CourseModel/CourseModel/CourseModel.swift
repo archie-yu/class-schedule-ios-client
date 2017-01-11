@@ -13,15 +13,15 @@ public class CourseModel : NSObject, NSCoding {
     public var course: String
     public var teacher: String
     public var location: String
-    public var day: Int
+    public var weekday: Int
     public var begin: Int
     public var end: Int
     
-    public init(course: String, teacher: String, in location:String, on day: Int, from begin: Int, to end: Int) {
+    public init(course: String, teacher: String, in location:String, on weekday: Int, from begin: Int, to end: Int) {
         self.course = course
         self.teacher = teacher
         self.location = location
-        self.day = day
+        self.weekday = weekday
         self.begin = begin
         self.end = end
     }
@@ -30,7 +30,7 @@ public class CourseModel : NSObject, NSCoding {
         with.encode(course, forKey: "course")
         with.encode(teacher, forKey: "teacher")
         with.encode(location, forKey: "location")
-        with.encode(day, forKey: "day")
+        with.encode(weekday, forKey: "weekday")
         with.encode(begin, forKey: "begin")
         with.encode(end, forKey: "end")
     }
@@ -39,9 +39,15 @@ public class CourseModel : NSObject, NSCoding {
         course = coder.decodeObject(forKey: "course") as! String
         teacher = coder.decodeObject(forKey: "teacher") as! String
         location = coder.decodeObject(forKey: "location") as! String
-        day = coder.decodeObject(forKey: "day") as! Int
-        begin = coder.decodeObject(forKey: "begin") as! Int
-        end = coder.decodeObject(forKey: "end") as! Int
+        weekday = coder.decodeInteger(forKey: "weekday")
+        begin = coder.decodeInteger(forKey: "begin")
+        end = coder.decodeInteger(forKey: "end")
     }
     
+}
+
+public func courseDataFilePath() -> String {
+    let manager = FileManager()
+    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
+    return (containerURL?.appendingPathComponent("course.dat").path)!
 }
