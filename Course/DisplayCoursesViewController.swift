@@ -57,7 +57,7 @@ class DisplayCoursesViewController: UITableViewController {
         
         let course = everydayCourseList[weekday - 1][indexPath.row]
         cell.CourseName.text = course.course
-        cell.CourseTime.text = "\(course.begin)-\(course.end)"
+        cell.CourseTime.text = "\(course.begin) - \(course.end)"
         cell.Location.text = course.location
         
         return cell
