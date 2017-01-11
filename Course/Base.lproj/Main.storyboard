@@ -471,7 +471,7 @@
         <scene sceneID="J7z-ln-uFs">
             <objects>
                 <navigationController id="I6Q-xK-xTu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="课程" image="course" id="xrI-4I-vhi"/>
+                    <tabBarItem key="tabBarItem" title="课程" image="course_not_selected" selectedImage="course" id="xrI-4I-vhi"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -583,7 +583,7 @@
         <scene sceneID="16U-IQ-ZTZ">
             <objects>
                 <navigationController id="RIF-7U-xyc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="作业" image="assignment" id="LZQ-Lu-Ecf"/>
+                    <tabBarItem key="tabBarItem" title="作业" image="assignment_not_selected" selectedImage="assignment" id="LZQ-Lu-Ecf"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -612,7 +612,9 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="I6Q-xK-xTu" kind="relationship" relationship="viewControllers" id="Bc2-eW-kG4"/>
@@ -633,7 +635,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="kww-xf-xvT">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kww-xf-xvT" id="fCg-U8-J51">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -736,12 +738,39 @@
                     <view key="view" contentMode="scaleToFill" id="Rop-AY-4F5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-tN-Rz5">
+                                <rect key="frame" x="138" y="190" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Course" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-aR-hxf">
+                                <rect key="frame" x="138" y="304" width="99" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.31443768739700317" green="0.88981455564498901" blue="0.75987976789474487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHA-7u-Z9M">
+                                <rect key="frame" x="153" y="333" width="71" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="官方微博    |    官方微信    |    商店评价" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POr-tG-Jch">
+                                <rect key="frame" x="68" y="597" width="242" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.3144376874" green="0.8898145556" blue="0.7598797679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nC-L8-WHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4078" y="779"/>
+            <point key="canvasLocation" x="4077.5999999999999" y="778.56071964017997"/>
         </scene>
         <!--课程时间-->
         <scene sceneID="mUG-hI-gea">
@@ -784,9 +813,13 @@
         <image name="Add" width="17" height="19"/>
         <image name="Setting" width="17" height="19"/>
         <image name="assignment" width="25" height="25"/>
+        <image name="assignment_not_selected" width="25" height="25"/>
         <image name="course" width="25" height="25"/>
+        <image name="course_not_selected" width="25" height="25"/>
+        <image name="icon" width="180" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Jc-vv-fCc"/>
+        <segue reference="305-Xf-M9X"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.31443768739700317" green="0.88981455564498901" blue="0.75987976789474487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

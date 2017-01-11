@@ -35,7 +35,7 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodayCourseCell", for: indexPath) as! CourseCell
         
         cell.courseName.text = "移动互联应用技术"
-        cell.courseTime.text = "3-4"
+        cell.courseTime.text = "5-6"
         
         return cell
     }

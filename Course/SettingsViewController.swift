@@ -100,7 +100,7 @@ class SettingsViewController: UITableViewController {
                 let switchSize = themeSwitch.frame.size
                 let rect = CGRect(x: cellSize.width - switchSize.width - 15, y: (cellSize.height - switchSize.height) / 2, width: switchSize.width, height: switchSize.height)
                 themeSwitch.frame = rect
-                themeSwitch.onTintColor = UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1)
+                themeSwitch.onTintColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.85)
                 themeSwitch.setOn(true, animated: false)
                 cell.addSubview(themeSwitch)
             default:
@@ -114,7 +114,7 @@ class SettingsViewController: UITableViewController {
             let switchSize = icloudSwitch.frame.size
             let rect = CGRect(x: cellSize.width - switchSize.width - 15, y: (cellSize.height - switchSize.height) / 2, width: switchSize.width, height: switchSize.height)
             icloudSwitch.frame = rect
-            icloudSwitch.onTintColor = UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1)
+            icloudSwitch.onTintColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.85)
             icloudSwitch.setOn(false, animated: false)
             cell.addSubview(icloudSwitch)
         case 2:
