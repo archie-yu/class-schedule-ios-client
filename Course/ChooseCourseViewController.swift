@@ -12,7 +12,7 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     let max = 16384
     let coursePicker = UIPickerView()
-    var courseName = ""
+    var course = ""
 
     @IBOutlet weak var infoLabel: UILabel!
     
@@ -42,8 +42,8 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     func endChooseCourse() {
-        courseName = courseList[coursePicker.selectedRow(inComponent: 0) % courseList.count].courseName
-        infoLabel.text = courseName
+        course = courseList[coursePicker.selectedRow(inComponent: 0) % courseList.count].courseName
+        infoLabel.text = course
         infoLabel.isHidden = false
         coursePicker.removeFromSuperview()
     }

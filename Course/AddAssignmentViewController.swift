@@ -247,7 +247,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {
         
         // 检查是否选择了课程
-        if courseVC?.courseName == "" {
+        if courseVC?.course == "" {
             let alertController = UIAlertController(title: "提示", message: "未选择课程！", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
             alertController.addAction(confirmAction)
@@ -277,11 +277,11 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         }
         
         else {
-            let courseName = courseVC.courseName
+            let course = courseVC.course
             let content = contentField.text!
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
-            assignmentList.append(AssignmentModel(in: courseName, todo: content, from: beginTime, to: endTime))
+            assignmentList.append(AssignmentModel(in: course, todo: content, note: "", from: beginTime, to: endTime))
             assignmentList.sort(by: endTimeOrder)
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         }

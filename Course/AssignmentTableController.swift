@@ -132,7 +132,7 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
          */
         cell.card.backgroundColor = color
         cell.selectionStyle = .none
-        cell.course.text = assignmentList[indexPath.row].courseName
+        cell.course.text = assignmentList[indexPath.row].course
         cell.assignment.text = assignmentList[indexPath.row].content
         let timeFormatter = DateFormatter()
         let curDate = Date()

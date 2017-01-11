@@ -80,7 +80,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
             cell.assignmentTime.text = ""
         } else {
             let assignment = weekAssignmentList[indexPath.row]
-            cell.assignmentContent.text = assignment.courseName + "：" + assignment.content
+            cell.assignmentContent.text = assignment.course + "：" + assignment.content
             let calender = Calendar.current
             let dateComponents = calender.dateComponents([.weekday, .hour, .minute], from: assignment.endTime)
             cell.assignmentTime.text = weekday[dateComponents.weekday! - 1] + String(format: " %02d:%02d", dateComponents.hour!, dateComponents.minute!)

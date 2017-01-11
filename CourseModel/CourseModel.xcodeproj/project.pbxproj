@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1134E9331E24F770007FB8C7 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E9321E24F770007FB8C7 /* AssignmentModel.swift */; };
 		1134E9341E24FA45007FB8C7 /* AssignmentModel.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1134E9321E24F770007FB8C7 /* AssignmentModel.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		11DB5B041E263C5600DD9BF4 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB5B031E263C5600DD9BF4 /* CourseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		1134E9241E24F74F007FB8C7 /* CourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseModel.h; sourceTree = "<group>"; };
 		1134E9251E24F74F007FB8C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1134E9321E24F770007FB8C7 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
+		11DB5B031E263C5600DD9BF4 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			children = (
 				1134E9241E24F74F007FB8C7 /* CourseModel.h */,
 				1134E9321E24F770007FB8C7 /* AssignmentModel.swift */,
+				11DB5B031E263C5600DD9BF4 /* CourseModel.swift */,
 				1134E9251E24F74F007FB8C7 /* Info.plist */,
 			);
 			path = CourseModel;
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11DB5B041E263C5600DD9BF4 /* CourseModel.swift in Sources */,
 				1134E9331E24F770007FB8C7 /* AssignmentModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

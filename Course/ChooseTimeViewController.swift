@@ -75,7 +75,7 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         // 计算初始行数
         let middle = max / 2
         year = timeComponents.year!
-        let yearRow = middle - (middle % 4)
+        let yearRow = middle - (middle % 9) + 4
         let monthRow = middle - (middle % 12) + timeComponents.month! - 1
         let dayRow = middle - (middle % 31) + timeComponents.day! - 1
         let hourRow = middle - (middle % 24) + timeComponents.hour!
@@ -136,7 +136,7 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
             minuteString = "0" + String(minute)
         }
         
-        let timeString = String(year + timePicker.selectedRow(inComponent: 0) % 4) + "." + monthString + "." + dayString + " " + hourString + ":" + minuteString
+        let timeString = String(year + timePicker.selectedRow(inComponent: 0) % 9 - 4) + "." + monthString + "." + dayString + " " + hourString + ":" + minuteString
         let timeFormatter = DateFormatter()
         
         timeFormatter.dateFormat = "yyyy.MM.dd HH:mm"
@@ -175,7 +175,7 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
         title.textColor = UIColor.black
         title.textAlignment = NSTextAlignment.center
         switch component {
-        case 0: title.text = String(row % 4 + year)
+        case 0: title.text = String(row % 9 + year - 4)
         case 1: title.text = String(row % 12 + 1)
         case 2: title.text = String(row % 31 + 1)
         case 3: title.text = String(row % 24)

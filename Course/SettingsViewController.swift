@@ -103,6 +103,7 @@ class SettingsViewController: UITableViewController {
                 themeSwitch.onTintColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.85)
                 themeSwitch.setOn(true, animated: false)
                 cell.addSubview(themeSwitch)
+                themeSwitch.isEnabled = false
             default:
                 break
             }
@@ -117,6 +118,7 @@ class SettingsViewController: UITableViewController {
             icloudSwitch.onTintColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.85)
             icloudSwitch.setOn(false, animated: false)
             cell.addSubview(icloudSwitch)
+            icloudSwitch.isEnabled = false
         case 2:
             switch indexPath.row {
             case 0: cell.textLabel?.text = "反馈"

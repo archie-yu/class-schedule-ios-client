@@ -13,15 +13,10 @@ var courseList : [CourseModel] = []
 class CourseModel : NSObject {
     
     var courseName = "";
-    
     var teacherName = "";
-    
     var date = "";
-    
     var begin_class = 1;
-    
     var end_class = 2;
-    
     var location = ""
     
     var isNew = true

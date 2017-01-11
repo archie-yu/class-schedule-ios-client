@@ -29,11 +29,11 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     var timer: Timer!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = assignmentList[assignmentNo].courseName
+        self.title = assignmentList[assignmentNo].course
         assignmentContent.text = assignmentList[assignmentNo].content
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         timer.invalidate()
     }
     
