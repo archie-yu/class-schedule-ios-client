@@ -39,7 +39,6 @@
 		11E8971A1DE0189C00226CF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */; };
 		11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E897211DE021F400226CF1 /* AddCourseViewController.swift */; };
 		CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */; };
-		CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,7 +135,6 @@
 		11E8971B1DE0189C00226CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11E897211DE021F400226CF1 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMainViewController.swift; sourceTree = "<group>"; };
-		CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */,
-				CAE2CE811DF554220064AD36 /* CoursePageViewController.swift */,
 				1179B22D1DFEA0500026046C /* Table */,
 			);
 			name = Page;
@@ -522,7 +519,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */,
-				CAE2CE821DF554220064AD36 /* CoursePageViewController.swift in Sources */,
 				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
 				1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */,
 				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,

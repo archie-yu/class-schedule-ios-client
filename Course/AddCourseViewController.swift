@@ -284,7 +284,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                             fromWeek: weekPickerView.selectedRow(inComponent: 0) + 1,toWeek: weekPickerView.selectedRow(inComponent: 1) + 1,limit: weekPickerView.selectedRow(inComponent: 2))
         
         courseList.append(course)
-        everydayCourseList[course.weekday - 2].append(course)
+        everydayCourseList[course.weekday - 1].append(course)
         
         //courseList.removeAll()
         

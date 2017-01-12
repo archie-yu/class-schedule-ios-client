@@ -13,7 +13,7 @@ class DisplayCoursesViewController: UITableViewController {
     
     var weekday = 0
     
-    @IBOutlet weak var courseCell: UITableView!
+    @IBOutlet weak var courseTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +21,12 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        courseCell.reloadData()
+        courseTable.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func getWeekday() -> Int{
-        return weekday
     }
     
     /*
@@ -48,14 +44,14 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return everydayCourseList[weekday - 1].count
+        return everydayCourseList[weekday].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCellID", for: indexPath) as! CourseCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell", for: indexPath) as! CourseCell
         
-        let course = everydayCourseList[weekday - 1][indexPath.row]
+        let course = everydayCourseList[weekday][indexPath.row]
         cell.CourseName.text = course.course
         cell.CourseTime.text = "\(course.begin) - \(course.end)"
         cell.Location.text = course.location

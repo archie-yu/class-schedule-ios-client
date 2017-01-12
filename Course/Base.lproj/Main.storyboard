@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Course Page View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="SyL-Cz-5BL">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="05U-IS-gbQ" customClass="CoursePageViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="05U-IS-gbQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bE9-md-4tJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2502" y="-778"/>
@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCellID" rowHeight="90" id="0QZ-8t-3zQ" customClass="CourseCell" customModule="Course" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCell" rowHeight="90" id="0QZ-8t-3zQ" customClass="CourseCell" customModule="Course" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0QZ-8t-3zQ" id="ACY-EV-yaL">
@@ -93,7 +93,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="courseCell" destination="vhP-6P-zTR" id="RGv-1z-h1Q"/>
+                        <outlet property="courseTable" destination="vhP-6P-zTR" id="2Nr-Eh-DPb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6V-cX-mXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -960,7 +960,7 @@
         <image name="icon" width="180" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Jc-vv-fCc"/>
+        <segue reference="305-Xf-M9X"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.31443768739700317" green="0.88981455564498901" blue="0.75987976789474487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

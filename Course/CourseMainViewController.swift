@@ -9,9 +9,10 @@
 import UIKit
 import CourseModel
 
-class CourseMainViewController: UIViewController, UIPageViewControllerDataSource {
+class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    var PageViewController:CoursePageViewController!
+    var coursePageVC: UIPageViewController!
+    var dayControllers: [DisplayCoursesViewController] = []
     
     @IBOutlet weak var weekdayPageControl: UIPageControl!
     
@@ -25,21 +26,30 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
             courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
         }
         for course in courseList {
-            everydayCourseList[course.weekday - 2].append(course)
+            everydayCourseList[course.weekday - 1].append(course)
         }
         
-        PageViewController = self.childViewControllers.first as!
-        CoursePageViewController
+        for vc in self.childViewControllers {
+            if vc is UIPageViewController {
+                coursePageVC = vc as! UIPageViewController
+            }
+        }
         
-        PageViewController.dataSource = self
-        
-        PageViewController.setViewControllers([PageViewController.mondayController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        coursePageVC.delegate = self
+        coursePageVC.dataSource = self
         
         weekdayPageControl.numberOfPages = 5
-        weekdayPageControl.currentPage = 0
+        for i in 0...4 {
+            dayControllers.append(
+                storyboard?.instantiateViewController(withIdentifier: "DayCourse") as!
+                DisplayCoursesViewController)
+            dayControllers[i].weekday = i
+        }
         
-        //weekdayPageControl.addTarget(self, action: #selector(pageChanged(_:)),
-                              //forControlEvents;: UIControlEvents.ValueChanged)
+        weekdayPageControl.currentPage = 0
+        coursePageVC.setViewControllers(
+            [dayControllers[0]], direction: .forward, animated: true, completion: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +57,24 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
         // Dispose of any resources that can be recreated.
     }
     
-
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let dayController = viewController as! DisplayCoursesViewController
+        let nextWeekday = (dayController.weekday + 1) % 5
+//        let nextWeekday = (weekdayPageControl.currentPage + 1) % 5
+        weekdayPageControl.currentPage = nextWeekday
+        return dayControllers[nextWeekday]
+        
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let dayController = viewController as! DisplayCoursesViewController
+        let lastWeekday = (dayController.weekday + 4) % 5
+//        let lastWeekday = (weekdayPageControl.currentPage + 4) % 5
+        weekdayPageControl.currentPage = lastWeekday
+        return dayControllers[lastWeekday]
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -57,82 +84,5 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDataSource
         // Pass the selected object to the new view controller.
     }
     */
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
-        if let daycontroller = viewController as? DisplayCoursesViewController{
-           // print("here")
-           //print(weekdayPageControl.currentPage)
-            let weekday = daycontroller.getWeekday()
-           //print("weekay is" + String(weekday))
-            //currentPage从0开始计数，而weekday从1开始计数
-            //所以存在错开现象
-            //weekdayPageControl.currentPage = (weekdayPageControl.currentPage + 1) % 5
-            
-            switch weekday {
-            case 1:
-                weekdayPageControl.currentPage = 1
-                return PageViewController.tuesdayController
-            case 2:
-                weekdayPageControl.currentPage = 2
-                return PageViewController.wednesdayController
-            case 3:
-                weekdayPageControl.currentPage = 3
-                return PageViewController.thursdayController
-            case 4:
-                weekdayPageControl.currentPage = 4
-                return PageViewController.fridayController
-            case 5:
-                weekdayPageControl.currentPage = 0
-                return PageViewController.mondayController
-            default: break
-            }
-            
-        }
-        
-        return nil
-        
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        if let daycontroller = viewController as? DisplayCoursesViewController{
-            
-            let weekday = daycontroller.getWeekday()
-            
-            /*
-            var numPage = weekdayPageControl.currentPage - 1
-            if numPage < 0{
-                numPage += 5
-            }
-            weekdayPageControl.currentPage = numPage
-            */
-            //currentPage从0开始计数，而weekday从1开始计数
-            //所以存在错开现象
-            switch weekday {
-            case 1:
-                weekdayPageControl.currentPage = 4
-                return PageViewController.fridayController
-            case 2:
-                weekdayPageControl.currentPage = 0
-                return PageViewController.mondayController
-            case 3:
-                weekdayPageControl.currentPage = 1
-                return PageViewController.tuesdayController
-            case 4:
-                weekdayPageControl.currentPage = 2
-                return PageViewController.wednesdayController
-            case 5:
-                weekdayPageControl.currentPage = 3
-                return PageViewController.thursdayController
-            default: break
-                
-            }
-            
-        }
-        
-        return nil
-        
-    }
 
 }
