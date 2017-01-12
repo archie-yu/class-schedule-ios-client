@@ -11,4 +11,3 @@ import CourseModel
 
 var courseList : [CourseModel] = []
 var everydayCourseList : [[CourseModel]] = [[],[],[],[],[]]
-

@@ -48,10 +48,13 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         timePicker?.delegate = self
         timePicker?.dataSource = self
         
+        // 开始显示前，确定应该显示的效果
         fresh()
         
-        // 启用计时器，控制每秒执行一次tickDown方法
-        timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector:#selector(AssignmentDetailViewController.fresh), userInfo:nil, repeats:true)
+        // 启用计时器，控制每秒执行一次fresh方法
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target:self, selector:#selector(AssignmentDetailViewController.fresh),
+                                     userInfo:nil, repeats:true)
         
         // 得到当前年份
         let curTime = Date()
@@ -64,7 +67,8 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     func fresh() {
         
         let current = Date()
-        let fromNow = assignmentList[assignmentNo].endTime.timeIntervalSince(current)
+        let end = assignmentList[assignmentNo].endTime
+        let fromNow = end.timeIntervalSince(current)
         
         // 处理过期任务
         if fromNow < 0 {
@@ -74,7 +78,8 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
             // 无剩余时间
             remainingTime.text = "任务过期"
         } else {
-            let fromBegin = assignmentList[assignmentNo].endTime.timeIntervalSince(assignmentList[assignmentNo].beginTime)
+            let begin = assignmentList[assignmentNo].beginTime
+            let fromBegin = end.timeIntervalSince(begin)
             // 计算电量显示条长度和剩余时间
             var ratio : CGFloat = 1
             if fromNow > fromBegin {
@@ -106,15 +111,17 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         
         let editTimeController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        // 编辑开始时间
         let beginHandler = {(action:UIAlertAction!) -> Void in
             let editBeginTimeController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             
+            // 定义时间选择器占用的空间
             let margin : CGFloat = 0.0
             let rect = CGRect(x: 0, y: margin, width: editTimeController.view.bounds.size.width, height: 230)
             self.timePicker?.frame = rect
 //            self.timePicker?.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.5)
             
-            // 设置为开始时间
+            // 选择器初始值设置为开始时间
             
             let beginTime = assignmentList[self.assignmentNo].beginTime
             
@@ -130,19 +137,47 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
             timeFormatter.dateFormat = "mm"
             let minute = Int(timeFormatter.string(from: beginTime))!
             
-            let max = self.max
+            let middle = self.max / 2
             
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 4) + year - self.year, inComponent: 0, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 12) + month - 1, inComponent: 1, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 31) + day - 1, inComponent: 2, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 24) + hour, inComponent: 3, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 60) + minute, inComponent: 4, animated: true)
+            let yearRow = middle - (middle % 9) + year - self.year + 4
+            let monthRow = middle - (middle % 12) + month - 1
+            let dayRow = middle - (middle % 31) + day - 1
+            let hourRow = middle - (middle % 24) + hour
+            let minuteRow = middle - (middle % 60) + minute
             
+            self.timePicker?.selectRow(yearRow, inComponent: 0, animated: true)
+            self.timePicker?.selectRow(monthRow, inComponent: 1, animated: true)
+            self.timePicker?.selectRow(dayRow, inComponent: 2, animated: true)
+            self.timePicker?.selectRow(hourRow, inComponent: 3, animated: true)
+            self.timePicker?.selectRow(minuteRow, inComponent: 4, animated: true)
             
-            // 添加到AlertController中
+            // 将时间选择器添加到AlertController的视图中
             editBeginTimeController.view.addSubview(self.timePicker!)
             
-            let confirm = UIAlertAction(title: "确定", style: .default, handler: nil)
+            let confirmHandler = {(action:UIAlertAction!) -> Void in
+                
+                let year = self.year + (self.timePicker?.selectedRow(inComponent: 0))! % 9 - 4
+                let month = (self.timePicker?.selectedRow(inComponent: 1))! % 12 + 1
+                let day = (self.timePicker?.selectedRow(inComponent: 2))! % 31 + 1
+                let hour = (self.timePicker?.selectedRow(inComponent: 3))! % 24
+                let minute = (self.timePicker?.selectedRow(inComponent: 4))! % 60
+                
+                var dateComponents = DateComponents()
+                dateComponents.year = year
+                dateComponents.month = month
+                dateComponents.day = day
+                dateComponents.hour = hour
+                dateComponents.minute = minute
+                dateComponents.second = 0
+                
+                let calendar = Calendar.current
+                let date = calendar.date(from: dateComponents)!
+                
+                assignmentList[self.assignmentNo].beginTime = date
+
+            }
+            
+            let confirm = UIAlertAction(title: "确定", style: .default, handler: confirmHandler)
             let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
             
             editBeginTimeController.addAction(confirm)
@@ -152,15 +187,17 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         }
         let begin = UIAlertAction(title: "开始时间", style: .default, handler: beginHandler)
         
+        // 编辑结束时间
         let endHandler = {(action:UIAlertAction!) -> Void in
             let editEndTimeController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
             
+            // 定义时间选择器占用的空间
             let margin : CGFloat = 0.0
             let rect = CGRect(x: 0, y: margin, width: editTimeController.view.bounds.size.width, height: 230)
             self.timePicker?.frame = rect
 //            self.timePicker?.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.5)
             
-            // 设置为结束时间
+            // 选择器初始值设置为结束时间
             
             let endTime = assignmentList[self.assignmentNo].endTime
             
@@ -176,19 +213,48 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
             timeFormatter.dateFormat = "mm"
             let minute = Int(timeFormatter.string(from: endTime))!
             
-            let max = self.max
+            let middle = self.max / 2
             
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 4) + year - self.year, inComponent: 0, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 12) + month - 1, inComponent: 1, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 31) + day - 1, inComponent: 2, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 24) + hour, inComponent: 3, animated: true)
-            self.timePicker?.selectRow(max / 2 - (max / 2 % 60) + minute, inComponent: 4, animated: true)
+            let yearRow = middle - (middle % 9) + year - self.year + 4
+            let monthRow = middle - (middle % 12) + month - 1
+            let dayRow = middle - (middle % 31) + day - 1
+            let hourRow = middle - (middle % 24) + hour
+            let minuteRow = middle - (middle % 60) + minute
+            
+            self.timePicker?.selectRow(yearRow, inComponent: 0, animated: true)
+            self.timePicker?.selectRow(monthRow, inComponent: 1, animated: true)
+            self.timePicker?.selectRow(dayRow, inComponent: 2, animated: true)
+            self.timePicker?.selectRow(hourRow, inComponent: 3, animated: true)
+            self.timePicker?.selectRow(minuteRow, inComponent: 4, animated: true)
             
             
-            // 添加到AlertController中
+            // 将时间选择器添加到AlertController的视图中
             editEndTimeController.view.addSubview(self.timePicker!)
             
-            let confirm = UIAlertAction(title: "确定", style: .default, handler: nil)
+            let confirmHandler = {(action:UIAlertAction!) -> Void in
+                
+                let year = self.year + (self.timePicker?.selectedRow(inComponent: 0))! % 9 - 4
+                let month = (self.timePicker?.selectedRow(inComponent: 1))! % 12 + 1
+                let day = (self.timePicker?.selectedRow(inComponent: 2))! % 31 + 1
+                let hour = (self.timePicker?.selectedRow(inComponent: 3))! % 24
+                let minute = (self.timePicker?.selectedRow(inComponent: 4))! % 60
+                
+                var dateComponents = DateComponents()
+                dateComponents.year = year
+                dateComponents.month = month
+                dateComponents.day = day
+                dateComponents.hour = hour
+                dateComponents.minute = minute
+                dateComponents.second = 0
+                
+                let calendar = Calendar.current
+                let date = calendar.date(from: dateComponents)!
+                
+                assignmentList[self.assignmentNo].endTime = date
+                
+            }
+            
+            let confirm = UIAlertAction(title: "确定", style: .default, handler: confirmHandler)
             let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
             
             editEndTimeController.addAction(confirm)
@@ -225,7 +291,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         title.textAlignment = NSTextAlignment.center
         
         switch component {
-        case 0: title.text = String(row % 4 + year)
+        case 0: title.text = String(row % 9 + year - 4)
         case 1: title.text = String(row % 12 + 1)
         case 2: title.text = String(row % 31 + 1)
         case 3: title.text = String(row % 24)
