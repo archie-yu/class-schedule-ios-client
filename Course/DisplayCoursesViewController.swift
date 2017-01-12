@@ -59,7 +59,7 @@ class DisplayCoursesViewController: UITableViewController {
         cell.CourseName.text = course.course
         cell.CourseTime.text = "\(course.begin) - \(course.end)"
         cell.Location.text = course.location
-        
+        cell.TeacherName.text = course.teacher
         return cell
         
     }

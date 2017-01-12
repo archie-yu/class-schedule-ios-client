@@ -56,7 +56,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上课地点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUn-dR-bSd">
-                                            <rect key="frame" x="20" y="58" width="333" height="20"/>
+                                            <rect key="frame" x="20" y="58" width="217" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,6 +69,13 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="教师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJP-ZH-vNW">
+                                            <rect key="frame" x="262" y="57" width="91" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,6 +83,7 @@
                                     <outlet property="CourseName" destination="bSP-rQ-EFb" id="UZl-hQ-SO1"/>
                                     <outlet property="CourseTime" destination="igD-AI-0Dc" id="GGC-c8-hyX"/>
                                     <outlet property="Location" destination="zUn-dR-bSd" id="mjX-8H-7lY"/>
+                                    <outlet property="TeacherName" destination="OJP-ZH-vNW" id="Pk2-aa-rzH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -110,6 +118,10 @@
                                     <segue destination="05U-IS-gbQ" kind="embed" id="y6g-75-eGk"/>
                                 </connections>
                             </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="IPi-j7-ei2">
+                                <rect key="frame" x="168" y="581" width="39" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -131,6 +143,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="weekdayPageControl" destination="IPi-j7-ei2" id="ldS-GG-0zG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Znb-Bo-tZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,51 +186,56 @@
                                 </items>
                             </navigationBar>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-2l-NUk">
-                                <rect key="frame" x="16" y="93" width="343" height="160"/>
+                                <rect key="frame" x="16" y="221" width="343" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入课程名" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZMA-fE-3Mm">
-                                <rect key="frame" x="70" y="318" width="244" height="30"/>
+                                <rect key="frame" x="70" y="397" width="244" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="ReadyToTyping:" destination="6Vt-d3-cTx" eventType="editingDidBegin" id="MEz-Rq-FGU"/>
                                     <action selector="TypingEnded:" destination="6Vt-d3-cTx" eventType="editingDidEnd" id="BHq-xS-ehg"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入老师姓名" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aqn-AZ-My8">
-                                <rect key="frame" x="70" y="365" width="244" height="30"/>
+                                <rect key="frame" x="70" y="449" width="244" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="TeacherNameEnterBegin:" destination="6Vt-d3-cTx" eventType="editingDidBegin" id="IHy-xA-wYv"/>
                                     <action selector="TeacherNameEnterEnded:" destination="6Vt-d3-cTx" eventType="editingDidEnd" id="rim-cE-5MN"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入地点" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WZh-5Z-4t4">
-                                <rect key="frame" x="70" y="414" width="244" height="30"/>
+                                <rect key="frame" x="70" y="499" width="244" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="LocationEnterBegin:" destination="6Vt-d3-cTx" eventType="editingDidBegin" id="iNI-p2-z93"/>
                                     <action selector="LocationEnterEnd:" destination="6Vt-d3-cTx" eventType="editingDidEnd" id="Tp6-Bd-iEq"/>
                                 </connections>
                             </textField>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j68-ij-moK">
+                                <rect key="frame" x="64" y="92" width="256" height="136"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="CourseName" destination="ZMA-fE-3Mm" id="bzq-E4-vjq"/>
                         <outlet property="Location" destination="WZh-5Z-4t4" id="laa-qb-MdM"/>
-                        <outlet property="PickerView" destination="wX8-2l-NUk" id="kIW-l9-13f"/>
                         <outlet property="TeacherName" destination="Aqn-AZ-My8" id="WsY-8Q-aE2"/>
+                        <outlet property="weekPickerView" destination="j68-ij-moK" id="k54-5i-uut"/>
+                        <outlet property="weekdayPickerView" destination="wX8-2l-NUk" id="HdG-gY-gS9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ny-h1-JgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
