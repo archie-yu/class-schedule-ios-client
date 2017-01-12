@@ -2,24 +2,33 @@
 //  AddCourseViewController.swift
 //  Course
 //
-//  Created by Archie Yu on 2016/11/19.
-//  Copyright © 2016年 Archie Yu. All rights reserved.
+//  Created by Cedric on 2016/12/8.
+//  Copyright © 2016年 Cedric. All rights reserved.
 //
 
 import UIKit
 import CourseModel
 
-class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
     
     let DAY_OF_WEEK = 5
     
     let LESSONS_A_DAY = 8
     
+    let WEEKS_OF_TERM = 18
+    
     let weekday = ["Mon","Tue","Wes","Thu","Fri"]
+    
+    let weekLimit = ["Single","Double","Every"]
+    
+    var editingItem = ""
     
     @IBOutlet weak var CourseName: UITextField!
     
-    @IBOutlet weak var PickerView: UIPickerView!
+    
+    @IBOutlet weak var weekdayPickerView: UIPickerView!
+    
+    @IBOutlet weak var weekPickerView: UIPickerView!
     
     @IBOutlet weak var Location: UITextField!
     
@@ -30,12 +39,79 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        PickerView.delegate = self
+        weekdayPickerView.delegate = self
+        weekPickerView.delegate = self
         
-        PickerView.selectRow(0, inComponent: 0, animated: true)
-        PickerView.selectRow(0, inComponent: 1, animated: true)
-        PickerView.selectRow(1, inComponent: 2, animated: true)
+        weekdayPickerView.selectRow(0, inComponent: 0, animated: true)
+        weekdayPickerView.selectRow(0, inComponent: 1, animated: true)
+        weekdayPickerView.selectRow(1, inComponent: 2, animated: true)
         
+        weekPickerView.selectRow(0, inComponent: 0, animated:true)
+        weekPickerView.selectRow(1, inComponent: 1, animated:true)
+        weekPickerView.selectRow(2, inComponent: 2, animated:true)
+        
+        CourseName.delegate = self
+        Location.delegate = self
+        TeacherName.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // 注册键盘出现和键盘消失的通知
+        
+        let NC = NotificationCenter.default
+        NC.addObserver(self,
+                       selector: #selector(AddCourseViewController.keyboardWillShow(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NC.addObserver(self,
+                       selector: #selector(AddCourseViewController.keyboardWillHide(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // 注销键盘出现和键盘消失的通知
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            // 计算可能需要上移的距离
+            let keyboardHeight = keyboardFrame.origin.y
+            var deltaY : CGFloat = 0
+            switch(editingItem) {
+            case "coursename":
+                let coursenameHeight = CourseName.frame.maxY
+                deltaY = keyboardHeight - coursenameHeight
+            case "teachername":
+                let teachernameHeight = TeacherName.frame.maxY
+                deltaY = keyboardHeight - teachernameHeight
+            case "location":
+                let locationHeight = Location.frame.maxY
+                deltaY = keyboardHeight - locationHeight
+            default: break
+            }
+            // 需要上移时，变化视图位置
+            if deltaY < 0 {
+                var frame = self.view.frame
+                frame.origin.y = deltaY
+                self.view.frame = frame
+            }
+        }
+
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        // 还原视图位置
+        var frame = self.view.frame
+        frame.origin.y = 0
+        self.view.frame = frame
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,31 +131,60 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     //set the row nums of the pickerview
     func pickerView(_ pickerView: UIPickerView,
                     numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return DAY_OF_WEEK
-        case 1,2:
-            return LESSONS_A_DAY
-        default:
-            return 0
+        if pickerView == weekdayPickerView{
+            switch component {
+            case 0:
+                return DAY_OF_WEEK
+            case 1,2:
+                return LESSONS_A_DAY
+            default:
+                return 0
+            }
         }
+        else if pickerView == weekPickerView{
+            switch component{
+            case 0,1:
+                return WEEKS_OF_TERM
+            case 2:
+                return 3
+            default:
+                return 0
+            }
+        }
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int,
                     forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            return weekday[row]
-        case 1, 2:
-            return String(row + 1)
-        default:
-            break
+        if pickerView == weekdayPickerView{
+            switch component {
+            case 0:
+                return weekday[row]
+            case 1, 2:
+                return String(row + 1)
+            default:
+                break
+            }
+        }
+        else if pickerView == weekPickerView{
+            switch component {
+            case 0,1:
+                return String(row + 1)
+            case 2:
+                if row == 0 {return "单周"}
+                else if row == 1 {return "双周"}
+                else if row == 2 {return "每周"}
+            default:
+                break;
+            }
         }
         return nil
     }
     
     
     @IBAction func ReadyToTyping(_ sender: UITextField) {
+        editingItem = "coursename"
+        
         if CourseName.text == "请输入课程名"{
             CourseName.text = ""
         }
@@ -94,6 +199,8 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     
     @IBAction func TeacherNameEnterBegin(_ sender: UITextField) {
+        editingItem = "teachername"
+        
         if TeacherName.text == "请输入老师姓名"{
             TeacherName.text = ""
         }
@@ -106,6 +213,8 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @IBAction func LocationEnterBegin(_ sender: UITextField) {
+        editingItem = "location"
+        
         if Location.text == "请输入地点"{
             Location.text = ""
         }
@@ -117,15 +226,67 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    func CheckContentIsLegal() -> Bool{
+        let beginWeek = weekPickerView.selectedRow(inComponent: 0)
+        let endWeek = weekPickerView.selectedRow(inComponent: 1)
+        let beginLesson = weekdayPickerView.selectedRow(inComponent: 1)
+        let endLesson = weekdayPickerView.selectedRow(inComponent: 2)
+        
+        if beginWeek > endWeek{
+            let alertController = UIAlertController(title: "提示", message: "课程开始周不能晚于结束周", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+
+        }
+        if beginLesson > endLesson{
+            let alertController = UIAlertController(title: "提示", message: "课程开始时间不能晚于结束时间", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+        }
+        if CourseName.text == "请输入课程名" {
+            let alertController = UIAlertController(title: "提示", message: "未输入课程名！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+        }
+        if TeacherName.text == "请输入老师姓名"{
+            let alertController = UIAlertController(title: "提示", message: "未输入老师姓名！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+        }
+        if Location.text == "请输入地点"{
+            let alertController = UIAlertController(title: "提示", message: "未输入地点名！", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
     @IBAction func AddCourse(_ sender: UIBarButtonItem) {
+        if !CheckContentIsLegal(){
+            return
+        }
         
         let course = CourseModel(course: CourseName.text!, teacher: TeacherName.text!, in: Location.text!,
-                            on: PickerView.selectedRow(inComponent: 0) + 2,
-                            from: PickerView.selectedRow(inComponent: 1) + 1,
-                            to: PickerView.selectedRow(inComponent: 2) + 1)
+                            on: weekdayPickerView.selectedRow(inComponent: 0) + 2,
+                            from: weekdayPickerView.selectedRow(inComponent: 1) + 1,
+                            to: weekdayPickerView.selectedRow(inComponent: 2) + 1,
+                            fromWeek: weekPickerView.selectedRow(inComponent: 0) + 1,toWeek: weekPickerView.selectedRow(inComponent: 1) + 1,limit: weekPickerView.selectedRow(inComponent: 2))
         
         courseList.append(course)
         everydayCourseList[course.weekday - 2].append(course)
+        
+        //courseList.removeAll()
         
         let filePath = courseDataFilePath()
         NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
