@@ -19,6 +19,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     var timePicker : UIPickerView?
     
     @IBOutlet weak var assignmentContent: UILabel!
+    @IBOutlet weak var assignmentNote: UILabel!
     @IBOutlet weak var battery: UILabel!
     @IBOutlet weak var remainingTime: UILabel!
     
@@ -27,15 +28,6 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     var batteryY : CGFloat = 263
     
     var timer: Timer!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.title = assignmentList[assignmentNo].course
-        assignmentContent.text = assignmentList[assignmentNo].content
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        timer.invalidate()
-    }
     
     override func viewDidLoad() {
         
@@ -62,6 +54,16 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         timeFormatter.dateFormat = "yyyy"
         year = Int(timeFormatter.string(from: curTime))!
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.title = assignmentList[assignmentNo].course
+        assignmentContent.text = assignmentList[assignmentNo].content
+        assignmentNote.text = assignmentList[assignmentNo].note
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        timer.invalidate()
     }
     
     func fresh() {

@@ -104,7 +104,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.3)
-        shadow.alpha = 0.5
+        shadow.alpha = 0.7
         courseView.frame = newFrame
         UIView.commitAnimations()
         
@@ -129,7 +129,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.5
+        shadow.alpha = 0.7
         timeView.frame = newFrame
         UIView.commitAnimations()
         
@@ -154,7 +154,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.5
+        shadow.alpha = 0.7
         timeView.frame = newFrame
         UIView.commitAnimations()
         
@@ -172,7 +172,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.5
+        shadow.alpha = 0.7
         UIView.commitAnimations()
         
     }
@@ -189,7 +189,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         // 渐变
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.5
+        shadow.alpha = 0.7
         UIView.commitAnimations()
         
     }
@@ -316,9 +316,10 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             // 将信息保存到assignmentList中
             let course = courseVC.course
             let content = contentField.text!
+            let note = noteField.text!
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
-            assignmentList.append(AssignmentModel(in: course, todo: content, note: "", from: beginTime, to: endTime))
+            assignmentList.append(AssignmentModel(in: course, todo: content, note: note, from: beginTime, to: endTime))
             
             // 插入列表后按结束时间重新排序
             assignmentList.sort(by: endTimeOrder)

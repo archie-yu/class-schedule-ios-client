@@ -64,4 +64,15 @@ class DisplayCoursesViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 64
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let rect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64)
+        let header = UIView(frame: rect)
+        header.backgroundColor = UIColor(white: 0, alpha: 0)
+        return header
+    }
+    
 }
