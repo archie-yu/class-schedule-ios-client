@@ -21,9 +21,14 @@ class DisplayCoursesViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("appear \(weekday)")
         courseTable.reloadData()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        print("disappear \(weekday)")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
