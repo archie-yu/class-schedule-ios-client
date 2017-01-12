@@ -33,6 +33,12 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var noteField: UITextField!
     @IBOutlet weak var noteBackground: UILabel!
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    @IBOutlet weak var courseViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var courseViewTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -98,15 +104,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         // 计算视图弹出时应该变化的大小
         let newSize = courseVC!.beginChooseCourse()
-        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-        let newFrame = CGRect(origin: newPos, size: newSize)
+//        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+//        let newFrame = CGRect(origin: newPos, size: newSize)
         
         // 渐变
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.3)
-        shadow.alpha = 0.7
-        courseView.frame = newFrame
-        UIView.commitAnimations()
+        courseViewHeightConstraint.constant = newSize.height
+        UIView.animate(withDuration: 0.3, animations: {() -> Void in
+            self.shadow.alpha = 0.7
+            self.view.layoutIfNeeded()
+        })
+//        UIView.beginAnimations(nil, context: nil)
+//        UIView.setAnimationDuration(0.3)
+//        shadow.alpha = 0.7
+//        courseView.frame = newFrame
+//        UIView.commitAnimations()
         
     }
     
@@ -123,15 +134,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-        let newFrame = CGRect(origin: newPos, size: newSize)
+//        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+//        let newFrame = CGRect(origin: newPos, size: newSize)
         
         // 渐变
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.7
-        timeView.frame = newFrame
-        UIView.commitAnimations()
+        timeViewHeightConstraint.constant = newSize.height
+        UIView.animate(withDuration: 0.3, animations: {() -> Void in
+            self.shadow.alpha = 0.7
+            self.view.layoutIfNeeded()
+        })
+//        UIView.beginAnimations(nil, context: nil)
+//        UIView.setAnimationDuration(0.2)
+//        shadow.alpha = 0.7
+//        timeView.frame = newFrame
+//        UIView.commitAnimations()
         
     }
     
@@ -148,15 +164,20 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
         // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-        let newFrame = CGRect(origin: newPos, size: newSize)
+        //        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
+        //        let newFrame = CGRect(origin: newPos, size: newSize)
         
         // 渐变
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.7
-        timeView.frame = newFrame
-        UIView.commitAnimations()
+        timeViewHeightConstraint.constant = newSize.height
+        UIView.animate(withDuration: 0.3, animations: {() -> Void in
+            self.shadow.alpha = 0.7
+            self.view.layoutIfNeeded()
+        })
+        //        UIView.beginAnimations(nil, context: nil)
+        //        UIView.setAnimationDuration(0.2)
+        //        shadow.alpha = 0.7
+        //        timeView.frame = newFrame
+        //        UIView.commitAnimations()
         
     }
     
@@ -200,23 +221,34 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         self.view.bringSubview(toFront: courseButton)
         self.view.bringSubview(toFront: beginTimeButton)
         self.view.bringSubview(toFront: endTimeButton)
+        self.view.bringSubview(toFront: navigationBar)
         
         // 根据正在编辑的区域恢复视图
         switch editingItem {
         case "course":
             courseVC!.endChooseCourse()
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.3)
-            shadow.alpha = 0
-            courseView.frame = courseOldFrame
-            UIView.commitAnimations()
+//            UIView.beginAnimations(nil, context: nil)
+//            UIView.setAnimationDuration(0.3)
+//            shadow.alpha = 0
+//            courseView.frame = courseOldFrame
+//            UIView.commitAnimations()
+            courseViewHeightConstraint.constant = courseOldFrame.height
+            UIView.animate(withDuration: 0.3, animations: {() -> Void in
+                self.shadow.alpha = 0
+                self.view.layoutIfNeeded()
+            })
         case "beginTime", "endTime":
             timeVC!.endChooseTime()
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(0.2)
-            shadow.alpha = 0
-            timeView.frame = timeOldFrame
-            UIView.commitAnimations()
+//            UIView.beginAnimations(nil, context: nil)
+//            UIView.setAnimationDuration(0.2)
+//            shadow.alpha = 0
+//            timeView.frame = timeOldFrame
+//            UIView.commitAnimations()
+            timeViewHeightConstraint.constant = timeOldFrame.height
+            UIView.animate(withDuration: 0.3, animations: {() -> Void in
+                self.shadow.alpha = 0
+                self.view.layoutIfNeeded()
+            })
         case "content":
             finishInput(contentField)
         case "note":
@@ -234,26 +266,34 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             switch(editingItem) {
             case "content":
                 let contentHeight = contentField.frame.maxY
-                deltaY = keyboardHeight - contentHeight
+                deltaY = keyboardHeight - contentHeight - 10
             case "note":
                 let noteHeight = noteField.frame.maxY
-                deltaY = keyboardHeight - noteHeight
+                deltaY = keyboardHeight - noteHeight - 10
             default: break
             }
             // 需要上移时，变化视图位置
             if deltaY < 0 {
-                var frame = self.view.frame
-                frame.origin.y = deltaY
-                self.view.frame = frame
+//                var frame = self.view.frame
+//                frame.origin.y = deltaY
+//                self.view.frame = frame
+                courseViewTopConstraint.constant = 60 + deltaY
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                    self.view.layoutIfNeeded()
+                })
             }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         // 还原视图位置
-        var frame = self.view.frame
-        frame.origin.y = 0
-        self.view.frame = frame
+//        var frame = self.view.frame
+//        frame.origin.y = 0
+//        self.view.frame = frame
+        courseViewTopConstraint.constant = 60
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            self.view.layoutIfNeeded()
+        })
     }
     
     func finishInput(_ textField: UITextField) {

@@ -23,7 +23,9 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var battery: UILabel!
     @IBOutlet weak var remainingTime: UILabel!
     
-    var batteryWidth : CGFloat = 250
+    @IBOutlet weak var batteryTrailingConstraint: NSLayoutConstraint!
+    
+    var batteryWidth : CGFloat!
     var batteryX : CGFloat = 62
     var batteryY : CGFloat = 263
     
@@ -39,6 +41,8 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         
         timePicker?.delegate = self
         timePicker?.dataSource = self
+        
+        batteryWidth = battery.frame.width
         
         // 开始显示前，确定应该显示的效果
         fresh()
@@ -103,8 +107,10 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
                     remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
                 }
             }
-            let frame = CGRect(x: batteryX, y: batteryY, width: batteryWidth * ratio, height: battery.bounds.height)
-            battery.frame = frame
+            batteryTrailingConstraint.constant = -5 - batteryWidth * (1 - ratio)
+//            UIView.animate(withDuration: 1, animations: {() -> Void in
+//                self.battery.layoutIfNeeded()
+//            })
         }
         
     }
