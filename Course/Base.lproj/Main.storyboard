@@ -183,7 +183,7 @@
             </objects>
             <point key="canvasLocation" x="3257" y="-779"/>
         </scene>
-        <!--课程-->
+        <!--Course Main View Controller-->
         <scene sceneID="phk-Bo-isS">
             <objects>
                 <viewController id="e9G-nZ-lQE" customClass="CourseMainViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
@@ -214,12 +214,23 @@
                             <constraint firstItem="yvZ-vt-JRQ" firstAttribute="bottom" secondItem="77O-v8-ro9" secondAttribute="top" id="bs7-bs-OUc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="课程" id="kL7-U4-k4G">
+                    <navigationItem key="navigationItem" id="kL7-U4-k4G">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="Setting" id="sfN-c0-N2X">
                             <connections>
                                 <segue destination="BYb-i5-Gr8" kind="show" id="305-Xf-M9X"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YcC-rX-CpP">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="课程">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="changeWeek:" destination="e9G-nZ-lQE" eventType="touchUpInside" id="WRf-kx-yM0"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="Add" id="FGr-iV-uty">
                             <connections>
                                 <segue destination="6Vt-d3-cTx" kind="showDetail" id="mUQ-QN-Khp"/>
@@ -227,6 +238,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="titleButton" destination="YcC-rX-CpP" id="y4C-81-1un"/>
                         <outlet property="weekdayPageControl" destination="IPi-j7-ei2" id="ldS-GG-0zG"/>
                     </connections>
                 </viewController>
@@ -986,10 +998,10 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="kww-xf-xvT">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kww-xf-xvT" id="fCg-U8-J51">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
@@ -1081,7 +1093,7 @@
         <scene sceneID="v12-00-XKH">
             <objects>
                 <navigationController id="gUl-WH-cQI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FJ8-I5-JWq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FJ8-I5-JWq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1235,7 +1247,7 @@
         <image name="icon" width="180" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Jc-vv-fCc"/>
+        <segue reference="305-Xf-M9X"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.31443768739700317" green="0.88981455564498901" blue="0.75987976789474487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
