@@ -456,9 +456,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ny-h1-JgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2501.5999999999999" y="-1532.3838080959522"/>
+            <point key="canvasLocation" x="1038" y="-1532"/>
         </scene>
-        <!--Add Assignment View Controller-->
+        <!--添加作业-->
         <scene sceneID="M5z-Bv-geI">
             <objects>
                 <viewController id="PUB-aP-hiz" customClass="AddAssignmentViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
@@ -581,28 +581,6 @@
                                     <action selector="chooseCourse:" destination="PUB-aP-hiz" eventType="touchUpInside" id="fMJ-2Z-qJ4"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nj6-f6-g2E">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="添加作业" id="0GD-KO-9oI">
-                                        <barButtonItem key="leftBarButtonItem" title="取消" id="C2F-4T-eN6">
-                                            <connections>
-                                                <action selector="cancel:" destination="PUB-aP-hiz" id="nmA-Cx-RCf"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="添加" id="Yhe-af-u9G">
-                                            <connections>
-                                                <action selector="addAssignmentButtonDown:" destination="PUB-aP-hiz" id="Asz-bh-Z6H"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -612,7 +590,7 @@
                             <constraint firstItem="99j-LV-3vp" firstAttribute="top" secondItem="OdP-w2-UdR" secondAttribute="bottom" id="73c-Lw-Tsv"/>
                             <constraint firstItem="V8H-T2-z6r" firstAttribute="centerY" secondItem="ZSL-Rw-ys4" secondAttribute="centerY" id="78I-lL-GVD"/>
                             <constraint firstItem="tFq-uJ-GXd" firstAttribute="width" secondItem="DGb-5k-rRt" secondAttribute="width" id="Dw9-uP-ITc"/>
-                            <constraint firstItem="OdP-w2-UdR" firstAttribute="top" secondItem="1Uc-ps-E10" secondAttribute="bottom" constant="44" id="EdJ-BT-G33"/>
+                            <constraint firstItem="OdP-w2-UdR" firstAttribute="top" secondItem="1Uc-ps-E10" secondAttribute="bottom" id="EdJ-BT-G33"/>
                             <constraint firstItem="DGb-5k-rRt" firstAttribute="width" secondItem="qed-tI-hWV" secondAttribute="width" id="H91-fQ-a6P"/>
                             <constraint firstItem="OdP-w2-UdR" firstAttribute="leading" secondItem="mKl-PP-T9D" secondAttribute="leadingMargin" constant="-16" id="HJ0-5P-BYE"/>
                             <constraint firstAttribute="leadingMargin" secondItem="qed-tI-hWV" secondAttribute="leading" id="HlP-pW-IPv"/>
@@ -631,7 +609,7 @@
                             <constraint firstItem="ZSL-Rw-ys4" firstAttribute="centerX" secondItem="DGb-5k-rRt" secondAttribute="centerX" id="WJI-Ol-ySh"/>
                             <constraint firstItem="tFq-uJ-GXd" firstAttribute="bottom" secondItem="DGb-5k-rRt" secondAttribute="bottom" id="WQ3-Ko-9S0"/>
                             <constraint firstItem="SfE-jq-sKP" firstAttribute="centerX" secondItem="DGb-5k-rRt" secondAttribute="centerX" id="kkw-Rf-sxb"/>
-                            <constraint firstItem="qed-tI-hWV" firstAttribute="top" secondItem="1Uc-ps-E10" secondAttribute="bottom" constant="60" id="kvv-tB-2nt"/>
+                            <constraint firstItem="qed-tI-hWV" firstAttribute="top" secondItem="1Uc-ps-E10" secondAttribute="bottom" constant="16" id="kvv-tB-2nt"/>
                             <constraint firstItem="AxM-Nc-IyZ" firstAttribute="trailing" secondItem="Gwu-MD-Qbb" secondAttribute="trailing" constant="-11" id="nl9-Qp-KPm"/>
                             <constraint firstItem="ZSL-Rw-ys4" firstAttribute="width" secondItem="DGb-5k-rRt" secondAttribute="width" id="qLe-lb-CTF"/>
                             <constraint firstItem="AxM-Nc-IyZ" firstAttribute="top" secondItem="Gwu-MD-Qbb" secondAttribute="top" constant="11" id="qVd-es-j99"/>
@@ -642,6 +620,18 @@
                             <constraint firstItem="AxM-Nc-IyZ" firstAttribute="leading" secondItem="Gwu-MD-Qbb" secondAttribute="leading" constant="11" id="zUn-hI-aWf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="添加作业" id="djg-Yr-p1C">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="8Uo-uU-t1r">
+                            <connections>
+                                <action selector="cancel:" destination="PUB-aP-hiz" id="SW4-gG-Ky2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="iek-AE-qUs">
+                            <connections>
+                                <action selector="addAssignmentButtonDown:" destination="PUB-aP-hiz" id="4qX-yJ-iLo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="beginTimeButton" destination="SfE-jq-sKP" id="47e-99-7U3"/>
                         <outlet property="contentBackground" destination="ZSL-Rw-ys4" id="hSZ-UU-BSm"/>
@@ -651,7 +641,6 @@
                         <outlet property="courseViewHeightConstraint" destination="pti-Iu-VFt" id="QqO-Ev-8TL"/>
                         <outlet property="courseViewTopConstraint" destination="kvv-tB-2nt" id="Tui-u2-8Hz"/>
                         <outlet property="endTimeButton" destination="tFq-uJ-GXd" id="CxG-tF-HMd"/>
-                        <outlet property="navigationBar" destination="Nj6-f6-g2E" id="wnq-Pe-BBC"/>
                         <outlet property="noteBackground" destination="Gwu-MD-Qbb" id="o15-6k-VqS"/>
                         <outlet property="notePlaceHolder" destination="LIJ-tS-moo" id="jtf-fO-gLt"/>
                         <outlet property="noteText" destination="AxM-Nc-IyZ" id="PCI-Gn-F89"/>
@@ -662,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNI-1X-F8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2488.8000000000002" y="778.56071964017997"/>
+            <point key="canvasLocation" x="3257" y="779"/>
         </scene>
         <!--course-->
         <scene sceneID="fYz-uy-mcS">
@@ -934,7 +923,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="assignmentTable" destination="bNr-qv-MaU" id="qDX-Fl-oFe"/>
-                        <segue destination="PUB-aP-hiz" kind="showDetail" identifier="AddAssignment" id="xJP-ue-aM1"/>
+                        <segue destination="gUl-WH-cQI" kind="showDetail" identifier="AddAssignment" id="f8v-Kx-gRK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS3-Ux-NO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1014,7 +1003,6 @@
                     <connections>
                         <segue destination="hfL-Lr-Aym" kind="show" identifier="ShowAbout" id="gvd-WQ-U7c"/>
                         <segue destination="TLS-qJ-lkk" kind="show" identifier="EditCourseTime" id="g6x-gD-XoL"/>
-                        <segue destination="4DT-es-bN0" kind="show" identifier="SendFeedback" id="wDp-KG-5l7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSq-9A-vO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1049,7 +1037,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAM-ex-KQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3256.8000000000002" y="532.53373313343332"/>
+            <point key="canvasLocation" x="4078" y="1043"/>
         </scene>
         <!--Choose Time View Controller-->
         <scene sceneID="uUC-JP-TLl">
@@ -1087,7 +1075,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZV-W8-a5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3256.8000000000002" y="754.72263868065977"/>
+            <point key="canvasLocation" x="4078" y="524"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="v12-00-XKH">
+            <objects>
+                <navigationController id="gUl-WH-cQI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FJ8-I5-JWq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PUB-aP-hiz" kind="relationship" relationship="rootViewController" id="Ys2-gw-4RT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6km-Rr-KKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2502" y="779"/>
         </scene>
         <!--关于-->
         <scene sceneID="asd-4c-3S0">
@@ -1142,7 +1150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nC-L8-WHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4077.5999999999999" y="778.56071964017997"/>
+            <point key="canvasLocation" x="4078" y="-16"/>
         </scene>
         <!--课程时间-->
         <scene sceneID="mUG-hI-gea">
@@ -1161,24 +1169,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AQ-IY-An3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4078" y="-778"/>
-        </scene>
-        <!--反馈-->
-        <scene sceneID="DkK-HH-UgL">
-            <objects>
-                <viewController title="反馈" hidesBottomBarWhenPushed="YES" id="4DT-es-bN0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1ry-sw-XQ6"/>
-                        <viewControllerLayoutGuide type="bottom" id="eaQ-V8-DJv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vRn-jP-Cgn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u13-hm-Efu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4078" y="-17"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="f4C-gn-aSB">
@@ -1205,7 +1195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T53-Vh-3AP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1037.5999999999999" y="-1805.3973013493255"/>
+            <point key="canvasLocation" x="2502" y="-1805"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="R2b-QW-mPn">
@@ -1232,7 +1222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OUU-yT-AMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038" y="-1533"/>
+            <point key="canvasLocation" x="2502" y="-1259"/>
         </scene>
     </scenes>
     <resources>

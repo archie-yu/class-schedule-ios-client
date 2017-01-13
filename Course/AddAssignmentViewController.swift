@@ -34,7 +34,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var noteBackground: UILabel!
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    var contentHeight: CGFloat!
+    var noteHeight: CGFloat!
     
     @IBOutlet weak var courseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeViewHeightConstraint: NSLayoutConstraint!
@@ -60,6 +61,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         // 保存课程选择界面和时间选择界面的初始大小，方便视图变化结束后恢复
         timeOldFrame = timeView.frame
         courseOldFrame = courseView.frame
+        contentHeight = contentField.frame.maxY
+        noteHeight = noteText.frame.maxY
         
         // 在编辑某一项信息时，用阴影遮盖其他部分
         shadow.backgroundColor = UIColor.black
@@ -75,7 +78,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         // 注册键盘出现和键盘消失的通知
         let NC = NotificationCenter.default
         NC.addObserver(self,
-                       selector: #selector(AddAssignmentViewController.keyboardWillShow(notification:)),
+                       selector: #selector(AddAssignmentViewController.keyboardWillChangeFrame(notification:)),
                        name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NC.addObserver(self,
                        selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)),
@@ -234,7 +237,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         self.view.bringSubview(toFront: courseButton)
         self.view.bringSubview(toFront: beginTimeButton)
         self.view.bringSubview(toFront: endTimeButton)
-        self.view.bringSubview(toFront: navigationBar)
         
         // 根据正在编辑的区域恢复视图
         switch editingItem {
@@ -271,42 +273,40 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-            // 计算可能需要上移的距离
-            let keyboardHeight = keyboardFrame.origin.y
-            var deltaY : CGFloat = 0
-            switch(editingItem) {
-            case "content":
-                let contentHeight = contentField.frame.maxY
-                deltaY = keyboardHeight - contentHeight - 10
-            case "note":
-                let noteHeight = noteText.frame.maxY
-                deltaY = keyboardHeight - noteHeight - 10
-            default: break
-            }
-            // 需要上移时，变化视图位置
-            if deltaY < 0 {
-//                var frame = self.view.frame
-//                frame.origin.y = deltaY
-//                self.view.frame = frame
-                courseViewTopConstraint.constant = 60 + deltaY
-                UIView.animate(withDuration: 0.5, animations: {() -> Void in
-                    self.view.layoutIfNeeded()
-                })
-            }
+    func keyboardWillChangeFrame(notification: NSNotification) {
+        
+        // 获取键盘高度
+        let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        let keyboardHeight = keyboardFrame.origin.y
+        
+        // 计算可能需要上移的距离
+        var deltaY: CGFloat = 0
+        switch(editingItem) {
+        case "content":
+            deltaY = keyboardHeight - contentHeight - 16
+        case "note":
+            deltaY = keyboardHeight - noteHeight - 16
+        default: break
         }
+        
+        // 需要上移时，变化视图位置
+        if deltaY < 0 {
+            courseViewTopConstraint.constant = deltaY + 16
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+        
     }
-    
+
     func keyboardWillHide(notification: NSNotification) {
+        
         // 还原视图位置
-//        var frame = self.view.frame
-//        frame.origin.y = 0
-//        self.view.frame = frame
-        courseViewTopConstraint.constant = 60
+        courseViewTopConstraint.constant = 16
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.view.layoutIfNeeded()
         })
+        
     }
     
     func finishInput(_ textArea: UIView) {
