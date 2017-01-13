@@ -23,6 +23,10 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        for _ in 0..<weekdayNum {
+            everydayCourseList.append([])
+        }
+        
         let filePath = courseDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
@@ -40,8 +44,8 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         coursePageVC.delegate = self
         coursePageVC.dataSource = self
         
-        weekdayPageControl.numberOfPages = 5
-        for i in 0...4 {
+        weekdayPageControl.numberOfPages = weekdayNum
+        for i in 0..<weekdayNum {
             dayControllers.append(
                 storyboard?.instantiateViewController(withIdentifier: "DayCourse") as!
                 DisplayCoursesViewController)
@@ -60,15 +64,15 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-
-        let nextWeekday = (weekdayPageControl.currentPage + 1) % 5
+        
+        let nextWeekday = (weekdayPageControl.currentPage + 1) % weekdayNum
         return dayControllers[nextWeekday]
         
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let nextWeekday = (weekdayPageControl.currentPage + 4) % 5
+        let nextWeekday = (weekdayPageControl.currentPage + weekdayNum - 1) % weekdayNum
         return dayControllers[nextWeekday]
         
     }

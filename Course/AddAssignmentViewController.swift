@@ -313,7 +313,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
         // 隐藏阴影
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.1)
+        UIView.setAnimationDuration(0.3)
         shadow.alpha = 0
         UIView.commitAnimations()
         

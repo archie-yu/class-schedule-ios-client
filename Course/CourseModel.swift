@@ -9,6 +9,10 @@
 import Foundation
 import CourseModel
 
+var weekdayNum = 6
+var courseNum = 11
+var weekNum = 18
 
 var courseList : [CourseModel] = []
-var everydayCourseList : [[CourseModel]] = [[],[],[],[],[]]
+var everydayCourseList : [[CourseModel]] = []
+

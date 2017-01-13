@@ -11,27 +11,16 @@ import CourseModel
 
 class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
     
-    let DAY_OF_WEEK = 5
-    
-    let LESSONS_A_DAY = 8
-    
     let WEEKS_OF_TERM = 18
     
-    let weekday = ["Mon","Tue","Wes","Thu","Fri"]
-    
-    let weekLimit = ["Single","Double","Every"]
+    let weekday = ["周一", "周二", "周三", "周四", "周五", "周六"]
     
     var editingItem = ""
     
     @IBOutlet weak var CourseName: UITextField!
-    
-    
     @IBOutlet weak var weekdayPickerView: UIPickerView!
-    
     @IBOutlet weak var weekPickerView: UIPickerView!
-    
     @IBOutlet weak var Location: UITextField!
-    
     @IBOutlet weak var TeacherName: UITextField!
     
     override func viewDidLoad() {
@@ -47,7 +36,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         weekdayPickerView.selectRow(1, inComponent: 2, animated: true)
         
         weekPickerView.selectRow(0, inComponent: 0, animated:true)
-        weekPickerView.selectRow(1, inComponent: 1, animated:true)
+        weekPickerView.selectRow(weekNum - 1, inComponent: 1, animated:true)
         weekPickerView.selectRow(2, inComponent: 2, animated:true)
         
         CourseName.delegate = self
@@ -59,7 +48,6 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     override func viewWillAppear(_ animated: Bool) {
         
         // 注册键盘出现和键盘消失的通知
-        
         let NC = NotificationCenter.default
         NC.addObserver(self,
                        selector: #selector(AddCourseViewController.keyboardWillShow(notification:)),
@@ -134,9 +122,9 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if pickerView == weekdayPickerView{
             switch component {
             case 0:
-                return DAY_OF_WEEK
+                return weekdayNum
             case 1,2:
-                return LESSONS_A_DAY
+                return courseNum
             default:
                 return 0
             }
@@ -144,7 +132,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         else if pickerView == weekPickerView{
             switch component{
             case 0,1:
-                return WEEKS_OF_TERM
+                return weekNum
             case 2:
                 return 3
             default:
