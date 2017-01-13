@@ -9,7 +9,7 @@
 import UIKit
 import CourseModel
 
-class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
+class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     var year = 0
     let max = 16384
@@ -30,7 +30,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endTimeButton: UIButton!
     @IBOutlet weak var contentField: UITextField!
     @IBOutlet weak var contentBackground: UILabel!
-    @IBOutlet weak var noteField: UITextField!
+    @IBOutlet weak var notePlaceHolder: UILabel!
+    @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var noteBackground: UILabel!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -63,7 +64,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         shadow.alpha = 0
         
         contentField.delegate = self
-        noteField.delegate = self
+        noteText.delegate = self
         
     }
     
@@ -198,14 +199,18 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func editNote(_ sender: UITextField) {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
         editingItem = "note"
+        
+        noteText.text = ""
+        noteText.textColor = .black
         
         // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: noteBackground)
-        self.view.bringSubview(toFront: noteField)
+        self.view.bringSubview(toFront: noteText)
+        self.view.bringSubview(toFront: notePlaceHolder)
         
         // 渐变
         UIView.beginAnimations(nil, context: nil)
@@ -213,6 +218,12 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         shadow.alpha = 0.7
         UIView.commitAnimations()
         
+        return true
+        
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        notePlaceHolder.isHidden = (noteText.text != "")
     }
     
     @IBAction func endEdit(_ sender: UIControl) {
@@ -252,7 +263,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         case "content":
             finishInput(contentField)
         case "note":
-            finishInput(noteField)
+            finishInput(noteText)
         default: break
         }
         
@@ -268,7 +279,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
                 let contentHeight = contentField.frame.maxY
                 deltaY = keyboardHeight - contentHeight - 10
             case "note":
-                let noteHeight = noteField.frame.maxY
+                let noteHeight = noteText.frame.maxY
                 deltaY = keyboardHeight - noteHeight - 10
             default: break
             }
@@ -296,7 +307,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         })
     }
     
-    func finishInput(_ textField: UITextField) {
+    func finishInput(_ textArea: UIView) {
         
         // 隐藏阴影
         UIView.beginAnimations(nil, context: nil)
@@ -304,7 +315,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
         shadow.alpha = 0
         UIView.commitAnimations()
         
-        textField.resignFirstResponder()
+        textArea.resignFirstResponder()
         
     }
     
@@ -356,7 +367,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate {
             // 将信息保存到assignmentList中
             let course = courseVC.course
             let content = contentField.text!
-            let note = noteField.text!
+            let note = noteText.text!
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
             assignmentList.append(AssignmentModel(in: course, todo: content, note: note, from: beginTime, to: endTime))
