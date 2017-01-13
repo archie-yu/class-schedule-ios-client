@@ -38,6 +38,7 @@
 		11E897171DE0189C00226CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E897161DE0189C00226CF1 /* Assets.xcassets */; };
 		11E8971A1DE0189C00226CF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */; };
 		11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E897211DE021F400226CF1 /* AddCourseViewController.swift */; };
+		CA1D51161E28784300797F0C /* CourseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1D51151E28784300797F0C /* CourseDetailViewController.swift */; };
 		CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,7 @@
 		11E897191DE0189C00226CF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11E8971B1DE0189C00226CF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11E897211DE021F400226CF1 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		CA1D51151E28784300797F0C /* CourseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
 		CA90B33E1DF95D96006785DC /* CourseMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 				118D27501DEC1236009BFA17 /* CourseModel.swift */,
 				1179B22F1DFEA09E0026046C /* Add */,
 				1179B2291DFE9DFA0026046C /* Page */,
+				CA1D51141E28782200797F0C /* Detail */,
 			);
 			name = Course;
 			sourceTree = "<group>";
@@ -326,6 +329,14 @@
 				118FF0F61E00E6CC00B28487 /* Settings */,
 			);
 			path = Course;
+			sourceTree = "<group>";
+		};
+		CA1D51141E28782200797F0C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CA1D51151E28784300797F0C /* CourseDetailViewController.swift */,
+			);
+			name = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,6 +539,7 @@
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
+				CA1D51161E28784300797F0C /* CourseDetailViewController.swift in Sources */,
 				11C4FE0E1DF92F2700ACC7FD /* ChooseTimeViewController.swift in Sources */,
 				1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */,
 				11E897221DE021F400226CF1 /* AddCourseViewController.swift in Sources */,
