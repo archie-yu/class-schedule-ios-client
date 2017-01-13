@@ -239,14 +239,14 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
-        switch result {
-        case .cancelled:
-            print("取消发送")
-        case .sent:
-            print("发送成功")
-        default:
-            break
-        }
+//        switch result {
+//        case .cancelled:
+//            print("取消发送")
+//        case .sent:
+//            print("发送成功")
+//        default:
+//            break
+//        }
         self.dismiss(animated: true, completion: nil)
         
     }
