@@ -87,12 +87,25 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate{
     }
     
     @IBAction func DeleteCourse(_ sender: UIButton) {
+        
         //删除课程前 弹出警告框
         let alertController = UIAlertController(title: "删除课程", message: "删除后将不可恢复", preferredStyle:.actionSheet)
         
         // 设置2个UIAlertAction
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "删除", style: .destructive, handler: ConfirmDeleteCourse)
+        let deleteAction = UIAlertAction(title: "删除", style: .destructive) {(alert: UIAlertAction) -> Void in
+            
+            let course = everydayCourseList[self.weekday][self.courseNo]
+            let index = courseList.index(of: course)
+            courseList.remove(at: index!)
+            everydayCourseList[self.weekday].remove(at: self.courseNo)
+            
+            let filePath = courseDataFilePath()
+            NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
+            
+            self.navigationController?.popViewController(animated: true)
+            
+        }
         
         // 添加到UIAlertController
         alertController.addAction(cancelAction)
@@ -100,20 +113,7 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate{
         
         // 弹出
         self.present(alertController, animated: true, completion: nil)
+        
     }
     
-    func ConfirmDeleteCourse(_ alert: UIAlertAction) -> Void{
-        let course = everydayCourseList[weekday][courseNo]
-        let index = courseList.index(of: course)
-        courseList.remove(at: index!)
-        everydayCourseList[weekday].remove(at: courseNo)
-        
-        
-        let filePath = courseDataFilePath()
-        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
-        
-        self.dismiss(animated: true, completion: nil)
-        
-        
-    }
 }

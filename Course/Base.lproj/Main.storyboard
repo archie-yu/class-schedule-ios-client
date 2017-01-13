@@ -37,7 +37,7 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <state key="normal" title="删除课程">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="DeleteCourse:" destination="X9B-C0-SeE" eventType="touchUpInside" id="vqC-FU-baH"/>
@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbY-HW-Cq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3351" y="-1533"/>
+            <point key="canvasLocation" x="3257" y="-1532"/>
         </scene>
         <!--Display Courses View Controller-->
         <scene sceneID="VdM-tc-119">
