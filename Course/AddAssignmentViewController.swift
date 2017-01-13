@@ -46,6 +46,8 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         // 在子控制器中找到课程选择界面和时间选择界面对应的控制器
         for vc in self.childViewControllers {
             switch vc {
@@ -74,7 +76,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         let NC = NotificationCenter.default
         NC.addObserver(self,
                        selector: #selector(AddAssignmentViewController.keyboardWillShow(notification:)),
-                       name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+                       name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NC.addObserver(self,
                        selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)),
                        name:NSNotification.Name.UIKeyboardWillHide, object: nil)
