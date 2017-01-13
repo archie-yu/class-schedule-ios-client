@@ -37,10 +37,13 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <state key="normal" title="删除课程">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="DeleteCourse:" destination="X9B-C0-SeE" eventType="touchUpInside" id="vqC-FU-baH"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Techer Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6bH-Wf-Gad">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Weekday" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6bH-Wf-Gad">
                                 <rect key="frame" x="16" y="172" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,18 +57,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASP-wX-uB8">
-                                <rect key="frame" x="16" y="134" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Teacher Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASP-wX-uB8">
+                                <rect key="frame" x="16" y="134" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F60-j2-hxP">
-                                <rect key="frame" x="0.0" y="67" width="375" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jf9-gH-oWD">
                                 <rect key="frame" x="16" y="248" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -73,13 +71,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="课程详细信息" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rcT-Iq-h46">
+                                <rect key="frame" x="16" y="305" width="343" height="231"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="课程名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuY-gl-ngk">
+                                <rect key="frame" x="16" y="73" width="343" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.12548337202126558" green="1" blue="0.53056775934737654" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="courseDetails" destination="rcT-Iq-h46" id="DkB-Ev-mFC"/>
+                        <outlet property="coursenameLabel" destination="XuY-gl-ngk" id="eyb-ie-MbI"/>
+                        <outlet property="locationField" destination="gaN-23-Xhe" id="YqX-JQ-Q7g"/>
+                        <outlet property="teachernameField" destination="ASP-wX-uB8" id="MKM-fR-sK7"/>
+                        <outlet property="timeField" destination="Jf9-gH-oWD" id="Zmm-2X-EzR"/>
+                        <outlet property="weekdayField" destination="6bH-Wf-Gad" id="Thi-aP-NlR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbY-HW-Cq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3256.8000000000002" y="-1532.3838080959522"/>
+            <point key="canvasLocation" x="3351" y="-1533"/>
         </scene>
         <!--Display Courses View Controller-->
         <scene sceneID="VdM-tc-119">
@@ -1149,6 +1169,10 @@
         <scene sceneID="f4C-gn-aSB">
             <objects>
                 <viewController id="Qkf-M5-raf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cLr-H4-9AH"/>
+                        <viewControllerLayoutGuide type="bottom" id="gnn-p3-elm"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tBf-bf-O1l">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1172,6 +1196,10 @@
         <scene sceneID="R2b-QW-mPn">
             <objects>
                 <viewController id="Ut4-Uf-Xct" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jCK-uC-Y7j"/>
+                        <viewControllerLayoutGuide type="bottom" id="WgI-6f-xt4"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ftH-r5-BXG">
                         <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
