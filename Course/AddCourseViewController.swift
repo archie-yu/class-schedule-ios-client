@@ -278,11 +278,16 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         
         let course = CourseModel(course: CourseName.text!, teacher: TeacherName.text!, in: Location.text!,
-                            on: weekdayPickerView.selectedRow(inComponent: 0) + 2,
+                            on: weekdayPickerView.selectedRow(inComponent: 0) + 1,
                             from: weekdayPickerView.selectedRow(inComponent: 1) + 1,
                             to: weekdayPickerView.selectedRow(inComponent: 2) + 1,
                             fromWeek: weekPickerView.selectedRow(inComponent: 0) + 1,toWeek: weekPickerView.selectedRow(inComponent: 1) + 1,limit: weekPickerView.selectedRow(inComponent: 2))
         
+        for existedCourse in courseList{
+            if existedCourse.course == course.course && existedCourse.courseDetails != ""{
+                course.courseDetails = existedCourse.courseDetails
+            }
+        }
         courseList.append(course)
         everydayCourseList[course.weekday - 1].append(course)
         

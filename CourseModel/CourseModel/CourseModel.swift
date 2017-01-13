@@ -21,6 +21,7 @@ public class CourseModel : NSObject, NSCoding {
     public var weekEnd: Int
     //0:single week 1:double week 2:everyweek
     public var weekLimit: Int
+    public var courseDetails: String = ""
     
     public init(course: String, teacher: String, in location:String, on weekday: Int, from begin: Int, to end: Int,fromWeek weekBegin:Int,toWeek weekEnd:Int,limit weekLimit: Int) {
         self.course = course
@@ -44,6 +45,7 @@ public class CourseModel : NSObject, NSCoding {
         with.encode(weekBegin,forKey: "weekBegin")
         with.encode(weekEnd,forKey: "weekEnd")
         with.encode(weekLimit,forKey: "weekLimit")
+        with.encode(courseDetails,forKey: "courseDetails")
     }
     
     required public init?(coder: NSCoder) {
@@ -56,6 +58,7 @@ public class CourseModel : NSObject, NSCoding {
         weekBegin = coder.decodeInteger(forKey: "weekBegin")
         weekEnd = coder.decodeInteger(forKey: "weekEnd")
         weekLimit = coder.decodeInteger(forKey: "weekLimit")
+        courseDetails = coder.decodeObject(forKey: "courseDetails") as! String
     }
     
 }

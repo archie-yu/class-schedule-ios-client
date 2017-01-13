@@ -73,4 +73,17 @@ class DisplayCoursesViewController: UITableViewController {
         return header
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let identifier = segue.identifier {
+            switch(identifier) {
+            case "ShowCourseDetail":
+                let controller = segue.destination as! CourseDetailViewController
+                controller.weekday = weekday
+                controller.courseNo = (courseTable.indexPathForSelectedRow?.row)!
+                print(controller.courseNo)
+            default: break
+            }
+        }
+
+    }
 }
