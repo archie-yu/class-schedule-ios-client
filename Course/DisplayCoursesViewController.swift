@@ -51,6 +51,8 @@ class DisplayCoursesViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell", for: indexPath) as! CourseCell
         
+        cell.selectionStyle = .none
+        
         let course = everydayCourseList[weekday][indexPath.row]
         cell.CourseName.text = course.course
         cell.CourseTime.text = "\(course.begin) - \(course.end)"

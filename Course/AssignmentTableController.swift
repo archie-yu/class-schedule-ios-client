@@ -207,7 +207,7 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
             case "ShowAssignmentDetail":
                 let controller = segue.destination as! AssignmentDetailViewController
                 controller.assignmentNo = (assignmentTable.indexPathForSelectedRow?.row)!
-            default: break;
+            default: break
             }
         }
     }
