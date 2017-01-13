@@ -23,7 +23,7 @@ class DisplayCoursesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         courseTable.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

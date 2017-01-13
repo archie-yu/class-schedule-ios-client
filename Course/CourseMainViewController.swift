@@ -14,6 +14,8 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     var coursePageVC: UIPageViewController!
     var dayControllers: [DisplayCoursesViewController] = []
     
+    var nextWeekday = 0
+    
     @IBOutlet weak var weekdayPageControl: UIPageControl!
     
     override func viewDidLoad() {
@@ -48,7 +50,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         
         weekdayPageControl.currentPage = 0
         coursePageVC.setViewControllers(
-            [dayControllers[0]], direction: .forward, animated: true, completion: nil)
+            [dayControllers[0]], direction: .forward, animated: false, completion: nil)
         
     }
 
@@ -58,20 +60,32 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let dayController = viewController as! DisplayCoursesViewController
-        let nextWeekday = (dayController.weekday + 1) % 5
-//        let nextWeekday = (weekdayPageControl.currentPage + 1) % 5
-        weekdayPageControl.currentPage = nextWeekday
+
+        let nextWeekday = (weekdayPageControl.currentPage + 1) % 5
         return dayControllers[nextWeekday]
         
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let dayController = viewController as! DisplayCoursesViewController
-        let lastWeekday = (dayController.weekday + 4) % 5
-//        let lastWeekday = (weekdayPageControl.currentPage + 4) % 5
-        weekdayPageControl.currentPage = lastWeekday
-        return dayControllers[lastWeekday]
+        
+        let nextWeekday = (weekdayPageControl.currentPage + 4) % 5
+        return dayControllers[nextWeekday]
+        
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        
+        if let displayController = pendingViewControllers[0] as? DisplayCoursesViewController {
+            nextWeekday = displayController.weekday
+        }
+        
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        if completed {
+            weekdayPageControl.currentPage = nextWeekday
+        }
         
     }
     
