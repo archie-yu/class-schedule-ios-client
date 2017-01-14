@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1120AA091E2A052700E20345 /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1120AA081E2A052700E20345 /* TimeSettingsViewController.swift */; };
 		1133CDD31E25DC2600270ECC /* CourseModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; };
 		1133CDD41E25DC2600270ECC /* CourseModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1134E8BA1E24BCC2007FB8C7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E8B91E24BCC2007FB8C7 /* NotificationCenter.framework */; };
@@ -103,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1120AA081E2A052700E20345 /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		1134E8B71E24BCC2007FB8C7 /* TodayCourse.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayCourse.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1134E8B91E24BCC2007FB8C7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1134E8BC1E24BCC2007FB8C7 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				118FF0F91E00E83F00B28487 /* SettingsViewController.swift */,
+				1120AA081E2A052700E20345 /* TimeSettingsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */,
 				11C4FE0C1DF9002200ACC7FD /* ChooseCourseViewController.swift in Sources */,
 				115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */,
+				1120AA091E2A052700E20345 /* TimeSettingsViewController.swift in Sources */,
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
