@@ -30,7 +30,10 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        for _ in 0..<weekdayNum {
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        for _ in 0..<7 {
             everydayCourseList.append([])
         }
         
@@ -39,7 +42,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
             courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
         }
         for course in courseList {
-            everydayCourseList[course.weekday - 1].append(course)
+            everydayCourseList[(course.weekday + 6) % 7].append(course)
         }
         
         for vc in self.childViewControllers {
@@ -52,7 +55,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         coursePageVC.dataSource = self
         
         weekdayPageControl.numberOfPages = weekdayNum
-        for i in 0..<weekdayNum {
+        for i in 0..<7 {
             dayControllers.append(
                 storyboard?.instantiateViewController(withIdentifier: "DayCourse") as!
                 DisplayCoursesViewController)
@@ -84,14 +87,18 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         pickerView.delegate = self
         self.view.addSubview(pickerView)
         
-//        for subview in picker.subviews {
-//            if subview.frame.size.height < 5 {
-//                subview.backgroundColor = .clear
-//            }
-//        }
-        
         pickerView.selectRow(currentWeek - 1, inComponent: 0, animated: false)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if needReload {
+            weekdayPageControl.numberOfPages = weekdayNum
+            weekdayPageControl.currentPage = 0
+            coursePageVC.setViewControllers(
+                [dayControllers[0]], direction: .forward, animated: false, completion: nil)
+            needReload = false
+        }
     }
     
     override func didReceiveMemoryWarning() {

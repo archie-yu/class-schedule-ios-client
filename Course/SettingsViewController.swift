@@ -46,16 +46,16 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0: return 40
-        default: return 20
-        }
-    }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        switch section {
+//        case 0: return 40
+//        default: return 20
+//        }
+//    }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
-    }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 20
+//    }
     
     /*
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
