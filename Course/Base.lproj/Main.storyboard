@@ -35,6 +35,7 @@
                                 <rect key="frame" x="16" y="157" width="63" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="63" id="qZM-Cu-v0o"/>
+                                    <constraint firstAttribute="height" constant="17" id="tOK-1Y-fXk"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -44,28 +45,39 @@
                                 <rect key="frame" x="16" y="184" width="100" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="MkM-Kh-riP"/>
+                                    <constraint firstAttribute="height" constant="17" id="YvY-dC-AwY"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="LocationModified:" destination="X9B-C0-SeE" eventType="editingDidEnd" id="f3K-Ih-yi4"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Teacher Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASP-wX-uB8">
                                 <rect key="frame" x="16" y="130" width="98" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="98" id="HRY-DK-qbG"/>
+                                    <constraint firstAttribute="height" constant="17" id="oRB-75-aPg"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="TeacherNameModified:" destination="X9B-C0-SeE" eventType="editingDidEnd" id="pZE-Nc-XpB"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jf9-gH-oWD">
+                                <rect key="frame" x="16" y="211" width="36" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="18Q-G0-2YG"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jf9-gH-oWD">
-                                <rect key="frame" x="16" y="211" width="36" height="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="课程详细信息" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rcT-Iq-h46">
-                                <rect key="frame" x="11" y="258" width="353" height="324"/>
+                                <rect key="frame" x="11" y="278" width="353" height="284"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -102,11 +114,11 @@
                             <constraint firstAttribute="leadingMargin" secondItem="gaN-23-Xhe" secondAttribute="leading" id="H8g-yB-bDA"/>
                             <constraint firstItem="6bH-Wf-Gad" firstAttribute="top" secondItem="ASP-wX-uB8" secondAttribute="bottom" constant="10" id="MGN-F5-l5V"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Jf9-gH-oWD" secondAttribute="leading" id="SL4-LC-6v7"/>
-                            <constraint firstItem="nuO-MW-cMb" firstAttribute="top" secondItem="rcT-Iq-h46" secondAttribute="bottom" constant="40" id="XlL-Uc-uw8"/>
+                            <constraint firstItem="nuO-MW-cMb" firstAttribute="top" secondItem="rcT-Iq-h46" secondAttribute="bottom" constant="60" id="XlL-Uc-uw8"/>
                             <constraint firstItem="XuY-gl-ngk" firstAttribute="leading" secondItem="CxL-8v-YXI" secondAttribute="leadingMargin" constant="20" id="aJd-kt-FbG"/>
                             <constraint firstItem="XuY-gl-ngk" firstAttribute="top" secondItem="jIU-e3-YmL" secondAttribute="bottom" constant="45" id="eHc-lC-fPT"/>
                             <constraint firstItem="ASP-wX-uB8" firstAttribute="top" secondItem="XuY-gl-ngk" secondAttribute="bottom" constant="30" id="emN-om-exz"/>
-                            <constraint firstItem="rcT-Iq-h46" firstAttribute="top" secondItem="Jf9-gH-oWD" secondAttribute="bottom" constant="30" id="exc-wr-Ek0"/>
+                            <constraint firstItem="rcT-Iq-h46" firstAttribute="top" secondItem="Jf9-gH-oWD" secondAttribute="bottom" constant="50" id="exc-wr-Ek0"/>
                             <constraint firstItem="Jf9-gH-oWD" firstAttribute="top" secondItem="gaN-23-Xhe" secondAttribute="bottom" constant="10" id="fTY-ce-ZpE"/>
                             <constraint firstItem="rcT-Iq-h46" firstAttribute="centerX" secondItem="CxL-8v-YXI" secondAttribute="centerX" id="ieM-Iq-JE4"/>
                             <constraint firstItem="6bH-Wf-Gad" firstAttribute="leading" secondItem="CxL-8v-YXI" secondAttribute="leadingMargin" id="u3a-9O-xDU"/>
@@ -250,7 +262,7 @@
                             </connections>
                         </barButtonItem>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YcC-rX-CpP">
-                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="课程">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -553,7 +565,12 @@
                     <connections>
                         <outlet property="CourseName" destination="ZMA-fE-3Mm" id="bzq-E4-vjq"/>
                         <outlet property="Location" destination="WZh-5Z-4t4" id="laa-qb-MdM"/>
+                        <outlet property="NavigationBar" destination="jye-G3-n8o" id="XhQ-dq-qA5"/>
                         <outlet property="TeacherName" destination="Aqn-AZ-My8" id="WsY-8Q-aE2"/>
+                        <outlet property="adjustableLayout" destination="etN-iZ-Y8Z" id="Sjd-gM-ByN"/>
+                        <outlet property="coursenameLayout" destination="bGE-MH-d9D" id="mXE-I3-KCp"/>
+                        <outlet property="locationLayout" destination="q9y-5b-Tnb" id="jRr-Wa-fXj"/>
+                        <outlet property="teachernameLayout" destination="EOA-GF-cgp" id="dLT-vi-Ay6"/>
                         <outlet property="weekPickerView" destination="j68-ij-moK" id="k54-5i-uut"/>
                         <outlet property="weekdayPickerView" destination="wX8-2l-NUk" id="HdG-gY-gS9"/>
                     </connections>
@@ -1088,10 +1105,10 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="kww-xf-xvT">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kww-xf-xvT" id="fCg-U8-J51">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>

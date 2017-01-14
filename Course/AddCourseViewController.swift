@@ -17,11 +17,20 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     var editingItem = ""
     
+    var deltaY : CGFloat = 0
+    
     @IBOutlet weak var CourseName: UITextField!
     @IBOutlet weak var weekdayPickerView: UIPickerView!
     @IBOutlet weak var weekPickerView: UIPickerView!
     @IBOutlet weak var Location: UITextField!
     @IBOutlet weak var TeacherName: UITextField!
+    
+    @IBOutlet weak var NavigationBar: UINavigationBar!
+    
+    @IBOutlet weak var adjustableLayout: NSLayoutConstraint!
+    @IBOutlet weak var locationLayout: NSLayoutConstraint!
+    @IBOutlet weak var teachernameLayout: NSLayoutConstraint!
+    @IBOutlet weak var coursenameLayout: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -69,24 +78,29 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
             // 计算可能需要上移的距离
             let keyboardHeight = keyboardFrame.origin.y
-            var deltaY : CGFloat = 0
             switch(editingItem) {
             case "coursename":
                 let coursenameHeight = CourseName.frame.maxY
                 deltaY = keyboardHeight - coursenameHeight
+                    break
             case "teachername":
                 let teachernameHeight = TeacherName.frame.maxY
                 deltaY = keyboardHeight - teachernameHeight
+                break
             case "location":
                 let locationHeight = Location.frame.maxY
                 deltaY = keyboardHeight - locationHeight
+                break
             default: break
             }
+            
             // 需要上移时，变化视图位置
             if deltaY < 0 {
-                var frame = self.view.frame
-                frame.origin.y = deltaY
-                self.view.frame = frame
+                self.view.bringSubview(toFront: NavigationBar)
+                adjustableLayout.constant += deltaY
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                    self.view.layoutIfNeeded()
+                })
             }
         }
 
@@ -94,9 +108,11 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func keyboardWillHide(notification: NSNotification) {
         // 还原视图位置
-        var frame = self.view.frame
-        frame.origin.y = 0
-        self.view.frame = frame
+        adjustableLayout.constant -= deltaY
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            self.view.layoutIfNeeded()
+        })
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -9,14 +9,13 @@
 import UIKit
 import CourseModel
 
-class CourseDetailViewController: UIViewController ,UITextViewDelegate{
+class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFieldDelegate{
     var weekday = -1
     var courseNo = -1
     var courseName = ""
     let weekdays = ["周一","周二","周三","周四","周五"]
     
     @IBOutlet weak var teachernameField: UITextField!
-    
     @IBOutlet weak var weekdayField: UITextField!
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var timeField: UITextField!
@@ -28,9 +27,14 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        courseDetails.delegate = self
-
         // Do any additional setup after loading the view.
+        timeField.isEnabled = false
+        weekdayField.isEnabled = false
+        
+        courseDetails.delegate = self
+        locationField.delegate = self
+        teachernameField.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,8 +65,32 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate{
         if course.courseDetails != ""{
             courseDetails.text = course.courseDetails
         }
+        
     }
+    
 
+    @IBAction func TeacherNameModified(_ sender: UITextField) {
+        everydayCourseList[weekday][courseNo].teacher = teachernameField.text!
+        let course = everydayCourseList[weekday][courseNo]
+        let index = courseList.index(of: course)
+        courseList[index!].teacher = teachernameField.text!
+        
+        let filePath = courseDataFilePath()
+        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
+    }
+    
+    
+    @IBAction func LocationModified(_ sender: UITextField) {
+        everydayCourseList[weekday][courseNo].location = locationField.text!
+        let course = everydayCourseList[weekday][courseNo]
+        let index = courseList.index(of: course)
+        courseList[index!].location = locationField.text!
+        
+        let filePath = courseDataFilePath()
+        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
+
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == courseDetails{
             if textView.text == "课程详细信息"{
