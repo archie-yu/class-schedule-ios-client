@@ -108,10 +108,12 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func keyboardWillHide(notification: NSNotification) {
         // 还原视图位置
-        adjustableLayout.constant -= deltaY
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
-            self.view.layoutIfNeeded()
-        })
+        if deltaY < 0{
+            adjustableLayout.constant -= deltaY
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
 
     }
     
