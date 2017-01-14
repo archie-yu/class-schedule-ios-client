@@ -43,7 +43,9 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         Location.delegate = self
         TeacherName.delegate = self
         
+        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
