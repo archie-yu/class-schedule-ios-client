@@ -9,7 +9,7 @@
 import UIKit
 import CourseModel
 
-class AddCourseFromWebViewController: UIViewController {
+class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userLabel: UITextField!
     @IBOutlet weak var passLabel: UITextField!
@@ -18,6 +18,13 @@ class AddCourseFromWebViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        userLabel.delegate = self
+        passLabel.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,22 +38,33 @@ class AddCourseFromWebViewController: UIViewController {
     
     func GetRequest()
     {
-        // 设置请求路径
-        
         // 创建请求对象
-        let url = URL(string: "http://115.159.208.82/")
+        let username = userLabel.text!
+        let password = passLabel.text!
+        let urlStr = "http://115.159.208.82/username=\(username)&password=\(password)"
+        let url = URL(string: urlStr)
         var request = URLRequest(url: url!)
+        
+//        let paramStr = "username=\(username)&password=\(password)"
+//        let paraData = paramStr.data(using: String.Encoding.utf8)
+        
+        // 设置请求体
         request.httpMethod = "GET"
+//        request.httpBody = paraData
         
         // 发送请求
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let e = error {
                 print(e)
             }
-            //服务器返回：请求方式 = GET，返回数据格式 = JSON
+            // 服务器返回：请求方式 = GET，返回数据格式 = JSON
             if let d = data {
+                let dataStr = String(data: d, encoding: .utf8)
+                let offset = dataStr?.range(of: "[")?.lowerBound
+                let rawData = dataStr?.substring(from: offset!).data(using: .utf8)
+//                print(String(data: rawData!, encoding: .utf8))
                 let jsonArr = try! JSONSerialization.jsonObject(
-                    with: d, options: JSONSerialization.ReadingOptions.mutableContainers) as! [[String: Any]]
+                    with: rawData!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [[String: Any]]
                 for json in jsonArr {
                     let course = json["Course"] as! String
                     let teacher = json["Teacher"] as! String
