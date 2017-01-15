@@ -79,8 +79,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         // 处理过期任务
         if fromNow < 0 {
             // 电量显示条长度为0
-            let frame = CGRect(x: batteryX, y: batteryY, width: 0, height: battery.bounds.height)
-            battery.frame = frame
+            batteryTrailingConstraint.constant = -6 - batteryWidth
             // 无剩余时间
             remainingTime.text = "任务过期"
         } else {
@@ -112,6 +111,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
 //                self.battery.layoutIfNeeded()
 //            })
         }
+        
         
     }
     

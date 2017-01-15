@@ -96,7 +96,6 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             // 需要上移时，变化视图位置
             if deltaY < 0 {
-                self.view.bringSubview(toFront: NavigationBar)
                 adjustableLayout.constant += deltaY
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     self.view.layoutIfNeeded()

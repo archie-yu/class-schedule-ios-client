@@ -75,7 +75,7 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                     let firstWeek = json["FirstWeek"] as! Int
                     let lastWeek = json["LastWeek"] as! Int
                     let interval = json["Interval"] as! Int
-                    courseFromWebList.append(CourseModel(course: course, teacher: teacher, in: location, on: weekday, from: begin, to: end, fromWeek: firstWeek, toWeek: lastWeek, limit: interval))
+                    courseFromWebList.append(CourseModel(course: course, teacher: teacher, in: location, on: weekday + 1, from: begin, to: end, fromWeek: firstWeek, toWeek: lastWeek, limit: interval))
                 }
                 DispatchQueue.main.async(execute: {
                     self.performSegue(withIdentifier: "ShowCourseFromWeb", sender: self)

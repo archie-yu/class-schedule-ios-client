@@ -37,7 +37,7 @@ class CourseFromWebViewController: UITableViewController {
             if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
                 let course = courseFromWebList[i]
                 courseList.append(course)
-                everydayCourseList[course.weekday].append(course)
+                everydayCourseList[course.weekday - 1].append(course)
             }
         }
         courseFromWebList.removeAll()
