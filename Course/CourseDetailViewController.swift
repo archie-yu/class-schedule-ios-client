@@ -114,6 +114,10 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFie
         }
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        courseDetails.resignFirstResponder()
+    }
+    
     @IBAction func DeleteCourse(_ sender: UIButton) {
         
         //删除课程前 弹出警告框
