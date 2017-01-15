@@ -272,7 +272,7 @@
                         </button>
                         <barButtonItem key="rightBarButtonItem" image="Add" id="FGr-iV-uty">
                             <connections>
-                                <segue destination="6Vt-d3-cTx" kind="showDetail" id="mUQ-QN-Khp"/>
+                                <segue destination="dpp-bw-PAy" kind="showDetail" id="xYu-J6-YUO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -285,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="1764" y="-776.76161919040487"/>
         </scene>
-        <!--Add Course From Web View Controller-->
+        <!--教务网导入-->
         <scene sceneID="cEP-zF-qHj">
             <objects>
                 <viewController id="oGX-rp-HUg" customClass="AddCourseFromWebViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
@@ -297,23 +297,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcV-KK-Upf">
-                                <rect key="frame" x="0.0" y="-10" width="375" height="74"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="教务网导入" prompt=" " id="yVx-Eb-Z6t">
-                                        <barButtonItem key="leftBarButtonItem" title="取消" id="0vR-O7-FvC">
-                                            <connections>
-                                                <action selector="cancel:" destination="oGX-rp-HUg" id="z3t-w9-5Vi"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xiV-BM-EnF">
                                 <rect key="frame" x="16" y="80" width="343" height="60"/>
                                 <constraints>
@@ -395,7 +378,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44j-XO-xDa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44j-XO-xDa">
                                 <rect key="frame" x="16" y="587" width="343" height="60"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -405,6 +388,9 @@
                                 <state key="normal" title="登  陆">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="oGX-rp-HUg" eventType="touchUpInside" id="FsC-n0-bL6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -424,7 +410,7 @@
                             <constraint firstItem="vWj-YG-B1V" firstAttribute="top" secondItem="b0D-MK-Cet" secondAttribute="bottom" constant="16" id="YUu-kA-adk"/>
                             <constraint firstAttribute="leadingMargin" secondItem="9fi-3c-CRf" secondAttribute="leading" id="csX-om-3V8"/>
                             <constraint firstItem="bnC-XY-ZMh" firstAttribute="leading" secondItem="vWj-YG-B1V" secondAttribute="leading" constant="10" id="cyi-u4-A9n"/>
-                            <constraint firstItem="xiV-BM-EnF" firstAttribute="top" secondItem="lUq-lw-RtJ" secondAttribute="bottom" constant="60" id="k8U-Ul-jua"/>
+                            <constraint firstItem="xiV-BM-EnF" firstAttribute="top" secondItem="lUq-lw-RtJ" secondAttribute="bottom" constant="16" id="k8U-Ul-jua"/>
                             <constraint firstItem="9fi-3c-CRf" firstAttribute="top" secondItem="xiV-BM-EnF" secondAttribute="bottom" constant="16" id="llG-kE-nnF"/>
                             <constraint firstItem="bnC-XY-ZMh" firstAttribute="trailing" secondItem="vWj-YG-B1V" secondAttribute="trailing" constant="-10" id="mFz-pK-jOd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b0D-MK-Cet" secondAttribute="trailing" id="pMf-yA-a5I"/>
@@ -432,12 +418,44 @@
                             <constraint firstAttribute="leadingMargin" secondItem="44j-XO-xDa" secondAttribute="leading" id="wmP-TI-hpR"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="教务网导入" id="aCz-pn-al1">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="0vR-O7-FvC">
+                            <connections>
+                                <action selector="cancel:" destination="oGX-rp-HUg" id="z3t-w9-5Vi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="passLabel" destination="bnC-XY-ZMh" id="zNP-S8-N8r"/>
+                        <outlet property="userLabel" destination="XNj-tu-QtH" id="9Ey-iR-Uy4"/>
+                        <segue destination="mIJ-2S-fl8" kind="show" identifier="ShowCourseFromWeb" id="mbr-sf-ECg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgW-ez-PFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2502" y="-1532"/>
         </scene>
-        <!--Add Course View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="tyl-0V-K9z">
+            <objects>
+                <navigationController id="dpp-bw-PAy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kWw-BG-wbI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6Vt-d3-cTx" kind="relationship" relationship="rootViewController" id="KOZ-Xt-H1m"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lWQ-oC-z1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1038" y="-1532"/>
+        </scene>
+        <!--添加课程-->
         <scene sceneID="cu5-Jy-HPe">
             <objects>
                 <viewController id="6Vt-d3-cTx" customClass="AddCourseViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
@@ -449,28 +467,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jye-G3-n8o">
-                                <rect key="frame" x="0.0" y="-10" width="375" height="74"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="添加课程" prompt=" " id="OY7-hc-uEu">
-                                        <barButtonItem key="leftBarButtonItem" title="取消" id="SB3-k3-vlY">
-                                            <connections>
-                                                <action selector="cancel:" destination="6Vt-d3-cTx" id="BE8-Oj-wTl"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="存储" id="GER-0q-Kv5">
-                                            <connections>
-                                                <action selector="AddCourse:" destination="6Vt-d3-cTx" id="U08-Ta-xad"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-2l-NUk">
                                 <rect key="frame" x="26" y="222" width="323" height="100"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -518,7 +514,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oGX-rp-HUg" kind="showDetail" action="showViewController:sender:" id="0Yv-Od-8Ud"/>
+                                    <segue destination="oGX-rp-HUg" kind="show" id="0Yv-Od-8Ud"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入课程名" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZMA-fE-3Mm">
@@ -554,17 +550,28 @@
                             <constraint firstItem="WZh-5Z-4t4" firstAttribute="centerX" secondItem="BEu-AX-2At" secondAttribute="centerX" id="S8e-OG-OnB"/>
                             <constraint firstItem="ZMA-fE-3Mm" firstAttribute="leading" secondItem="BEu-AX-2At" secondAttribute="leadingMargin" constant="84" id="XWc-KY-iy8"/>
                             <constraint firstItem="ZMA-fE-3Mm" firstAttribute="top" secondItem="wX8-2l-NUk" secondAttribute="bottom" constant="60" id="bGE-MH-d9D"/>
-                            <constraint firstItem="j68-ij-moK" firstAttribute="top" secondItem="OIs-HI-BN8" secondAttribute="bottom" constant="57" id="etN-iZ-Y8Z"/>
+                            <constraint firstItem="j68-ij-moK" firstAttribute="top" secondItem="OIs-HI-BN8" secondAttribute="bottom" constant="13" id="etN-iZ-Y8Z"/>
                             <constraint firstItem="ZMA-fE-3Mm" firstAttribute="centerX" secondItem="BEu-AX-2At" secondAttribute="centerX" id="gDL-Ha-mNm"/>
                             <constraint firstItem="WZh-5Z-4t4" firstAttribute="top" secondItem="Aqn-AZ-My8" secondAttribute="bottom" constant="20" id="q9y-5b-Tnb"/>
                             <constraint firstItem="Aqn-AZ-My8" firstAttribute="width" secondItem="ZMA-fE-3Mm" secondAttribute="width" id="yNW-Az-UdY"/>
                             <constraint firstItem="NqG-kZ-vjC" firstAttribute="centerX" secondItem="BEu-AX-2At" secondAttribute="centerX" id="zIS-6a-G11"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="添加课程" id="XXv-oS-L5Z">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="SB3-k3-vlY">
+                            <connections>
+                                <action selector="cancel:" destination="6Vt-d3-cTx" id="BE8-Oj-wTl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="存储" id="GER-0q-Kv5">
+                            <connections>
+                                <action selector="AddCourse:" destination="6Vt-d3-cTx" id="U08-Ta-xad"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="CourseName" destination="ZMA-fE-3Mm" id="bzq-E4-vjq"/>
                         <outlet property="Location" destination="WZh-5Z-4t4" id="laa-qb-MdM"/>
-                        <outlet property="NavigationBar" destination="jye-G3-n8o" id="XhQ-dq-qA5"/>
                         <outlet property="TeacherName" destination="Aqn-AZ-My8" id="WsY-8Q-aE2"/>
                         <outlet property="adjustableLayout" destination="etN-iZ-Y8Z" id="Sjd-gM-ByN"/>
                         <outlet property="coursenameLayout" destination="bGE-MH-d9D" id="mXE-I3-KCp"/>
@@ -1228,7 +1235,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-tN-Rz5">
-                                <rect key="frame" x="137.5" y="210" width="100" height="100"/>
+                                <rect key="frame" x="138" y="210" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3co-kM-gfF"/>
                                     <constraint firstAttribute="height" constant="100" id="Aq0-er-pJ6"/>
@@ -1241,13 +1248,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="官方微博    |    官方微信    |    商店评价" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POr-tG-Jch">
-                                <rect key="frame" x="66.5" y="571" width="242" height="17"/>
+                                <rect key="frame" x="67" y="571" width="242" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.3144376874" green="0.8898145556" blue="0.7598797679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHA-7u-Z9M">
-                                <rect key="frame" x="174" y="347" width="27" height="16"/>
+                                <rect key="frame" x="174" y="347" width="27.5" height="16"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1325,6 +1332,90 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T53-Vh-3AP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3257" y="-1805"/>
+        </scene>
+        <!--Course From Web View Controller-->
+        <scene sceneID="NPY-Sw-DXw">
+            <objects>
+                <tableViewController id="mIJ-2S-fl8" customClass="CourseFromWebViewController" customModule="Course" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tcp-RY-NPO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CourseFromWebCellID" rowHeight="90" id="dcE-di-H8s" customClass="CourseFromWebCell" customModule="Course" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dcE-di-H8s" id="wyH-8B-wcY">
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SP-mB-Nfm">
+                                            <rect key="frame" x="8" y="8" width="359" height="73"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="r1S-nK-bQD">
+                                            <rect key="frame" x="13" y="14" width="300" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GS-FW-4Oh">
+                                            <rect key="frame" x="13" y="36" width="300" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qML-pO-nHV">
+                                            <rect key="frame" x="13" y="57" width="300" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="courseLabel" destination="r1S-nK-bQD" id="yoS-B6-3qU"/>
+                                    <outlet property="locationLabel" destination="qML-pO-nHV" id="h4A-bB-Gty"/>
+                                    <outlet property="teacherLabel" destination="2GS-FW-4Oh" id="Pg3-Gt-giI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mIJ-2S-fl8" id="IZg-Ey-gxa"/>
+                            <outlet property="delegate" destination="mIJ-2S-fl8" id="cK8-ey-G2e"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="3mb-Us-yrO">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="hSM-xR-f4F">
+                            <connections>
+                                <action selector="cancel:" destination="mIJ-2S-fl8" id="E50-KI-ndE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="存储" id="JUO-cN-RlO">
+                            <connections>
+                                <action selector="save:" destination="mIJ-2S-fl8" id="W5Y-BU-o1H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9G-QG-BZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4037.5999999999999" y="-1532.3838080959522"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="R2b-QW-mPn">

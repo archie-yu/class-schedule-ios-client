@@ -20,5 +20,7 @@ var weekNum = 18
 var currentWeek = 1
 var realWeek = 0
 
-var courseList : [CourseModel] = []
-var everydayCourseList : [[CourseModel]] = []
+var courseList: [CourseModel] = []
+var everydayCourseList: [[CourseModel]] = []
+
+var courseFromWebList: [CourseModel] = []

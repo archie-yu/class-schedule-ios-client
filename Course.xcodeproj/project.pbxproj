@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1120AA091E2A052700E20345 /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1120AA081E2A052700E20345 /* TimeSettingsViewController.swift */; };
+		1121EE511E2B5DA1006E7428 /* CourseFromWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1121EE501E2B5DA1006E7428 /* CourseFromWebViewController.swift */; };
+		1121EE531E2B5E19006E7428 /* CourseFromWebCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1121EE521E2B5E19006E7428 /* CourseFromWebCell.swift */; };
 		1133CDD31E25DC2600270ECC /* CourseModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; };
 		1133CDD41E25DC2600270ECC /* CourseModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1134E8BA1E24BCC2007FB8C7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E8B91E24BCC2007FB8C7 /* NotificationCenter.framework */; };
@@ -105,6 +107,8 @@
 
 /* Begin PBXFileReference section */
 		1120AA081E2A052700E20345 /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
+		1121EE501E2B5DA1006E7428 /* CourseFromWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseFromWebViewController.swift; sourceTree = "<group>"; };
+		1121EE521E2B5E19006E7428 /* CourseFromWebCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseFromWebCell.swift; sourceTree = "<group>"; };
 		1134E8B71E24BCC2007FB8C7 /* TodayCourse.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayCourse.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1134E8B91E24BCC2007FB8C7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1134E8BC1E24BCC2007FB8C7 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 			children = (
 				11E897211DE021F400226CF1 /* AddCourseViewController.swift */,
 				11536E911E288D02009EB152 /* AddCourseFromWebViewController.swift */,
+				1121EE521E2B5E19006E7428 /* CourseFromWebCell.swift */,
+				1121EE501E2B5DA1006E7428 /* CourseFromWebViewController.swift */,
 			);
 			name = Add;
 			sourceTree = "<group>";
@@ -543,10 +549,12 @@
 				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
 				1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */,
 				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,
+				1121EE531E2B5E19006E7428 /* CourseFromWebCell.swift in Sources */,
 				1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */,
 				11C4FE0C1DF9002200ACC7FD /* ChooseCourseViewController.swift in Sources */,
 				115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */,
 				1120AA091E2A052700E20345 /* TimeSettingsViewController.swift in Sources */,
+				1121EE511E2B5DA1006E7428 /* CourseFromWebViewController.swift in Sources */,
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
 				118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
