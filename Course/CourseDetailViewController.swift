@@ -10,30 +10,31 @@ import UIKit
 import CourseModel
 
 class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFieldDelegate{
+    
     var weekday = -1
     var courseNo = -1
     var courseName = ""
-    let weekdays = ["周一","周二","周三","周四","周五"]
-    
-    @IBOutlet weak var teachernameField: UITextField!
-    @IBOutlet weak var weekdayField: UITextField!
-    @IBOutlet weak var locationField: UITextField!
-    @IBOutlet weak var timeField: UITextField!
+    let weekdays = ["周一","周二","周三","周四","周五","周六","周日"]
     
     @IBOutlet weak var coursenameLabel: UILabel!
-    
+    @IBOutlet weak var teachernameField: UITextField!
+    @IBOutlet weak var timeAndLocationField: UITextField!
     @IBOutlet weak var courseDetails: UITextView!
+    @IBOutlet weak var deleteButton: UIButton!
+    
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        timeField.isEnabled = false
-        weekdayField.isEnabled = false
+        let item = UIBarButtonItem(title: "编辑", style: .plain, target: self, action: #selector(CourseDetailViewController.beginEditing(right:)))
+        self.navigationItem.rightBarButtonItem = item
         
-        courseDetails.delegate = self
-        locationField.delegate = self
+        deleteButton.isHidden = true
+        
+        timeAndLocationField.delegate = self
         teachernameField.delegate = self
+        courseDetails.delegate = self
         
     }
 
@@ -42,30 +43,27 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFie
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     override func viewWillAppear(_ animated: Bool) {
         let course = everydayCourseList[weekday][courseNo]
         courseName = course.course
         
         coursenameLabel.text = courseName
         teachernameField.text = course.teacher
-        weekdayField.text = weekdays[course.weekday - 1]
-        locationField.text = course.location
-        timeField.text = String(course.begin) + "-" + String(course.end) + "节"
+        timeAndLocationField.text = "\(course.location), \(weekdays[course.weekday - 1]) \(course.begin)-\(course.end)节"
         if course.courseDetails != ""{
             courseDetails.text = course.courseDetails
         }
         
+    }
+    
+    func beginEditing(right: UIBarButtonItem) {
+        if right.title == "编辑" {
+            right.title = "完成"
+            deleteButton.isHidden = false
+        } else {
+            right.title = "编辑"
+            deleteButton.isHidden = true
+        }
     }
     
 
@@ -77,18 +75,6 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFie
         
         let filePath = courseDataFilePath()
         NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
-    }
-    
-    
-    @IBAction func LocationModified(_ sender: UITextField) {
-        everydayCourseList[weekday][courseNo].location = locationField.text!
-        let course = everydayCourseList[weekday][courseNo]
-        let index = courseList.index(of: course)
-        courseList[index!].location = locationField.text!
-        
-        let filePath = courseDataFilePath()
-        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
-
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -135,7 +121,7 @@ class CourseDetailViewController: UIViewController ,UITextViewDelegate,UITextFie
             let filePath = courseDataFilePath()
             NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
             
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)?.dismiss(animated: true, completion: nil)
             
         }
         

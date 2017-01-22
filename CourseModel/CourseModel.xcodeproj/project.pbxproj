@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1134E9331E24F770007FB8C7 /* AssignmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E9321E24F770007FB8C7 /* AssignmentModel.swift */; };
-		1134E9341E24FA45007FB8C7 /* AssignmentModel.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1134E9321E24F770007FB8C7 /* AssignmentModel.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		11DB5B041E263C5600DD9BF4 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DB5B031E263C5600DD9BF4 /* CourseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1134E9211E24F74F007FB8C7 /* CourseModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CourseModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1134E9241E24F74F007FB8C7 /* CourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseModel.h; sourceTree = "<group>"; };
 		1134E9251E24F74F007FB8C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1134E9321E24F770007FB8C7 /* AssignmentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentModel.swift; sourceTree = "<group>"; };
 		11DB5B031E263C5600DD9BF4 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
@@ -50,7 +48,6 @@
 		1134E9231E24F74F007FB8C7 /* CourseModel */ = {
 			isa = PBXGroup;
 			children = (
-				1134E9241E24F74F007FB8C7 /* CourseModel.h */,
 				1134E9321E24F770007FB8C7 /* AssignmentModel.swift */,
 				11DB5B031E263C5600DD9BF4 /* CourseModel.swift */,
 				1134E9251E24F74F007FB8C7 /* Info.plist */,
@@ -65,7 +62,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1134E9341E24FA45007FB8C7 /* AssignmentModel.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +184,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -235,7 +231,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -259,7 +255,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CourseModel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = NO;
@@ -284,7 +280,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CourseModel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = NO;

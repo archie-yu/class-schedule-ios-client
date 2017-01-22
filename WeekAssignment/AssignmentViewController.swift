@@ -14,23 +14,21 @@ import CourseModel
 
 class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITableViewDelegate, UITableViewDataSource {
     
-//    let weekday = ["Sun.", "Mon.", "Tue.", "Thur.", "Fri.", "Sat."]
     let weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
     
     @IBOutlet weak var assignmentTable: UITableView!
     
-    var assignmentList : [AssignmentModel] = []
-    var weekAssignmentList : [AssignmentModel] = []
+    var assignmentList: [AssignmentModel] = []
+    var weekAssignmentList: [AssignmentModel] = []
+    
+    var isOldVersion = false
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view from its nib.
         assignmentTable.delegate = self
         assignmentTable.dataSource = self
-        
-        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
         let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
@@ -39,14 +37,25 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         
         let current = Date()
         for assignment in assignmentList {
-//            print(assignment.endTime.timeIntervalSince(current))
             if assignment.endTime.timeIntervalSince(current) < 60 * 60 * 24 * 7 {
                 weekAssignmentList.append(assignment)
             }
         }
         
+        if #available(iOSApplicationExtension 10.0, *) {
+            self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        } else {
+            isOldVersion = true
+            self.preferredContentSize = CGSize(width: 0, height: CGFloat(37 * (weekAssignmentList.count > 3 ? weekAssignmentList.count : 3) - 1))
+        }
+        
     }
     
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+    
+    @available(iOSApplicationExtension 10.0, *)
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         switch activeDisplayMode {
         case .compact:
@@ -65,7 +74,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weekAssignmentList.count
+        return weekAssignmentList.count > 6 ? weekAssignmentList.count : 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,6 +85,10 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
             cell.assignmentContent.text = ""
             cell.assignmentTime.text = ""
         } else {
+            if isOldVersion {
+                cell.assignmentContent.textColor = .white
+                cell.assignmentTime.textColor = .white
+            }
             let assignment = weekAssignmentList[indexPath.row]
             cell.assignmentContent.text = assignment.course + "：" + assignment.content
             let calender = Calendar.current

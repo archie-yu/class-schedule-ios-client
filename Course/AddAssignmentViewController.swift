@@ -16,11 +16,11 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
     
     var editingItem = ""
     
-    var courseOldFrame : CGRect!
-    var timeOldFrame : CGRect!
+    var courseOldHeight: CGFloat!
+    var timeOldHeight: CGFloat!
     
-    var courseVC : ChooseCourseViewController!
-    var timeVC : ChooseTimeViewController!
+    var courseVC: ChooseCourseViewController!
+    var timeVC: ChooseTimeViewController!
     
     @IBOutlet weak var shadow: UIButton!
     @IBOutlet weak var courseView: UIView!
@@ -40,14 +40,13 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var courseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var courseViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toButtom: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.automaticallyAdjustsScrollViewInsets = false
         
         // 在子控制器中找到课程选择界面和时间选择界面对应的控制器
         for vc in self.childViewControllers {
@@ -58,23 +57,18 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
             }
         }
         
-        // 保存课程选择界面和时间选择界面的初始大小，方便视图变化结束后恢复
-        timeOldFrame = timeView.frame
-        courseOldFrame = courseView.frame
-        contentHeight = contentField.frame.maxY
-        noteHeight = noteText.frame.maxY
-        
-        // 在编辑某一项信息时，用阴影遮盖其他部分
-        shadow.backgroundColor = UIColor.black
-        shadow.alpha = 0
-        
         contentField.delegate = self
         noteText.delegate = self
+        
+        // 保存课程选择界面和时间选择界面的初始大小，方便视图变化结束后恢复
+        courseOldHeight = courseView.bounds.height
+        timeOldHeight = timeView.bounds.height
+        contentHeight = contentField.frame.maxY
+        noteHeight = noteText.frame.minY + 125
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         // 注册键盘出现和键盘消失的通知
         let NC = NotificationCenter.default
         NC.addObserver(self,
@@ -83,7 +77,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         NC.addObserver(self,
                        selector: #selector(AddAssignmentViewController.keyboardWillHide(notification:)),
                        name:NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,21 +102,14 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         self.view.bringSubview(toFront: courseView)
         
         // 计算视图弹出时应该变化的大小
-        let newSize = courseVC!.beginChooseCourse()
-//        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-//        let newFrame = CGRect(origin: newPos, size: newSize)
+        let newHeight = courseVC!.beginChooseCourse().height
         
         // 渐变
-        courseViewHeightConstraint.constant = newSize.height
+        courseViewHeightConstraint.constant = newHeight
         UIView.animate(withDuration: 0.3, animations: {() -> Void in
             self.shadow.alpha = 0.7
             self.view.layoutIfNeeded()
         })
-//        UIView.beginAnimations(nil, context: nil)
-//        UIView.setAnimationDuration(0.3)
-//        shadow.alpha = 0.7
-//        courseView.frame = newFrame
-//        UIView.commitAnimations()
         
     }
     
@@ -140,8 +126,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
         // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-//        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-//        let newFrame = CGRect(origin: newPos, size: newSize)
         
         // 渐变
         timeViewHeightConstraint.constant = newSize.height
@@ -149,11 +133,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
             self.shadow.alpha = 0.7
             self.view.layoutIfNeeded()
         })
-//        UIView.beginAnimations(nil, context: nil)
-//        UIView.setAnimationDuration(0.2)
-//        shadow.alpha = 0.7
-//        timeView.frame = newFrame
-//        UIView.commitAnimations()
         
     }
     
@@ -170,8 +149,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
         // 计算视图弹出时应该变化的大小
         let newSize = timeVC!.beginChooseTime()
-        //        let newPos = CGPoint(x: courseView.frame.minX, y: self.view.frame.height / 2 - newSize.height / 2)
-        //        let newFrame = CGRect(origin: newPos, size: newSize)
         
         // 渐变
         timeViewHeightConstraint.constant = newSize.height
@@ -179,11 +156,6 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
             self.shadow.alpha = 0.7
             self.view.layoutIfNeeded()
         })
-        //        UIView.beginAnimations(nil, context: nil)
-        //        UIView.setAnimationDuration(0.2)
-        //        shadow.alpha = 0.7
-        //        timeView.frame = newFrame
-        //        UIView.commitAnimations()
         
     }
     
@@ -196,11 +168,9 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         self.view.bringSubview(toFront: contentBackground)
         self.view.bringSubview(toFront: contentField)
         
-        // 渐变
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.7
-        UIView.commitAnimations()
+        UIView.animate(withDuration: 0.2, animations: {() -> Void in
+            self.shadow.alpha = 0.7
+        })
         
     }
     
@@ -208,20 +178,15 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         
         editingItem = "note"
         
-        noteText.text = ""
-        noteText.textColor = .black
-        
         // 将阴影和当前编辑视图前置
         self.view.bringSubview(toFront: shadow)
         self.view.bringSubview(toFront: noteBackground)
         self.view.bringSubview(toFront: noteText)
         self.view.bringSubview(toFront: notePlaceHolder)
         
-        // 渐变
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.2)
-        shadow.alpha = 0.7
-        UIView.commitAnimations()
+        UIView.animate(withDuration: 0.2, animations: {() -> Void in
+            self.shadow.alpha = 0.7
+        })
         
         return true
         
@@ -242,24 +207,14 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         switch editingItem {
         case "course":
             courseVC!.endChooseCourse()
-//            UIView.beginAnimations(nil, context: nil)
-//            UIView.setAnimationDuration(0.3)
-//            shadow.alpha = 0
-//            courseView.frame = courseOldFrame
-//            UIView.commitAnimations()
-            courseViewHeightConstraint.constant = courseOldFrame.height
+            courseViewHeightConstraint.constant = courseOldHeight
             UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.shadow.alpha = 0
                 self.view.layoutIfNeeded()
             })
         case "beginTime", "endTime":
             timeVC!.endChooseTime()
-//            UIView.beginAnimations(nil, context: nil)
-//            UIView.setAnimationDuration(0.2)
-//            shadow.alpha = 0
-//            timeView.frame = timeOldFrame
-//            UIView.commitAnimations()
-            timeViewHeightConstraint.constant = timeOldFrame.height
+            timeViewHeightConstraint.constant = timeOldHeight
             UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.shadow.alpha = 0
                 self.view.layoutIfNeeded()
@@ -285,10 +240,10 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
         case "content":
             deltaY = keyboardHeight - contentHeight - 16
         case "note":
+            toButtom.priority = 100
             deltaY = keyboardHeight - noteHeight - 16
         default: break
         }
-        
         // 需要上移时，变化视图位置
         if deltaY < 0 {
             courseViewTopConstraint.constant = deltaY + 16
@@ -301,24 +256,17 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
 
     func keyboardWillHide(notification: NSNotification) {
         
-        // 还原视图位置
         courseViewTopConstraint.constant = 16
+        toButtom.priority = 750
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
+             self.shadow.alpha = 0
             self.view.layoutIfNeeded()
         })
         
     }
     
     func finishInput(_ textArea: UIView) {
-        
-        // 隐藏阴影
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(0.3)
-        shadow.alpha = 0
-        UIView.commitAnimations()
-        
         textArea.resignFirstResponder()
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -333,39 +281,17 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
     
     @IBAction func addAssignmentButtonDown(_ sender: UIBarButtonItem) {
         
-        // 检查是否选择了课程
+        var hint: String!
+        
         if courseVC?.course == "" {
-            let alertController = UIAlertController(title: "提示", message: "未选择课程！", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        // 检查结束时间是否有效
-        else if !timeVC.finish {
-            let alertController = UIAlertController(title: "提示", message: "未选择结束时间！", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        else if timeVC.beginTime.compare(timeVC.endTime) != ComparisonResult.orderedAscending {
-            let alertController = UIAlertController(title: "提示", message: "任务结束时间不能晚于开始时间！", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        // 检查是否输入了作业内容
-        else if contentField.text == "" {
-            let alertController = UIAlertController(title: "提示", message: "未输入作业内容！", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
-            alertController.addAction(confirmAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
-        // 信息完整
-        else {
-            
+            hint = "未选择课程！"
+        } else if !timeVC.finish {
+            hint = "未选择结束时间！"
+        } else if timeVC.beginTime.compare(timeVC.endTime) != ComparisonResult.orderedAscending {
+            hint = "任务结束时间不能晚于开始时间！"
+        } else if contentField.text == "" {
+            hint = "未输入作业内容！"
+        } else {
             // 将信息保存到assignmentList中
             let course = courseVC.course
             let content = contentField.text!
@@ -378,8 +304,13 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
             assignmentList.sort(by: endTimeOrder)
             
             self.presentingViewController?.dismiss(animated: true, completion: nil)
+            return
             
         }
+        let alertController = UIAlertController(title: "提示", message: hint, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     

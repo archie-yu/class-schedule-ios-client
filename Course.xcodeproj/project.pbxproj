@@ -23,12 +23,12 @@
 		1134E8E71E24C2D3007FB8C7 /* WeekAssignment.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1134E8DC1E24C2D2007FB8C7 /* WeekAssignment.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1134E8EC1E24C5CF007FB8C7 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E8EB1E24C5CF007FB8C7 /* AssignmentCell.swift */; };
 		1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1134E9151E24F5E6007FB8C7 /* Assignment.swift */; };
-		1134E93A1E24FF5B007FB8C7 /* CourseModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1134E9311E24F750007FB8C7 /* CourseModel.framework */; };
 		11536E8F1E287215009EB152 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11536E8E1E287215009EB152 /* MessageUI.framework */; };
 		11536E921E288D02009EB152 /* AddCourseFromWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11536E911E288D02009EB152 /* AddCourseFromWebViewController.swift */; };
 		115C2B551DF400060078FE23 /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */; };
 		1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B22A1DFE9E5E0026046C /* CourseCell.swift */; };
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
+		118B4E431E33992C00280466 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4E421E33992C00280466 /* MainTabBarController.swift */; };
 		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
 		118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FF0F91E00E83F00B28487 /* SettingsViewController.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
@@ -130,6 +130,7 @@
 		115C2B541DF400060078FE23 /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		1179B22A1DFE9E5E0026046C /* CourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCell.swift; sourceTree = "<group>"; };
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
+		118B4E421E33992C00280466 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		118D27501DEC1236009BFA17 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		118FF0F91E00E83F00B28487 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +163,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1134E93A1E24FF5B007FB8C7 /* CourseModel.framework in Frameworks */,
 				1134E8DD1E24C2D2007FB8C7 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +336,7 @@
 				11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */,
 				1134E8F21E24E361007FB8C7 /* Course.entitlements */,
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
+				118B4E421E33992C00280466 /* MainTabBarController.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
 				11E8971B1DE0189C00226CF1 /* Info.plist */,
@@ -514,9 +515,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E897151DE0189C00226CF1 /* Main.storyboard in Resources */,
 				11E8971A1DE0189C00226CF1 /* LaunchScreen.storyboard in Resources */,
 				11E897171DE0189C00226CF1 /* Assets.xcassets in Resources */,
-				11E897151DE0189C00226CF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +548,7 @@
 			files = (
 				11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */,
 				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
+				118B4E431E33992C00280466 /* MainTabBarController.swift in Sources */,
 				1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */,
 				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,
 				1121EE531E2B5E19006E7428 /* CourseFromWebCell.swift in Sources */,
@@ -630,6 +632,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodayCourse/TodayCourse.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
 				INFOPLIST_FILE = TodayCourse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course.TodayCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -645,6 +648,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodayCourse/TodayCourse.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
 				INFOPLIST_FILE = TodayCourse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course.TodayCourse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -661,6 +665,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeekAssignment/WeekAssignment.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
 				INFOPLIST_FILE = "$(SRCROOT)/WeekAssignment/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course.WeekAssignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -677,6 +682,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeekAssignment/WeekAssignment.entitlements;
 				DEVELOPMENT_TEAM = Y68KHR2W8X;
 				INFOPLIST_FILE = "$(SRCROOT)/WeekAssignment/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course.WeekAssignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,7 +732,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -771,7 +777,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -794,11 +800,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Course/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -816,10 +824,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Course/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.nju.edu.Course;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

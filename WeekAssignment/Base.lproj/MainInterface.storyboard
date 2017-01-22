@@ -23,29 +23,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rgd-Rh-xjn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="667" id="gls-3y-zQ8"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeekAssignmentCell" rowHeight="37" id="qOh-Tb-cDt" customClass="WeekAssignmentCell" customModule="WeekAssignment" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="37"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="37"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qOh-Tb-cDt" id="qsa-8H-f3u">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="36.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLD-BK-3OT">
-                                                    <rect key="frame" x="8" y="10" width="289" height="16"/>
+                                                    <rect key="frame" x="8" y="10" width="257" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周一 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tp-mf-HJ8">
-                                                    <rect key="frame" x="297" y="10.5" width="70" height="15"/>
+                                                    <rect key="frame" x="265" y="11" width="70" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="gOE-n3-3EX"/>
+                                                        <constraint firstAttribute="width" constant="70" id="kgz-St-9V2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -53,11 +50,11 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="CLD-BK-3OT" firstAttribute="centerY" secondItem="qsa-8H-f3u" secondAttribute="centerY" id="7sV-KG-IDK"/>
-                                                <constraint firstItem="CLD-BK-3OT" firstAttribute="leading" secondItem="qsa-8H-f3u" secondAttribute="leadingMargin" id="Ess-eb-6lS"/>
-                                                <constraint firstItem="7Tp-mf-HJ8" firstAttribute="centerY" secondItem="qsa-8H-f3u" secondAttribute="centerY" id="dwp-pE-o0C"/>
-                                                <constraint firstItem="7Tp-mf-HJ8" firstAttribute="leading" secondItem="CLD-BK-3OT" secondAttribute="trailing" id="nw5-KR-2rh"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="7Tp-mf-HJ8" secondAttribute="trailing" id="xZc-fD-leN"/>
+                                                <constraint firstItem="CLD-BK-3OT" firstAttribute="bottom" secondItem="7Tp-mf-HJ8" secondAttribute="bottom" id="HSI-jp-YbT"/>
+                                                <constraint firstItem="CLD-BK-3OT" firstAttribute="leading" secondItem="qsa-8H-f3u" secondAttribute="leadingMargin" id="P7V-cy-LlX"/>
+                                                <constraint firstItem="CLD-BK-3OT" firstAttribute="centerY" secondItem="qsa-8H-f3u" secondAttribute="centerY" id="Tb5-6h-jYe"/>
+                                                <constraint firstItem="7Tp-mf-HJ8" firstAttribute="trailing" secondItem="qsa-8H-f3u" secondAttribute="trailingMargin" id="mGk-88-ky1"/>
+                                                <constraint firstItem="7Tp-mf-HJ8" firstAttribute="leading" secondItem="CLD-BK-3OT" secondAttribute="trailing" id="rbT-VB-ZNM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -69,9 +66,10 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Rgd-Rh-xjn" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" id="jOd-ej-bst"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Rgd-Rh-xjn" secondAttribute="bottom" id="dIg-Sz-tiM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rgd-Rh-xjn" secondAttribute="trailing" id="rTI-pH-iV6"/>
                             <constraint firstItem="Rgd-Rh-xjn" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="reb-9a-rgr"/>
-                            <constraint firstItem="Rgd-Rh-xjn" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="tXr-IX-vLT"/>
+                            <constraint firstItem="Rgd-Rh-xjn" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="zoY-Yd-gdy"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -86,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112.8" y="37.331334332833585"/>
+            <point key="canvasLocation" x="23" y="-13"/>
         </scene>
     </scenes>
 </document>

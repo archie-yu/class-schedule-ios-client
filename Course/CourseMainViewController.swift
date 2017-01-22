@@ -20,7 +20,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     var editView: UIView!
     var labelView: UILabel!
     var pickerView: UIPickerView!
-    let offset: CGFloat = -15.5
+    let offset: CGFloat = -18
     
     @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var weekdayPageControl: UIPageControl!
@@ -62,10 +62,6 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
             dayControllers[i].weekday = i
         }
         
-        weekdayPageControl.currentPage = 0
-        coursePageVC.setViewControllers(
-            [dayControllers[0]], direction: .forward, animated: false, completion: nil)
-        
         titleButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
         
         let width = UIScreen.main.bounds.width
@@ -81,7 +77,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         labelView.textAlignment = .center
         self.view.addSubview(labelView)
         
-        frame = CGRect(x: 0, y: -160, width: width, height: 160)
+        frame = CGRect(x: 0, y: -162, width: width, height: 162)
         pickerView = UIPickerView(frame: frame)
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -94,9 +90,11 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         if needReload {
             weekdayPageControl.numberOfPages = weekdayNum
-            weekdayPageControl.currentPage = 0
+            var weekday = (Calendar.current.dateComponents([.weekday], from: Date()).weekday! + 5) % 7
+            if weekday >= weekdayNum { weekday = 0 }
+            weekdayPageControl.currentPage = weekday
             coursePageVC.setViewControllers(
-                [dayControllers[0]], direction: .forward, animated: false, completion: nil)
+                [dayControllers[weekday]], direction: .forward, animated: false, completion: nil)
             needReload = false
         }
     }
@@ -145,7 +143,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
             titleButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
             let frame = CGRect(x: 0, y: -224, width: width, height: 224)
             let labelFrame = CGRect(x: offset, y: -100, width: width, height: 40)
-            let pickerFrame = CGRect(x: 0, y: -160, width: width, height: 160)
+            let pickerFrame = CGRect(x: 0, y: -162, width: width, height: 162)
             UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.editView.frame = frame
                 self.labelView.frame = labelFrame
@@ -157,7 +155,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
             titleButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
             let frame = CGRect(x: 0, y: 0, width: width, height: 224)
             let labelFrame = CGRect(x: offset, y: 124, width: width, height: 40)
-            let pickerFrame = CGRect(x: 0, y: 64, width: width, height: 160)
+            let pickerFrame = CGRect(x: 0, y: 64, width: width, height: 162)
             UIView.animate(withDuration: 0.5, animations: {() -> Void in
                 self.editView.frame = frame
                 self.labelView.frame = labelFrame

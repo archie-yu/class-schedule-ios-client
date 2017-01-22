@@ -25,7 +25,11 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         todayCourseTable.delegate = self
         todayCourseTable.dataSource = self
         
-        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        if #available(iOSApplicationExtension 10.0, *) {
+            self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        } else {
+            // Fallback on earlier versions
+        }
         
         let filePath = courseDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
@@ -43,6 +47,7 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         
     }
     
+    @available(iOSApplicationExtension 10.0, *)
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         switch activeDisplayMode {
         case .compact:

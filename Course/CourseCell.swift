@@ -13,7 +13,6 @@ class CourseCell: UITableViewCell {
     @IBOutlet weak var CourseName: UILabel!
     @IBOutlet weak var CourseTime: UILabel!
     @IBOutlet weak var Location: UILabel!
-    @IBOutlet weak var TeacherName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

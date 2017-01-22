@@ -18,6 +18,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     
     var timePicker : UIPickerView?
     
+    @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var assignmentContent: UILabel!
     @IBOutlet weak var assignmentNote: UILabel!
     @IBOutlet weak var battery: UILabel!
@@ -26,8 +27,6 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var batteryTrailingConstraint: NSLayoutConstraint!
     
     var batteryWidth : CGFloat!
-    var batteryX : CGFloat = 62
-    var batteryY : CGFloat = 263
     
     var timer: Timer!
     
@@ -35,22 +34,14 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
-        
         timePicker = UIPickerView()
         
         timePicker?.delegate = self
         timePicker?.dataSource = self
         
-        batteryWidth = battery.frame.width
-        
-        // 开始显示前，确定应该显示的效果
+        batteryWidth = UIScreen.main.bounds.width - 102
         fresh()
-        
-        // 启用计时器，控制每秒执行一次fresh方法
-        timer = Timer.scheduledTimer(timeInterval: 1,
-                                     target:self, selector:#selector(AssignmentDetailViewController.fresh),
-                                     userInfo:nil, repeats:true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AssignmentDetailViewController.fresh), userInfo: nil, repeats: true)
         
         // 得到当前年份
         let curTime = Date()
@@ -61,9 +52,15 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = assignmentList[assignmentNo].course
+        courseLabel.text = assignmentList[assignmentNo].course
         assignmentContent.text = assignmentList[assignmentNo].content
-        assignmentNote.text = assignmentList[assignmentNo].note
+        if assignmentList[assignmentNo].note == "" {
+            assignmentNote.textColor = UIColor.lightGray
+            assignmentNote.text = "备注"
+        } else {
+            assignmentNote.textColor = UIColor.darkText
+            assignmentNote.text = assignmentList[assignmentNo].note
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -76,17 +73,15 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         let end = assignmentList[assignmentNo].endTime
         let fromNow = end.timeIntervalSince(current)
         
+        var ratio: CGFloat!
         // 处理过期任务
         if fromNow < 0 {
-            // 电量显示条长度为0
-            batteryTrailingConstraint.constant = -6 - batteryWidth
-            // 无剩余时间
+            ratio = 0
             remainingTime.text = "任务过期"
         } else {
             let begin = assignmentList[assignmentNo].beginTime
             let fromBegin = end.timeIntervalSince(begin)
             // 计算电量显示条长度和剩余时间
-            var ratio : CGFloat = 1
             if fromNow > fromBegin {
                 remainingTime.text = "任务还未开始"
             } else {
@@ -106,12 +101,8 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
                     remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
                 }
             }
-            batteryTrailingConstraint.constant = -5 - batteryWidth * (1 - ratio)
-//            UIView.animate(withDuration: 1, animations: {() -> Void in
-//                self.battery.layoutIfNeeded()
-//            })
         }
-        
+        batteryTrailingConstraint.constant = -5 - batteryWidth * (1 - ratio)
         
     }
     

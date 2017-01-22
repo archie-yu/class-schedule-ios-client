@@ -27,12 +27,6 @@ class ChooseTimeViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        // 设置圆角
-        self.view.layer.cornerRadius = 4
-        self.view.clipsToBounds = true
         
         timePicker.delegate = self
         timePicker.dataSource = self

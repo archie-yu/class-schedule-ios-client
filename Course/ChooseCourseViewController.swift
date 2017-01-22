@@ -22,12 +22,6 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
-        // 设置圆角
-        self.view.layer.cornerRadius = 4
-        self.view.clipsToBounds = true
-        
         coursePicker.delegate = self
         coursePicker.dataSource = self
         
@@ -87,8 +81,8 @@ class ChooseCourseViewController: UIViewController, UIPickerViewDelegate, UIPick
         // 为某一行设置对应的课程名
         let title = UILabel()
         title.textColor = UIColor.black
-        title.text = courseList[row % courseList.count].course
-        title.textAlignment = NSTextAlignment.center
+        title.text = "  \(courseList[row % courseList.count].course)"
+        title.textAlignment = NSTextAlignment.natural
         return title
     }
     

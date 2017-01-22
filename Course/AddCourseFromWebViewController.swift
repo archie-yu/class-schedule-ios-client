@@ -44,13 +44,7 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
         let urlStr = "http://115.159.208.82/username=\(username)&password=\(password)"
         let url = URL(string: urlStr)
         var request = URLRequest(url: url!)
-        
-//        let paramStr = "username=\(username)&password=\(password)"
-//        let paraData = paramStr.data(using: String.Encoding.utf8)
-        
-        // 设置请求体
         request.httpMethod = "GET"
-//        request.httpBody = paraData
         
         // 发送请求
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -62,7 +56,6 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                 let dataStr = String(data: d, encoding: .utf8)
                 let offset = dataStr?.range(of: "[")?.lowerBound
                 let rawData = dataStr?.substring(from: offset!).data(using: .utf8)
-//                print(String(data: rawData!, encoding: .utf8))
                 let jsonArr = try! JSONSerialization.jsonObject(
                     with: rawData!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [[String: Any]]
                 for json in jsonArr {
