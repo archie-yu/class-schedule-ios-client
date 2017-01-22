@@ -29,7 +29,7 @@
 		1179B22B1DFE9E5E0026046C /* CourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B22A1DFE9E5E0026046C /* CourseCell.swift */; };
 		1184EC9D1DE1A0C100979440 /* AssignmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */; };
 		118B4E431E33992C00280466 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B4E421E33992C00280466 /* MainTabBarController.swift */; };
-		118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* CourseModel.swift */; };
+		118D27511DEC1236009BFA17 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* Course.swift */; };
 		118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FF0F91E00E83F00B28487 /* SettingsViewController.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
 		11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
@@ -131,7 +131,7 @@
 		1179B22A1DFE9E5E0026046C /* CourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCell.swift; sourceTree = "<group>"; };
 		1184EC9C1DE1A0C100979440 /* AssignmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentCell.swift; sourceTree = "<group>"; };
 		118B4E421E33992C00280466 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		118D27501DEC1236009BFA17 /* CourseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
+		118D27501DEC1236009BFA17 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		118FF0F91E00E83F00B28487 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
 		11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSwipeTableCell.framework; sourceTree = SOURCE_ROOT; };
@@ -224,7 +224,6 @@
 		1179B2271DFE9DDB0026046C /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				118D27501DEC1236009BFA17 /* CourseModel.swift */,
 				1179B22F1DFEA09E0026046C /* Add */,
 				1179B2291DFE9DFA0026046C /* Page */,
 				CA1D51141E28782200797F0C /* Detail */,
@@ -336,6 +335,7 @@
 				11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */,
 				1134E8F21E24E361007FB8C7 /* Course.entitlements */,
 				11E8970D1DE0189C00226CF1 /* AppDelegate.swift */,
+				118D27501DEC1236009BFA17 /* Course.swift */,
 				118B4E421E33992C00280466 /* MainTabBarController.swift */,
 				11E897131DE0189C00226CF1 /* Main.storyboard */,
 				11E897181DE0189C00226CF1 /* LaunchScreen.storyboard */,
@@ -547,7 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C27E1A1DFFF8F900C8FC9D /* DisplayCoursesViewController.swift in Sources */,
-				118D27511DEC1236009BFA17 /* CourseModel.swift in Sources */,
+				118D27511DEC1236009BFA17 /* Course.swift in Sources */,
 				118B4E431E33992C00280466 /* MainTabBarController.swift in Sources */,
 				1134E9161E24F5E6007FB8C7 /* Assignment.swift in Sources */,
 				CA90B33F1DF95D96006785DC /* CourseMainViewController.swift in Sources */,

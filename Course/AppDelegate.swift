@@ -18,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        usleep(500)
         UIApplication.shared.isStatusBarHidden = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+        if let saturdayValue = userDefault?.bool(forKey: "Saturday") {
+            saturday = saturdayValue ? 1 : 0
+        }
+        if let sundayValue = userDefault?.bool(forKey: "Sunday") {
+            sunday = sundayValue ? 1 : 0
+        }
+        
         return true
     }
 

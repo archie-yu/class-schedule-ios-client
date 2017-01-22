@@ -93,6 +93,8 @@ class TimeSettingsViewController: UITableViewController {
         // 取消选中
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+        
         // 跳转
         switch indexPath.section {
         case 0:
@@ -101,9 +103,11 @@ class TimeSettingsViewController: UITableViewController {
                 if saturday == 1 {
                     tableView.cellForRow(at: indexPath)?.accessoryType = .none
                     saturday = 0
+                    userDefault?.set(false, forKey: "Saturday")
                 } else {
                     tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
                     saturday = 1
+                    userDefault?.set(true, forKey: "Saturday")
                 }
             case 1:
                 let saturdayCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
@@ -111,12 +115,15 @@ class TimeSettingsViewController: UITableViewController {
                     saturdayCell?.isUserInteractionEnabled = true
                     tableView.cellForRow(at: indexPath)?.accessoryType = .none
                     sunday = 0
+                    userDefault?.set(false, forKey: "Sunday")
                 } else {
                     saturdayCell?.accessoryType = .checkmark
                     saturdayCell?.isUserInteractionEnabled = false
                     saturday = 1
+                    userDefault?.set(true, forKey: "Saturday")
                     tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
                     sunday = 1
+                    userDefault?.set(true, forKey: "Sunday")
                 }
             default: break
             }
@@ -125,6 +132,8 @@ class TimeSettingsViewController: UITableViewController {
         case 2: break
         default: break
         }
+        
+        userDefault?.synchronize()
         
     }
 
