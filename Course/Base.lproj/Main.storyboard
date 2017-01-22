@@ -387,7 +387,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44j-XO-xDa">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44j-XO-xDa">
                                 <rect key="frame" x="8" y="609" width="359" height="50"/>
                                 <color key="backgroundColor" red="0.3144376874" green="0.8898145556" blue="0.7598797679" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -401,6 +401,9 @@
                                     <action selector="login:" destination="oGX-rp-HUg" eventType="touchUpInside" id="FsC-n0-bL6"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Dyl-ob-J5M">
+                                <rect key="frame" x="225.5" y="624" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -413,6 +416,7 @@
                             <constraint firstItem="XNj-tu-QtH" firstAttribute="top" secondItem="b0D-MK-Cet" secondAttribute="bottom" constant="-50" id="EdJ-sy-JDF"/>
                             <constraint firstItem="xiV-BM-EnF" firstAttribute="leading" secondItem="dtU-QW-TBE" secondAttribute="leading" constant="8" id="HtP-a1-Cdl"/>
                             <constraint firstItem="44j-XO-xDa" firstAttribute="leading" secondItem="dtU-QW-TBE" secondAttribute="leading" constant="8" id="JWS-ag-i5g"/>
+                            <constraint firstItem="Dyl-ob-J5M" firstAttribute="centerX" secondItem="44j-XO-xDa" secondAttribute="centerX" constant="48" id="Jrh-9w-dVa"/>
                             <constraint firstAttribute="trailing" secondItem="b0D-MK-Cet" secondAttribute="trailing" constant="8" id="N5h-W5-d6C"/>
                             <constraint firstItem="vWj-YG-B1V" firstAttribute="leading" secondItem="dtU-QW-TBE" secondAttribute="leading" constant="8" id="Oht-H2-vo9"/>
                             <constraint firstItem="Pju-Pi-l5o" firstAttribute="top" secondItem="44j-XO-xDa" secondAttribute="bottom" constant="8" id="QmD-9Q-w31"/>
@@ -425,6 +429,7 @@
                             <constraint firstItem="bnC-XY-ZMh" firstAttribute="trailing" secondItem="vWj-YG-B1V" secondAttribute="trailing" constant="-10" id="mFz-pK-jOd"/>
                             <constraint firstItem="b0D-MK-Cet" firstAttribute="leading" secondItem="dtU-QW-TBE" secondAttribute="leading" constant="8" id="t1U-5L-TOB"/>
                             <constraint firstAttribute="trailing" secondItem="9fi-3c-CRf" secondAttribute="trailing" constant="8" id="tDT-aC-ACz"/>
+                            <constraint firstItem="Dyl-ob-J5M" firstAttribute="centerY" secondItem="44j-XO-xDa" secondAttribute="centerY" id="zYG-ig-gf1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="教务网导入" id="aCz-pn-al1">
@@ -435,6 +440,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="fetchingIndicator" destination="Dyl-ob-J5M" id="v6Y-ev-uCK"/>
+                        <outlet property="loginButton" destination="44j-XO-xDa" id="3Fr-GA-yCz"/>
                         <outlet property="passLabel" destination="bnC-XY-ZMh" id="zNP-S8-N8r"/>
                         <outlet property="userLabel" destination="XNj-tu-QtH" id="9Ey-iR-Uy4"/>
                         <segue destination="mIJ-2S-fl8" kind="show" identifier="ShowCourseFromWeb" id="mbr-sf-ECg"/>

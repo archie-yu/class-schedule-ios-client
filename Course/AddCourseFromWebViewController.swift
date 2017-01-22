@@ -13,6 +13,8 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userLabel: UITextField!
     @IBOutlet weak var passLabel: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var fetchingIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +38,21 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if userLabel.text != "" && passLabel.text != "" {
+            loginButton.alpha = 1
+            loginButton.isEnabled = true
+        } else {
+            loginButton.alpha = 0.5
+            loginButton.isEnabled = false
+        }
+    }
+    
     func GetRequest()
     {
+        
+        fetchingIndicator.startAnimating()
+        
         // 创建请求对象
         let username = userLabel.text!
         let password = passLabel.text!
@@ -48,11 +63,16 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
         
         // 发送请求
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let e = error {
-                print(e)
-            }
-            // 服务器返回：请求方式 = GET，返回数据格式 = JSON
-            if let d = data {
+            if error != nil {
+                sleep(1)
+                let alertController = UIAlertController(title: "错误", message: "连接至服务器失败", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "确定", style: .default, handler: nil)
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true, completion: nil)
+                DispatchQueue.main.async(execute: {
+                    self.fetchingIndicator.stopAnimating()
+                })
+            } else if let d = data {
                 let dataStr = String(data: d, encoding: .utf8)
                 let offset = dataStr?.range(of: "[")?.lowerBound
                 let rawData = dataStr?.substring(from: offset!).data(using: .utf8)
@@ -71,6 +91,7 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                     courseFromWebList.append(CourseModel(course: course, teacher: teacher, in: location, on: weekday + 1, from: begin, to: end, fromWeek: firstWeek, toWeek: lastWeek, limit: interval))
                 }
                 DispatchQueue.main.async(execute: {
+                    self.fetchingIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "ShowCourseFromWeb", sender: self)
                 })
             }
@@ -79,19 +100,9 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
         task.resume()
     
     }
-
+    
     @IBAction func login(_ sender: UIButton) {
         GetRequest()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
