@@ -135,58 +135,6 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
     }
     
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-    
-//    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-//        return "完成"
-//    }
-    
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let finish = UITableViewRowAction(style: .default, title: "完成") { (action, indexPath) in
-//            assignmentList.remove(at: indexPath.row)
-//        }
-//        let delete = UITableViewRowAction(style: .destructive, title: "删除") { (action, indexPath) in
-//            assignmentList.remove(at: indexPath.row)
-//        }
-//        finish.backgroundColor = .green
-//        return [finish, delete]
-//    }
-    
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            assignmentList.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-//        }
-//    }
-    
-//    func swipeTableCell(_ cell: MGSwipeTableCell, canSwipe direction: MGSwipeDirection, from point: CGPoint) -> Bool {
-//        if direction == .rightToLeft {
-//            return true
-//        }
-//        else {
-//            return false
-//        }
-//    }
-    
-//    func swipeTableCell(_ cell: MGSwipeTableCell, swipeButtonsFor direction: MGSwipeDirection, swipeSettings: MGSwipeSettings, expansionSettings: MGSwipeExpansionSettings) -> [UIView]? {
-//        
-//        swipeSettings.transition = .drag
-//        expansionSettings.buttonIndex = 0
-//        
-//        expansionSettings.fillOnTrigger = true;
-//        expansionSettings.threshold = 1.1;
-//        let padding = 15
-//        let bgColor = UIColor.green
-//        return [
-//            MGSwipeButton(title: "完成", backgroundColor: bgColor, padding: padding, callback: { (cell) -> Bool in
-//                return false; //don't autohide to improve delete animation
-//            })
-//        ]
-//        
-//    }
-    
     @IBAction func addAssignment(_ sender: UIBarButtonItem) {
         if courseList.count > 0 {
             self.performSegue(withIdentifier: "AddAssignment", sender: self)

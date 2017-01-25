@@ -17,8 +17,23 @@ var needReload = true
 var courseNum = 11
 
 var weekNum = 18
-var currentWeek = 1
-var realWeek = 0
+var courseWeek = 0
+var relevantWeek = 0
+var currenWeek = 0
+
+func resumeWeek() {
+    let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+    courseWeek = userDefault!.integer(forKey: "CourseWeek")
+    relevantWeek = userDefault!.integer(forKey: "RelevantWeek")
+    if courseWeek == 0 {
+        courseWeek = 1
+        relevantWeek = Calendar.current.dateComponents([.weekOfYear], from: Date()).weekOfYear!
+    } else {
+        let currentWeek = Calendar.current.dateComponents([.weekOfYear], from: Date()).weekOfYear!
+        courseWeek += currentWeek - relevantWeek
+        if courseWeek > weekNum { courseWeek = weekNum }
+    }
+}
 
 let weekdayStrings = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
@@ -55,7 +70,9 @@ func load(from filePath: String) {
     }
     for course in courseList {
         for lesson in course.lessons {
-            lessonList[lesson.weekday].append(lesson)
+            if lesson.firstWeek <= courseWeek && lesson.lastWeek >= courseWeek && (lesson.alternate == 3 || (lesson.alternate % 2) == (courseWeek % 2)) {
+                lessonList[lesson.weekday].append(lesson)
+            }
         }
     }
     for i in 0..<lessonList.count {

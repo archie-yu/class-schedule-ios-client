@@ -13,15 +13,13 @@ class DisplayCoursesViewController: UITableViewController {
     
     var weekday = 0
     
-    @IBOutlet weak var courseTable: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        courseTable.reloadData()
+        (self.view as! UITableView).reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,7 +77,7 @@ class DisplayCoursesViewController: UITableViewController {
             case "ShowCourseDetail":
                 let controller = segue.destination as! CourseDetailViewController
                 controller.weekday = weekday
-                controller.lessonNo = (courseTable.indexPathForSelectedRow?.row)!
+                controller.lessonNo = ((self.view as! UITableView).indexPathForSelectedRow?.row)!
             default: break
             }
         }

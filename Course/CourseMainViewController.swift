@@ -31,6 +31,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         
         self.automaticallyAdjustsScrollViewInsets = false
         
+        resumeWeek()
         load(from: courseDataFilePath())
         
         for vc in self.childViewControllers {
@@ -69,10 +70,6 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         pickerView.dataSource = self
         pickerView.delegate = self
         self.view.addSubview(pickerView)
-        
-        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
-        currentWeek = userDefault!.integer(forKey: "CurrentWeek")
-        pickerView.selectRow(currentWeek - 1, inComponent: 0, animated: false)
         
     }
     
@@ -138,11 +135,31 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
                 self.labelView.frame = labelFrame
                 self.pickerView.frame = pickerFrame
             })
-            currentWeek = pickerView.selectedRow(inComponent: 0) + 1
+            courseWeek = pickerView.selectedRow(inComponent: 0) + 1
+            relevantWeek = Calendar.current.dateComponents([.weekOfYear], from: Date()).weekOfYear!
             let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
-            userDefault?.set(currentWeek, forKey: "CurrentWeek")
+            userDefault?.set(courseWeek, forKey: "CourseWeek")
+            userDefault?.set(relevantWeek, forKey: "RelevantWeek")
             userDefault?.synchronize()
+            for controller in dayControllers {
+                for i in 0..<lessonList.count {
+                    lessonList[i].removeAll()
+                }
+                for course in courseList {
+                    for lesson in course.lessons {
+                        if lesson.firstWeek <= courseWeek && lesson.lastWeek >= courseWeek && (lesson.alternate == 3 || (lesson.alternate % 2) == (courseWeek % 2)) {
+                            lessonList[lesson.weekday].append(lesson)
+                        }
+                    }
+                }
+                for i in 0..<lessonList.count {
+                    lessonList[i].sort() { $0.firstClass < $1.firstClass }
+                }
+                (controller.view as! UITableView).reloadData()
+            }
         } else {
+            resumeWeek()
+            pickerView.selectRow(courseWeek - 1, inComponent: 0, animated: false)
             titleButton.setTitle("确认", for: .normal)
             titleButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
             let frame = CGRect(x: 0, y: 0, width: width, height: 224)
