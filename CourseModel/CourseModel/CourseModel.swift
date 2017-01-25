@@ -8,62 +8,107 @@
 
 import Foundation
 
-// 保存课程信息的单元
-public class CourseModel : NSObject, NSCoding {
+public class Lesson: NSObject, NSCoding {
     
     public var course: String
-    public var teacher: String
-    public var location: String
+    public var room: String
+    public var firstWeek: Int
+    public var lastWeek: Int
+    public var alternate: Int // every: 00, odd: 01, even: 10
     public var weekday: Int
-    public var begin: Int
-    public var end: Int
-    public var weekBegin: Int
-    public var weekEnd: Int
-    //0:single week 1:double week 2:everyweek
-    public var weekLimit: Int
-    public var courseDetails: String = ""
+    public var firstClass: Int
+    public var lastClass: Int
     
-    public init(course: String, teacher: String, in location:String, on weekday: Int, from begin: Int, to end: Int,fromWeek weekBegin:Int,toWeek weekEnd:Int,limit weekLimit: Int) {
+    public init(course: String, inRoom: String, fromWeek: Int, toWeek: Int, alternate: Int, on: Int, fromClass: Int, toClass: Int) {
         self.course = course
-        self.teacher = teacher
-        self.location = location
-        self.weekday = weekday
-        self.begin = begin
-        self.end = end
-        self.weekBegin = weekBegin
-        self.weekEnd = weekEnd
-        self.weekLimit = weekLimit
+        room = inRoom
+        switch alternate {
+        case 1:
+            firstWeek = fromWeek / 2 * 2 + 1
+            lastWeek = toWeek / 2 * 2 - 1
+        case 2:
+            firstWeek = (fromWeek + 1) / 2 * 2
+            lastWeek = (toWeek - 1) / 2 * 2
+        default:
+            firstWeek = fromWeek
+            lastWeek = toWeek
+        }
+        self.alternate = alternate
+        weekday = on
+        firstClass = fromClass
+        lastClass = toClass
     }
     
-    public func encode(with: NSCoder){
-        with.encode(course, forKey: "course")
-        with.encode(teacher, forKey: "teacher")
-        with.encode(location, forKey: "location")
-        with.encode(weekday, forKey: "weekday")
-        with.encode(begin, forKey: "begin")
-        with.encode(end, forKey: "end")
-        with.encode(weekBegin,forKey: "weekBegin")
-        with.encode(weekEnd,forKey: "weekEnd")
-        with.encode(weekLimit,forKey: "weekLimit")
-        with.encode(courseDetails,forKey: "courseDetails")
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(course, forKey: "course")
+        aCoder.encode(room, forKey: "room")
+        aCoder.encode(firstWeek, forKey: "firstWeek")
+        aCoder.encode(lastWeek, forKey: "lastWeek")
+        aCoder.encode(alternate, forKey: "alternate")
+        aCoder.encode(weekday, forKey: "weekday")
+        aCoder.encode(firstClass, forKey: "firstClass")
+        aCoder.encode(lastClass, forKey: "lastClass")
     }
     
-    required public init?(coder: NSCoder) {
-        course = coder.decodeObject(forKey: "course") as! String
-        teacher = coder.decodeObject(forKey: "teacher") as! String
-        location = coder.decodeObject(forKey: "location") as! String
-        weekday = coder.decodeInteger(forKey: "weekday")
-        begin = coder.decodeInteger(forKey: "begin")
-        end = coder.decodeInteger(forKey: "end")
-        weekBegin = coder.decodeInteger(forKey: "weekBegin")
-        weekEnd = coder.decodeInteger(forKey: "weekEnd")
-        weekLimit = coder.decodeInteger(forKey: "weekLimit")
-        courseDetails = coder.decodeObject(forKey: "courseDetails") as! String
+    required public init?(coder aDecoder: NSCoder) {
+        course = aDecoder.decodeObject(forKey: "course") as! String
+        room = aDecoder.decodeObject(forKey: "room") as! String
+        firstWeek = aDecoder.decodeInteger(forKey: "firstWeek")
+        lastWeek = aDecoder.decodeInteger(forKey: "lastWeek")
+        alternate = aDecoder.decodeInteger(forKey: "alternate")
+        weekday = aDecoder.decodeInteger(forKey: "weekday")
+        firstClass = aDecoder.decodeInteger(forKey: "firstClass")
+        lastClass = aDecoder.decodeInteger(forKey: "lastClass")
+    }
+    
+    public func conflict(with lesson: Lesson) -> Bool {
+        let weekConflict = ((firstWeek >= lesson.firstWeek && firstWeek <= lesson.lastWeek) || (lastWeek >= lesson.firstWeek && lastWeek <= lesson.lastWeek)) && (alternate & lesson.alternate == 0)
+        let weekdayConflict = weekConflict && weekday == lesson.weekday
+        let classConflict = (firstClass >= lesson.firstClass && firstClass <= lesson.lastClass) || (lastClass >= lesson.firstClass && lastClass <= lesson.lastClass)
+        return  weekConflict && weekdayConflict && classConflict
     }
     
 }
 
-// 获取共享空间中保存课程信息的文件地址
+public class Course: NSObject, NSCoding {
+    
+    public var course: String
+    public var teacher: String
+    public var lessons: [Lesson]
+    public var note: String
+    
+    public init(course: String, teacher: String) {
+        self.course = course
+        self.teacher = teacher
+        lessons = []
+        note = ""
+    }
+    
+    public func encode(with aCoder: NSCoder){
+        aCoder.encode(course, forKey: "course")
+        aCoder.encode(teacher, forKey: "teacher")
+        aCoder.encode(lessons, forKey: "lessons")
+        aCoder.encode(note,forKey: "note")
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        course = aDecoder.decodeObject(forKey: "course") as! String
+        teacher = aDecoder.decodeObject(forKey: "teacher") as! String
+        lessons = aDecoder.decodeObject(forKey: "lessons") as! [Lesson]
+        note = aDecoder.decodeObject(forKey: "note") as! String
+    }
+    
+    public func add(lesson newLesson: Lesson) -> Bool {
+        for lesson in self.lessons {
+            if lesson.conflict(with: newLesson) {
+                return false
+            }
+        }
+        self.lessons.append(newLesson)
+        return true
+    }
+}
+
 public func courseDataFilePath() -> String {
     let manager = FileManager()
     let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")

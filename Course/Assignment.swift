@@ -9,4 +9,4 @@
 import Foundation
 import CourseModel
 
-var assignmentList : [AssignmentModel] = []
+var assignmentList : [Assignment] = []

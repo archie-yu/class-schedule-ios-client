@@ -8,8 +8,7 @@
 
 import Foundation
 
-// 保存任务信息的单元
-public class AssignmentModel : NSObject, NSCoding {
+public class Assignment: NSObject, NSCoding {
     
     public var course: String
     public var content: String
@@ -43,7 +42,6 @@ public class AssignmentModel : NSObject, NSCoding {
     
 }
 
-// 获取共享空间中保存任务信息的文件地址
 public func assignmentDataFilePath() -> String {
     let manager = FileManager()
     let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")

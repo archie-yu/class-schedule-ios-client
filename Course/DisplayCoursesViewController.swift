@@ -29,22 +29,12 @@ class DisplayCoursesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return everydayCourseList[weekday].count
+        return lessonList[weekday].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,10 +43,10 @@ class DisplayCoursesViewController: UITableViewController {
         
         cell.selectionStyle = .none
         
-        let course = everydayCourseList[weekday][indexPath.row]
-        cell.CourseName.text = course.course
-        cell.CourseTime.text = "\(course.begin) - \(course.end)"
-        cell.Location.text = course.location
+        let lesson = lessonList[weekday][indexPath.row]
+        cell.CourseName.text = lesson.course
+        cell.CourseTime.text = "\(lesson.firstClass) - \(lesson.lastClass)"
+        cell.Location.text = lesson.room
         return cell
         
     }
@@ -89,7 +79,7 @@ class DisplayCoursesViewController: UITableViewController {
             case "ShowCourseDetail":
                 let controller = segue.destination as! CourseDetailViewController
                 controller.weekday = weekday
-                controller.courseNo = (courseTable.indexPathForSelectedRow?.row)!
+                controller.lessonNo = (courseTable.indexPathForSelectedRow?.row)!
             default: break
             }
         }

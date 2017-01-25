@@ -11,8 +11,6 @@ import CourseModel
 
 class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
     
-    let weekday = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-    
     var editingItem = ""
     
     var courseHeight: CGFloat!
@@ -38,7 +36,7 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         courseTimePicker.selectRow(0, inComponent: 0, animated: true)
         courseTimePicker.selectRow(weekNum - 1, inComponent: 1, animated:true)
-        courseTimePicker.selectRow(2, inComponent: 2, animated: true)
+        courseTimePicker.selectRow(0, inComponent: 2, animated: true)
         
         courseTimePicker.selectRow(0, inComponent: 3, animated: true)
         courseTimePicker.selectRow(0, inComponent: 4, animated: true)
@@ -141,24 +139,6 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int,
-//                    forComponent component: Int) -> String? {
-//        switch component {
-//        case 0, 1: return String(row + 1)
-//        case 2:
-//            switch row {
-//            case 0: return "单"
-//            case 1: return "双"
-//            case 2: return "全"
-//            default: break
-//            }
-//        case 3: return weekday[row]
-//        case 4, 5: return String(row + 1)
-//        default: break
-//        }
-//        return nil
-//    }
-    
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let title = UILabel()
         title.textColor = UIColor.black
@@ -168,12 +148,12 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         case 0, 1: title.text = String(row + 1)
         case 2:
             switch row {
-            case 0: title.text = "单"
-            case 1: title.text = "双"
-            case 2: title.text = "全"
+            case 0: title.text = "全"
+            case 1: title.text = "单"
+            case 2: title.text = "双"
             default: break
             }
-        case 3: title.text = weekday[row]
+        case 3: title.text = weekdayStrings[row]
         case 4, 5: title.text = String(row + 1)
         default: break
         }
@@ -214,33 +194,28 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func AddCourse(_ sender: UIBarButtonItem) {
         
-        if !CheckContentIsLegal() {
-            return
-        }
+        if !CheckContentIsLegal() { return }
         
-        let course = CourseModel(
+        let newLesson = Lesson(
             course: courseName.text!,
-            teacher: teacherName.text!,
-            in: location.text!,
-            on: courseTimePicker.selectedRow(inComponent: 3) + 1,
-            from: courseTimePicker.selectedRow(inComponent: 4) + 1,
-            to: courseTimePicker.selectedRow(inComponent: 5) + 1,
+            inRoom: location.text!,
             fromWeek: courseTimePicker.selectedRow(inComponent: 0) + 1,
             toWeek: courseTimePicker.selectedRow(inComponent: 1) + 1,
-            limit: courseTimePicker.selectedRow(inComponent: 2))
+            alternate: courseTimePicker.selectedRow(inComponent: 2),
+            on: courseTimePicker.selectedRow(inComponent: 3),
+            fromClass: courseTimePicker.selectedRow(inComponent: 4) + 1,
+            toClass: courseTimePicker.selectedRow(inComponent: 5) + 1)
+        let newCourse = Course(course: courseName.text!, teacher: teacherName.text!)
         
-        for existedCourse in courseList{
-            if existedCourse.course == course.course && existedCourse.courseDetails != ""{
-                course.courseDetails = existedCourse.courseDetails
-            }
+        add(course: newCourse)
+        if add(lesson: newLesson) {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "时间冲突", message: "该课程在相同时间存在其他安排", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        courseList.append(course)
-        everydayCourseList[course.weekday - 1].append(course)
-        
-        let filePath = courseDataFilePath()
-        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
-        
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
         
     }
     

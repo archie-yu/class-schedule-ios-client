@@ -18,8 +18,8 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
     
     @IBOutlet weak var assignmentTable: UITableView!
     
-    var assignmentList: [AssignmentModel] = []
-    var weekAssignmentList: [AssignmentModel] = []
+    var assignmentList: [Assignment] = []
+    var weekAssignmentList: [Assignment] = []
     
     var isOldVersion = false
     
@@ -32,7 +32,7 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         
         let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
-            assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
+            assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [Assignment]
         }
         
         let current = Date()

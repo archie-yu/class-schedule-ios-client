@@ -18,12 +18,10 @@ class AssignmentTableController: UITableViewController, MGSwipeTableCellDelegate
         
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
-        
         // 载入保存的数据
         let filePath = assignmentDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
-            assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [AssignmentModel]
+            assignmentList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [Assignment]
         }
         
         // 注册应用程序进入后台的消息

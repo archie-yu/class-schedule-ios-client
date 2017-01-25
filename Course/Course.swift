@@ -20,7 +20,45 @@ var weekNum = 18
 var currentWeek = 1
 var realWeek = 0
 
-var courseList: [CourseModel] = []
-var everydayCourseList: [[CourseModel]] = []
+let weekdayStrings = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
-var courseFromWebList: [CourseModel] = []
+var courseList: [Course] = []
+var lessonList: [[Lesson]] = [[], [], [], [], [], [], []]
+
+func add(course newCourse: Course) {
+    for course in courseList {
+        if course.course == newCourse.course {
+            return
+        }
+    }
+    courseList.append(newCourse)
+}
+
+func add(lesson newLesson: Lesson) -> Bool {
+    for course in courseList {
+        if course.course == newLesson.course {
+            if course.add(lesson: newLesson) {
+                lessonList[newLesson.weekday].append(newLesson)
+                let filePath = courseDataFilePath()
+                NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
+                return true
+            }
+            return false
+        }
+    }
+    return false
+}
+
+func load(from filePath: String) {
+    if (FileManager.default.fileExists(atPath: filePath)) {
+        courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [Course]
+    }
+    for course in courseList {
+        for lesson in course.lessons {
+            lessonList[lesson.weekday].append(lesson)
+        }
+    }
+}
+
+var courseFromWebList: [Course] = []
+var lessonFromWebList: [[Lesson]] = []

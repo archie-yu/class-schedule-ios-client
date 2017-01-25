@@ -28,29 +28,16 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        for _ in 0..<7 {
-            everydayCourseList.append([])
-        }
-        
-        let filePath = courseDataFilePath()
-        if (FileManager.default.fileExists(atPath: filePath)) {
-            courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
-        }
-        for course in courseList {
-            everydayCourseList[(course.weekday + 6) % 7].append(course)
-        }
+        load(from: courseDataFilePath())
         
         for vc in self.childViewControllers {
             if vc is UIPageViewController {
                 coursePageVC = vc as! UIPageViewController
             }
         }
-        
         coursePageVC.delegate = self
         coursePageVC.dataSource = self
         
@@ -186,15 +173,5 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         label.textAlignment = .center
         return label
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 }

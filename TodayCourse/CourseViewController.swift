@@ -14,8 +14,8 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
     
     @IBOutlet weak var todayCourseTable: UITableView!
     
-    var courseList : [CourseModel] = []
-    var todayCourseList : [CourseModel] = []
+    var courseList : [Course] = []
+    var todayCourseList : [Course] = []
     
     override func viewDidLoad() {
         
@@ -33,17 +33,17 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         
         let filePath = courseDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
-            courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [CourseModel]
+            courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [Course]
         }
 
         let curDate = Date()
         let calendar = Calendar.current
         let weekday = calendar.dateComponents([.weekday], from: curDate).weekday
-        for course in courseList {
-            if course.weekday == weekday {
-                todayCourseList.append(course)
-            }
-        }
+//        for course in courseList {
+//            if course.weekday == weekday {
+//                todayCourseList.append(course)
+//            }
+//        }
         
     }
     
@@ -74,8 +74,8 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodayCourseCell", for: indexPath) as! CourseCell
         
         let course = todayCourseList[indexPath.row]
-        cell.courseName.text = "\(course.course)(\(course.location))"
-        cell.courseTime.text = "\(course.begin) - \(course.end)"
+//        cell.courseName.text = "\(course.course)(\(course.location))"
+//        cell.courseTime.text = "\(course.begin) - \(course.end)"
         
         return cell
         

@@ -275,7 +275,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
     }
     
     // 用于比较两个任务先后次序
-    func endTimeOrder(a: AssignmentModel, b: AssignmentModel) ->Bool {
+    func endTimeOrder(a: Assignment, b: Assignment) ->Bool {
         return a.endTime.compare(b.endTime) == .orderedAscending
     }
     
@@ -298,7 +298,7 @@ class AddAssignmentViewController : UIViewController, UITextFieldDelegate, UITex
             let note = noteText.text!
             let beginTime = timeVC.beginTime!
             let endTime = timeVC.endTime!
-            assignmentList.append(AssignmentModel(in: course, todo: content, note: note, from: beginTime, to: endTime))
+            assignmentList.append(Assignment(in: course, todo: content, note: note, from: beginTime, to: endTime))
             
             // 插入列表后按结束时间重新排序
             assignmentList.sort(by: endTimeOrder)

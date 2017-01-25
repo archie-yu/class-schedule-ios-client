@@ -39,7 +39,7 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         timePicker?.delegate = self
         timePicker?.dataSource = self
         
-        batteryWidth = UIScreen.main.bounds.width - 102
+        batteryWidth = UIScreen.main.bounds.width - 96
         fresh()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AssignmentDetailViewController.fresh), userInfo: nil, repeats: true)
         
@@ -55,10 +55,8 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
         courseLabel.text = assignmentList[assignmentNo].course
         assignmentContent.text = assignmentList[assignmentNo].content
         if assignmentList[assignmentNo].note == "" {
-            assignmentNote.textColor = UIColor.lightGray
             assignmentNote.text = "备注"
         } else {
-            assignmentNote.textColor = UIColor.darkText
             assignmentNote.text = assignmentList[assignmentNo].note
         }
     }
@@ -94,15 +92,15 @@ class AssignmentDetailViewController : UIViewController, UIPickerViewDelegate, U
                 let day = hour / 24
                 hour %= 24
                 if day > 0 {
-                    remainingTime.text = String(format: "%d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
+                    remainingTime.text = String(format: "剩余时间 %d:%02d:%02d:%02d", arguments: [day, hour, min, sec])
                 } else if hour > 0 {
-                    remainingTime.text = String(format: "%02d:%02d:%02d", arguments: [hour, min, sec])
+                    remainingTime.text = String(format: "剩余时间 %02d:%02d:%02d", arguments: [hour, min, sec])
                 } else {
-                    remainingTime.text = String(format: "%02d:%02d", arguments: [min, sec])
+                    remainingTime.text = String(format: "剩余时间 %02d:%02d", arguments: [min, sec])
                 }
             }
         }
-        batteryTrailingConstraint.constant = -5 - batteryWidth * (1 - ratio)
+        batteryTrailingConstraint.constant = -8 - batteryWidth * (1 - ratio)
         
     }
     

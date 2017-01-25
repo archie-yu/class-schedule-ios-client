@@ -19,7 +19,6 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         userLabel.delegate = self
         passLabel.delegate = self
     }
@@ -83,12 +82,15 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                     let teacher = json["Teacher"] as! String
                     let location = json["Location"] as! String
                     let weekday = json["Weekday"] as! Int
-                    let begin = json["Begin"] as! Int
-                    let end = json["End"] as! Int
+                    let firstClass = json["Begin"] as! Int
+                    let lastClass = json["End"] as! Int
                     let firstWeek = json["FirstWeek"] as! Int
                     let lastWeek = json["LastWeek"] as! Int
-                    let interval = json["Interval"] as! Int
-                    courseFromWebList.append(CourseModel(course: course, teacher: teacher, in: location, on: weekday + 1, from: begin, to: end, fromWeek: firstWeek, toWeek: lastWeek, limit: interval))
+                    let alternate = json["Interval"] as! Int
+                    let newCourse = Course(course: course, teacher: teacher)
+                    let newLesson = Lesson(course: course, inRoom: location, fromWeek: firstWeek, toWeek: lastWeek, alternate: alternate, on: weekday, fromClass: firstClass, toClass: lastClass)
+                    courseFromWebList.append(newCourse)
+                    lessonFromWebList.append([newLesson])
                 }
                 DispatchQueue.main.async(execute: {
                     self.fetchingIndicator.stopAnimating()
