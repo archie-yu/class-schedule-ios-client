@@ -196,12 +196,14 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         if !CheckContentIsLegal() { return }
         
+        var alternate = courseTimePicker.selectedRow(inComponent: 2)
+        if alternate == 0 { alternate = 3 }
         let newLesson = Lesson(
             course: courseName.text!,
             inRoom: location.text!,
             fromWeek: courseTimePicker.selectedRow(inComponent: 0) + 1,
             toWeek: courseTimePicker.selectedRow(inComponent: 1) + 1,
-            alternate: courseTimePicker.selectedRow(inComponent: 2),
+            alternate: alternate,
             on: courseTimePicker.selectedRow(inComponent: 3),
             fromClass: courseTimePicker.selectedRow(inComponent: 4) + 1,
             toClass: courseTimePicker.selectedRow(inComponent: 5) + 1)

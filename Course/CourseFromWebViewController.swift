@@ -32,13 +32,16 @@ class CourseFromWebViewController: UITableViewController {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
+        var conflictCourses: Set<String> = []
         for i in 0..<courseFromWebList.count {
             let indexPath = IndexPath(row: i, section: 0)
             if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
                 let course = courseFromWebList[i]
                 add(course: course)
                 for lesson in lessonFromWebList[i] {
-                    add(lesson: lesson)
+                    if !add(lesson: lesson) {
+                        conflictCourses.insert(lesson.course)
+                    }
                 }
             }
         }
@@ -46,7 +49,22 @@ class CourseFromWebViewController: UITableViewController {
         lessonFromWebList.removeAll()
         let filePath = courseDataFilePath()
         NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
+        
+        if conflictCourses.isEmpty {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        } else {
+            var msg = "课程: "
+            for course in conflictCourses {
+                msg += course + ", "
+            }
+            msg += "在相同时间存在其他安排"
+            let alertController = UIAlertController(title: "时间冲突", message: msg, preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "确定", style: .cancel) { (alterAction: UIAlertAction) -> Void in
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

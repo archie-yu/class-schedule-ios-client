@@ -14,7 +14,7 @@ public class Lesson: NSObject, NSCoding {
     public var room: String
     public var firstWeek: Int
     public var lastWeek: Int
-    public var alternate: Int // every: 00, odd: 01, even: 10
+    public var alternate: Int // every: 11, odd: 01, even: 10
     public var weekday: Int
     public var firstClass: Int
     public var lastClass: Int
@@ -62,10 +62,10 @@ public class Lesson: NSObject, NSCoding {
     }
     
     public func conflict(with lesson: Lesson) -> Bool {
-        let weekConflict = ((firstWeek >= lesson.firstWeek && firstWeek <= lesson.lastWeek) || (lastWeek >= lesson.firstWeek && lastWeek <= lesson.lastWeek)) && (alternate & lesson.alternate == 0)
-        let weekdayConflict = weekConflict && weekday == lesson.weekday
+        let weekConflict = ((firstWeek >= lesson.firstWeek && firstWeek <= lesson.lastWeek) || (lastWeek >= lesson.firstWeek && lastWeek <= lesson.lastWeek)) && (alternate & lesson.alternate != 0)
+        let weekdayConflict = weekday == lesson.weekday
         let classConflict = (firstClass >= lesson.firstClass && firstClass <= lesson.lastClass) || (lastClass >= lesson.firstClass && lastClass <= lesson.lastClass)
-        return  weekConflict && weekdayConflict && classConflict
+        return  weekConflict || weekdayConflict || classConflict
     }
     
 }

@@ -80,15 +80,15 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                 for json in jsonArr {
                     let course = json["Course"] as! String
                     let teacher = json["Teacher"] as! String
-                    let location = json["Location"] as! String
+                    let room = json["Room"] as! String
                     let weekday = json["Weekday"] as! Int
-                    let firstClass = json["Begin"] as! Int
-                    let lastClass = json["End"] as! Int
+                    let firstClass = json["FirstClass"] as! Int
+                    let lastClass = json["LastClass"] as! Int
                     let firstWeek = json["FirstWeek"] as! Int
                     let lastWeek = json["LastWeek"] as! Int
-                    let alternate = json["Interval"] as! Int
+                    let alternate = json["Alternate"] as! Int
                     let newCourse = Course(course: course, teacher: teacher)
-                    let newLesson = Lesson(course: course, inRoom: location, fromWeek: firstWeek, toWeek: lastWeek, alternate: alternate, on: weekday, fromClass: firstClass, toClass: lastClass)
+                    let newLesson = Lesson(course: course, inRoom: room, fromWeek: firstWeek, toWeek: lastWeek, alternate: alternate, on: weekday, fromClass: firstClass, toClass: lastClass)
                     courseFromWebList.append(newCourse)
                     lessonFromWebList.append([newLesson])
                 }
