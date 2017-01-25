@@ -70,6 +70,8 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
         pickerView.delegate = self
         self.view.addSubview(pickerView)
         
+        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+        currentWeek = userDefault!.integer(forKey: "CurrentWeek")
         pickerView.selectRow(currentWeek - 1, inComponent: 0, animated: false)
         
     }
@@ -137,6 +139,9 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
                 self.pickerView.frame = pickerFrame
             })
             currentWeek = pickerView.selectedRow(inComponent: 0) + 1
+            let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+            userDefault?.set(currentWeek, forKey: "CurrentWeek")
+            userDefault?.synchronize()
         } else {
             titleButton.setTitle("确认", for: .normal)
             titleButton.titleLabel?.font = .boldSystemFont(ofSize: 21)

@@ -24,6 +24,8 @@ let weekdayStrings = ["周一", "周二", "周三", "周四", "周五", "周六"
 
 var courseList: [Course] = []
 var lessonList: [[Lesson]] = [[], [], [], [], [], [], []]
+var courseFromWebList: [Course] = []
+var lessonFromWebList: [[Lesson]] = []
 
 func add(course newCourse: Course) {
     for course in courseList {
@@ -60,6 +62,3 @@ func load(from filePath: String) {
         lessonList[i].sort() { $0.firstClass < $1.firstClass }
     }
 }
-
-var courseFromWebList: [Course] = []
-var lessonFromWebList: [[Lesson]] = []

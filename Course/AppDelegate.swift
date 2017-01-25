@@ -20,12 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
-        if let saturdayValue = userDefault?.bool(forKey: "Saturday") {
-            saturday = saturdayValue ? 1 : 0
-        }
-        if let sundayValue = userDefault?.bool(forKey: "Sunday") {
-            sunday = sundayValue ? 1 : 0
-        }
+        saturday = userDefault!.integer(forKey: "Saturday")
+        sunday = userDefault!.integer(forKey: "Sunday")
         
         return true
     }
