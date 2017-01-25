@@ -65,7 +65,7 @@ public class Lesson: NSObject, NSCoding {
         let weekConflict = ((firstWeek >= lesson.firstWeek && firstWeek <= lesson.lastWeek) || (lastWeek >= lesson.firstWeek && lastWeek <= lesson.lastWeek)) && (alternate & lesson.alternate != 0)
         let weekdayConflict = weekday == lesson.weekday
         let classConflict = (firstClass >= lesson.firstClass && firstClass <= lesson.lastClass) || (lastClass >= lesson.firstClass && lastClass <= lesson.lastClass)
-        return  weekConflict || weekdayConflict || classConflict
+        return  weekConflict && weekdayConflict && classConflict
     }
     
 }

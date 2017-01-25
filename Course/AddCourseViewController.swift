@@ -211,6 +211,9 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         add(course: newCourse)
         if add(lesson: newLesson) {
+            lessonList[newLesson.weekday].sort() { $0.firstClass < $1.firstClass }
+            let filePath = courseDataFilePath()
+            NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(title: "时间冲突", message: "该课程在相同时间存在其他安排", preferredStyle: .alert)

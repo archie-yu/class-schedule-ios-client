@@ -47,6 +47,10 @@ class CourseFromWebViewController: UITableViewController {
         }
         courseFromWebList.removeAll()
         lessonFromWebList.removeAll()
+        // 对所有课时重新排序
+        for i in 0..<lessonList.count {
+            lessonList[i].sort() { $0.firstClass < $1.firstClass }
+        }
         let filePath = courseDataFilePath()
         NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
         

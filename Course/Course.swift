@@ -39,8 +39,6 @@ func add(lesson newLesson: Lesson) -> Bool {
         if course.course == newLesson.course {
             if course.add(lesson: newLesson) {
                 lessonList[newLesson.weekday].append(newLesson)
-                let filePath = courseDataFilePath()
-                NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
                 return true
             }
             return false
@@ -57,6 +55,9 @@ func load(from filePath: String) {
         for lesson in course.lessons {
             lessonList[lesson.weekday].append(lesson)
         }
+    }
+    for i in 0..<lessonList.count {
+        lessonList[i].sort() { $0.firstClass < $1.firstClass }
     }
 }
 
