@@ -12,7 +12,7 @@ class CourseInformationViewController: UIViewController {
 
     @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var timeAndLocationLabel: UILabel!
-    @IBOutlet weak var teacherTextField: UITextField!
+    @IBOutlet weak var teacherLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

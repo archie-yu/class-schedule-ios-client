@@ -75,7 +75,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuO-MW-cMb">
+                            <button opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuO-MW-cMb">
                                 <rect key="frame" x="8" y="609" width="359" height="50"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -85,6 +85,11 @@
                                 <state key="normal" title="删除课程">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="DeleteCourse:" destination="X9B-C0-SeE" eventType="touchUpInside" id="vqC-FU-baH"/>
                                 </connections>
@@ -1597,15 +1602,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="教师名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASP-wX-uB8">
-                                <rect key="frame" x="12" y="65" width="335" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="oRB-75-aPg"/>
-                                </constraints>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间地点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cND-jP-4Xu">
                                 <rect key="frame" x="12" y="39" width="335" height="20"/>
                                 <constraints>
@@ -1615,23 +1611,32 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教师名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmR-Di-gkm">
+                                <rect key="frame" x="12" y="65" width="335" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="i7v-SR-GPC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cND-jP-4Xu" firstAttribute="top" secondItem="XuY-gl-ngk" secondAttribute="bottom" constant="2" id="H21-DQ-pwr"/>
-                            <constraint firstItem="ASP-wX-uB8" firstAttribute="leading" secondItem="fxw-uc-LtD" secondAttribute="leading" constant="12" id="Pa1-Z6-hxK"/>
-                            <constraint firstAttribute="trailing" secondItem="ASP-wX-uB8" secondAttribute="trailing" constant="12" id="Xwa-Kc-fux"/>
                             <constraint firstItem="XuY-gl-ngk" firstAttribute="leading" secondItem="fxw-uc-LtD" secondAttribute="leading" constant="12" id="a7h-nv-79y"/>
+                            <constraint firstAttribute="trailing" secondItem="CmR-Di-gkm" secondAttribute="trailing" constant="12" id="aZJ-ck-r6U"/>
                             <constraint firstAttribute="trailing" secondItem="XuY-gl-ngk" secondAttribute="trailing" constant="12" id="bBS-DB-cbK"/>
                             <constraint firstItem="cND-jP-4Xu" firstAttribute="leading" secondItem="fxw-uc-LtD" secondAttribute="leading" constant="12" id="btW-nC-1Tl"/>
                             <constraint firstAttribute="trailing" secondItem="cND-jP-4Xu" secondAttribute="trailing" constant="12" id="e5H-OJ-7uh"/>
                             <constraint firstItem="XuY-gl-ngk" firstAttribute="top" secondItem="fxw-uc-LtD" secondAttribute="top" constant="12" id="fCB-Es-VBO"/>
-                            <constraint firstAttribute="bottom" secondItem="ASP-wX-uB8" secondAttribute="bottom" constant="12" id="t1h-UT-MxS"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="CmR-Di-gkm" secondAttribute="bottom" constant="12" id="gzR-HK-Xiq"/>
+                            <constraint firstItem="CmR-Di-gkm" firstAttribute="leading" secondItem="fxw-uc-LtD" secondAttribute="leading" constant="12" id="wsP-xW-Q6J"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="courseLabel" destination="XuY-gl-ngk" id="9VB-X3-DJS"/>
-                        <outlet property="teacherTextField" destination="ASP-wX-uB8" id="gXw-Nc-dOL"/>
+                        <outlet property="teacherLabel" destination="CmR-Di-gkm" id="QXx-AY-zg4"/>
                         <outlet property="timeAndLocationLabel" destination="cND-jP-4Xu" id="bIx-Wk-eOA"/>
                     </connections>
                 </viewController>

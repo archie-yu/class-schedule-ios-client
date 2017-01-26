@@ -55,7 +55,9 @@ func add(lesson newLesson: Lesson) -> Bool {
     for course in courseList {
         if course.course == newLesson.course {
             if course.add(lesson: newLesson) {
-                lessonList[newLesson.weekday].append(newLesson)
+                if newLesson.firstWeek <= courseWeek && newLesson.lastWeek >= courseWeek && (newLesson.alternate == 3 || (newLesson.alternate % 2) == (courseWeek % 2)) {
+                    lessonList[newLesson.weekday].append(newLesson)
+                }
                 return true
             }
             return false
