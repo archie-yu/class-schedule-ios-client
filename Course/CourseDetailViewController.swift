@@ -9,7 +9,7 @@
 import UIKit
 import CourseModel
 
-class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     var weekday = -1
     var lessonNo = -1
@@ -17,9 +17,14 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
     var count = 0
     var editingLine = -1
     
+    var editingItem = ""
+    
+    var noteToBottom: CGFloat = 0
+    
     var course: Course!
     
     var infoVC: CourseInformationViewController!
+    var noteVC: CourseNoteViewController!
     
     var bgColor: UIColor!
     var courseTextField = UITextField()
@@ -31,10 +36,10 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
     var deleteButtonState: [Bool] = []
     
     @IBOutlet weak var informationCard: UIView!
-    @IBOutlet weak var notePlaceHolder: UILabel!
-    @IBOutlet weak var courseDetails: UITextView!
+    @IBOutlet weak var noteCard: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     
+    @IBOutlet weak var informationCardToTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteHeight: NSLayoutConstraint!
     
@@ -52,7 +57,10 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
         }
         infoVC.timeAndLocationLabel.text = lessonString.substring(to: lessonString.index(lessonString.endIndex, offsetBy: -2))
         infoVC.teacherLabel.text = course.teacher
-        courseDetails.text = course.note
+        if course.note != "" {
+            noteVC.courseNote.text = course.note
+            noteHeight.constant = max(100, noteVC.courseNote.contentSize.height) + 38
+        }
     }
     
     func modify(textField: UITextField, withText text: String) -> CGFloat {
@@ -96,17 +104,19 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
         }
         
         for vc in self.childViewControllers {
-            if vc is CourseInformationViewController {
+            switch vc {
+            case is CourseInformationViewController:
                 infoVC = vc as! CourseInformationViewController
-                break
+            case is CourseNoteViewController:
+                noteVC = vc as! CourseNoteViewController
+            default: break
             }
         }
         fillInformation()
+        noteVC.courseNote.delegate = self
         
         let item = UIBarButtonItem(title: "编辑", style: .plain, target: self, action: #selector(CourseDetailViewController.beginEditing(right:)))
         self.navigationItem.rightBarButtonItem = item
-        
-        courseDetails.delegate = self
         
         bgColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 1)
         count = course.lessons.count
@@ -155,6 +165,24 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
                                         informationCard.bounds.width - 24)
         teacherTextField.frame = CGRect(x: 12, y: CGFloat(78 + count * 36), width: teacherTextFieldWidth, height: 30)
         
+        noteToBottom = UIScreen.main.bounds.height - 230 - informationCard.bounds.height
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // 注册键盘出现和键盘消失的通知
+        let NC = NotificationCenter.default
+        NC.addObserver(self,
+                       selector: #selector(CourseDetailViewController.keyboardWillChangeFrame(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NC.addObserver(self,
+                       selector: #selector(CourseDetailViewController.keyboardWillHide(notification:)),
+                       name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // 注销键盘出现和键盘消失的通知
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -165,6 +193,7 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
     func beginEditing(right: UIBarButtonItem) {
         if right.title == "编辑" {
             // 准备编辑
+            noteVC.courseNote.resignFirstResponder()
             right.title = "完成"
             self.infoHeightConstraint.constant += CGFloat(40 * count + 12)
             UIView.animate(withDuration: 0.4) { () in
@@ -186,8 +215,10 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
                 self.addButton.alpha = 1
                 self.teacherTextField.alpha = 1
             }, completion: nil)
+            noteToBottom = UIScreen.main.bounds.height - 230 - informationCard.bounds.height
         } else {
             // 编辑结束
+            noteVC.courseNote.resignFirstResponder()
             right.title = "编辑"
             UIView.animate(withDuration: 0.4) { () in
                 self.deleteButton.alpha = 0
@@ -228,6 +259,7 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
             let filePath = courseDataFilePath()
             NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
             fillInformation()
+            noteToBottom = UIScreen.main.bounds.height - 230 - informationCard.bounds.height
         }
     }
     
@@ -252,11 +284,32 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        notePlaceHolder.isHidden = (textView.text != "")
-        UIView.animate(withDuration: 0.3) { () -> Void in
-            self.noteHeight.constant = max(textView.contentSize.height, 100)
-            self.view.layoutIfNeeded()
+        course.note = noteVC.courseNote.text
+        let filePath = courseDataFilePath()
+        NSKeyedArchiver.archiveRootObject(courseList, toFile: filePath)
+    }
+    
+    func keyboardWillChangeFrame(notification: NSNotification) {
+        if noteVC.courseNote.isFirstResponder {
+            noteHeight.constant = 258
+            let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! CGRect
+            let keyboardHeight = keyboardFrame.height
+            let deltaY = keyboardHeight - 3 - noteToBottom + 120
+            if deltaY > 0 {
+                informationCardToTopConstraint.constant -= deltaY
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                    self.view.layoutIfNeeded()
+                })
+            }
         }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        informationCardToTopConstraint.constant = 14
+        noteHeight.constant = max(100, noteVC.courseNote.contentSize.height) + 38
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            self.view.layoutIfNeeded()
+        })
     }
     
     func deleteLesson(button: UIButton) {
@@ -322,7 +375,7 @@ class CourseDetailViewController: UIViewController, UITextViewDelegate, UITextFi
                 }, completion: nil)
             }
         }
-        courseDetails.resignFirstResponder()
+        noteVC.courseNote.resignFirstResponder()
     }
     
     @IBAction func DeleteCourse(_ sender: UIButton) {

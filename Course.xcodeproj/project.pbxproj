@@ -32,6 +32,7 @@
 		118D27511DEC1236009BFA17 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D27501DEC1236009BFA17 /* Course.swift */; };
 		118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FF0F91E00E83F00B28487 /* SettingsViewController.swift */; };
 		119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */; };
+		11B4D2F81E3A25E100DEFCDF /* CourseNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4D2F71E3A25E100DEFCDF /* CourseNoteViewController.swift */; };
 		11C2057F1E3705CF00439AC2 /* CourseInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C2057E1E3705CF00439AC2 /* CourseInformationViewController.swift */; };
 		11C27E161DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; };
 		11C27E171DFFDBFA00C8FC9D /* MGSwipeTableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -135,6 +136,7 @@
 		118D27501DEC1236009BFA17 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		118FF0F91E00E83F00B28487 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		119C3DDE1DE2D3CD003C644C /* AddAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAssignmentViewController.swift; sourceTree = "<group>"; };
+		11B4D2F71E3A25E100DEFCDF /* CourseNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseNoteViewController.swift; sourceTree = "<group>"; };
 		11C2057E1E3705CF00439AC2 /* CourseInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInformationViewController.swift; sourceTree = "<group>"; };
 		11C27E141DFFDBF300C8FC9D /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSwipeTableCell.framework; sourceTree = SOURCE_ROOT; };
 		11C27E191DFFF8F900C8FC9D /* DisplayCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCoursesViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 			children = (
 				CA1D51151E28784300797F0C /* CourseDetailViewController.swift */,
 				11C2057E1E3705CF00439AC2 /* CourseInformationViewController.swift */,
+				11B4D2F71E3A25E100DEFCDF /* CourseNoteViewController.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				1120AA091E2A052700E20345 /* TimeSettingsViewController.swift in Sources */,
 				1121EE511E2B5DA1006E7428 /* CourseFromWebViewController.swift in Sources */,
 				119C3DDF1DE2D3CD003C644C /* AddAssignmentViewController.swift in Sources */,
+				11B4D2F81E3A25E100DEFCDF /* CourseNoteViewController.swift in Sources */,
 				118FF0FA1E00E83F00B28487 /* SettingsViewController.swift in Sources */,
 				11E897121DE0189C00226CF1 /* AssignmentTableController.swift in Sources */,
 				11536E921E288D02009EB152 /* AddCourseFromWebViewController.swift in Sources */,
