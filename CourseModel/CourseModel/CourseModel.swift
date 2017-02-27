@@ -111,6 +111,6 @@ public class Course: NSObject, NSCoding {
 
 public func courseDataFilePath() -> String {
     let manager = FileManager()
-    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
+    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.studio.sloth.Course")
     return (containerURL?.appendingPathComponent("course.dat").path)!
 }

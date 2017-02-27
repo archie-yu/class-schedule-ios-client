@@ -17,16 +17,20 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     var count = 0
     var editingLine = -1
     
-    var editingItem = ""
-    
     var noteToBottom: CGFloat = 0
     
     var course: Course!
     
+    let bgColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 1)
+    
     var infoVC: CourseInformationViewController!
     var noteVC: CourseNoteViewController!
+    lazy var courseTimePickerViewController: CourseTimePickerViewController = {
+        let controller = CourseTimePickerViewController()
+        controller.courseTimePickerView.backgroundColor = self.bgColor
+        return controller
+    }()
     
-    var bgColor: UIColor!
     var courseTextField = UITextField()
     var roomTextFields: [UITextField] = []
     var timeButtons: [UIButton] = []
@@ -34,6 +38,8 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     var addButton = UIButton()
     var teacherTextField = UITextField()
     var deleteButtonState: [Bool] = []
+    var confirmButton: UIButton!
+    var cancelButton: UIButton!
     
     @IBOutlet weak var informationCard: UIView!
     @IBOutlet weak var noteCard: UIView!
@@ -61,6 +67,25 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
             noteVC.courseNote.text = course.note
             noteHeight.constant = max(100, noteVC.courseNote.contentSize.height) + 38
         }
+    }
+    
+    func getTextField(withRoom text: String) -> UITextField {
+        let textField = UITextField()
+        textField.alpha = 0
+        textField.tintColor = .white
+        textField.textColor = .white
+        textField.backgroundColor = bgColor
+        textField.textAlignment = .center
+        textField.text = text
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.returnKeyType = .done
+        textField.clipsToBounds = true
+        textField.layer.cornerRadius = 6
+        informationCard.addSubview(textField)
+        informationCard.bringSubview(toFront: textField)
+        textField.delegate = self
+        textField.addTarget(self, action: #selector(CourseDetailViewController.textFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
+        return textField
     }
     
     func modify(textField: UITextField, withText text: String) -> CGFloat {
@@ -118,7 +143,6 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         let item = UIBarButtonItem(title: "编辑", style: .plain, target: self, action: #selector(CourseDetailViewController.beginEditing(right:)))
         self.navigationItem.rightBarButtonItem = item
         
-        bgColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 1)
         count = course.lessons.count
         for i in 0..<count {
             let lesson = course.lessons[i]
@@ -126,6 +150,9 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
             let textField = UITextField()
             roomTextFields.append(textField)
             var textFieldWidth = modify(textField: textField, withText: lesson.room)
+//            let textField = getTextField(withRoom: lesson.room)
+//            roomTextFields.append(textField)
+//            var textFieldWidth = textField.intrinsicContentSize.width + 20
             
             let timeButton = UIButton()
             timeButtons.append(timeButton)
@@ -160,6 +187,7 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         modify(button: addButton, withText: "＋", color: .lightGray)
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         addButton.layer.cornerRadius = 12
+        addButton.addTarget(self, action: #selector(CourseDetailViewController.addLesson(button:)), for: .touchUpInside)
         addButton.frame = CGRect(x: 12, y: CGFloat(48 + count * 36), width: 24, height: 24)
         let teacherTextFieldWidth = min(modify(textField: teacherTextField, withText: course.teacher),
                                         informationCard.bounds.width - 24)
@@ -175,9 +203,9 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         NC.addObserver(self,
                        selector: #selector(CourseDetailViewController.keyboardWillChangeFrame(notification:)),
                        name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        NC.addObserver(self,
-                       selector: #selector(CourseDetailViewController.keyboardWillHide(notification:)),
-                       name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        NC.addObserver(self,
+//                       selector: #selector(CourseDetailViewController.keyboardWillHide(notification:)),
+//                       name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -193,7 +221,7 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     func beginEditing(right: UIBarButtonItem) {
         if right.title == "编辑" {
             // 准备编辑
-            noteVC.courseNote.resignFirstResponder()
+            noteVC.courseNote.isEditable = true
             right.title = "完成"
             self.infoHeightConstraint.constant += CGFloat(40 * count + 12)
             UIView.animate(withDuration: 0.4) { () in
@@ -217,8 +245,8 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
             }, completion: nil)
             noteToBottom = UIScreen.main.bounds.height - 230 - informationCard.bounds.height
         } else {
-            // 编辑结束
-            noteVC.courseNote.resignFirstResponder()
+            // 结束编辑
+            noteVC.courseNote.isEditable = false
             right.title = "编辑"
             UIView.animate(withDuration: 0.4) { () in
                 self.deleteButton.alpha = 0
@@ -296,7 +324,7 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
             let keyboardHeight = keyboardFrame.height
             let deltaY = keyboardHeight - 3 - noteToBottom + 120
             if deltaY > 0 {
-                informationCardToTopConstraint.constant -= deltaY
+                informationCardToTopConstraint.constant = 14 - deltaY
                 UIView.animate(withDuration: 0.5, animations: {() -> Void in
                     self.view.layoutIfNeeded()
                 })
@@ -304,7 +332,7 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         informationCardToTopConstraint.constant = 14
         noteHeight.constant = max(100, noteVC.courseNote.contentSize.height) + 38
         UIView.animate(withDuration: 0.5, animations: {() -> Void in
@@ -357,6 +385,118 @@ class CourseDetailViewController: UIViewController, UITextFieldDelegate, UITextV
                 button.titleLabel?.alpha = 1
             }, completion: nil)
         }
+    }
+    
+    func addLesson(button: UIButton) {
+        
+        // 禁止编辑其他项目，防止误触
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        noteVC.courseNote.isEditable = false
+        deleteButton.isEnabled = false
+        
+        let beginY = button.frame.minY
+        
+        let textField = UITextField()
+        roomTextFields.append(textField)
+        textField.placeholder = "输入教室"
+        var textFieldWidth = modify(textField: textField, withText: "")
+        
+        let timeButton = UIButton()
+        timeButtons.append(timeButton)
+        modify(button: timeButton, withText: "编辑时间", color: bgColor)
+        timeButton.layer.cornerRadius = 6
+        let timeWidth = timeButton.intrinsicContentSize.width + 20
+        
+        textFieldWidth = min(textFieldWidth, informationCard.bounds.width - timeWidth - 76)
+        textField.frame = CGRect(x: 12, y: beginY, width: textFieldWidth, height: 30)
+        timeButton.frame = CGRect(x: textFieldWidth + 24, y: beginY, width: timeWidth, height: 30)
+        
+        courseTimePickerViewController.expand(withFrame: CGRect(x: 0, y: beginY + 36, width: informationCard.bounds.width, height: 0))
+        
+        confirmButton = UIButton()
+        confirmButton.frame = CGRect(x: 12, y: beginY + 36, width: informationCard.bounds.width / 2 - 18, height: 40)
+        modify(button: confirmButton, withText: "添加", color: bgColor)
+        confirmButton.layer.cornerRadius = 2
+        
+        cancelButton = UIButton()
+        cancelButton.frame = CGRect(x: informationCard.bounds.width / 2 + 6, y: beginY + 36, width: informationCard.bounds.width / 2 - 18, height: 40)
+        modify(button: cancelButton, withText: "取消", color: .lightGray)
+        cancelButton.layer.cornerRadius = 2
+        cancelButton.addTarget(self, action: #selector(CourseDetailViewController.cancelAddLesson(button:)), for: .touchUpInside)
+        
+        UIView.animate(withDuration: 0.2) { () in
+            self.addButton.alpha = 0
+            self.teacherTextField.alpha = 0
+            self.deleteButton.alpha = 0.3
+            self.infoHeightConstraint.constant += 16
+            self.view.layoutIfNeeded()
+        }
+        UIView.animate(withDuration: 0.2, delay: 0.2, options: .layoutSubviews, animations: { () in
+            self.confirmButton.alpha = 1
+            self.cancelButton.alpha = 1
+            textField.alpha = 1
+            timeButton.alpha = 1
+        }, completion: nil)
+        UIView.animate(withDuration: 0.0075, delay: 0.5, options: .curveLinear, animations: { () in
+            self.infoHeightConstraint.constant += 6
+            self.view.layoutIfNeeded()
+            self.confirmButton.frame.origin.y += 6
+            self.cancelButton.frame.origin.y += 6
+        }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.5075, options: .curveLinear, animations: { () in
+            self.informationCardToTopConstraint.constant = -button.frame.minY + 6
+            self.infoHeightConstraint.constant += 160
+            self.view.layoutIfNeeded()
+            self.confirmButton.frame.origin.y += 160
+            self.cancelButton.frame.origin.y += 160
+            self.informationCard.addSubview(self.courseTimePickerViewController.view)
+            self.courseTimePickerViewController.expand(withFrame: CGRect(x: 0, y: beginY + 36, width: self.informationCard.bounds.width, height: 160))
+        }, completion: nil)
+    }
+    
+    func cancelAddLesson(button: UIButton) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveLinear, animations: { () in
+            self.courseTimePickerViewController.compact(withFrame: CGRect(x: 0, y: CGFloat(84 + self.count * 36), width: self.informationCard.bounds.width, height: 0))
+            self.informationCardToTopConstraint.constant = 14
+            self.infoHeightConstraint.constant -= 160
+            self.view.layoutIfNeeded()
+            self.confirmButton.frame.origin.y -= 160
+            self.cancelButton.frame.origin.y -= 160
+        }, completion: { (finished) in
+            self.courseTimePickerViewController.view.removeFromSuperview()
+        })
+        UIView.animate(withDuration: 0.0075, delay: 0.2, options: .curveLinear, animations: { () in
+            self.infoHeightConstraint.constant -= 6
+            self.view.layoutIfNeeded()
+            self.confirmButton.frame.origin.y -= 6
+            self.cancelButton.frame.origin.y -= 6
+        }, completion: nil)
+        UIView.animate(withDuration: 0.2, delay: 0.3075, options: .curveLinear, animations: { () in
+            self.confirmButton.alpha = 0
+            self.cancelButton.alpha = 0
+            self.roomTextFields.last?.alpha = 0
+            self.timeButtons.last?.alpha = 0
+        }, completion: { (finished) in
+            self.confirmButton.removeFromSuperview()
+            self.cancelButton.removeFromSuperview()
+            self.roomTextFields.removeLast()
+            self.timeButtons.removeLast()
+        })
+        UIView.animate(withDuration: 0.2, delay: 0.5075, options: .curveLinear, animations: { () in
+            self.addButton.alpha = 1
+            self.teacherTextField.alpha = 1
+            self.deleteButton.alpha = 1
+            self.infoHeightConstraint.constant -= 16
+            self.view.layoutIfNeeded()
+        }, completion: { (finished) in
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.noteVC.courseNote.isEditable = true
+            self.deleteButton.isEnabled = true
+        })
+    }
+    
+    func confirmAddLesson(button: UIButton) {
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

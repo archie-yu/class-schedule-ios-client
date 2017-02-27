@@ -87,10 +87,20 @@ class CourseFromWebViewController: UITableViewController {
         cell.teacherLabel.text = course.teacher
         var lessonString = ""
         for lesson in lessonFromWebList[indexPath.row] {
-            lessonString += "\(lesson.room), \(weekdayStrings[lesson.weekday]) \(lesson.firstClass)-\(lesson.lastClass)节; "
+            if lesson.weekday == -1 {
+                lessonString += "\(lesson.room), 自由时间; "
+                cell.accessoryType = .none
+                cell.isUserInteractionEnabled = false
+                cell.card.backgroundColor = UIColor(white: 0.8, alpha: 1)
+            } else {
+                lessonString += "\(lesson.room), \(weekdayStrings[lesson.weekday]) \(lesson.firstClass)-\(lesson.lastClass)节; "
+                cell.accessoryType = .checkmark
+                cell.isUserInteractionEnabled = true
+                cell.card.backgroundColor = UIColor.white
+            }
         }
         cell.locationLabel.text = lessonString.substring(to: lessonString.index(lessonString.endIndex, offsetBy: -2))
-
+        
         return cell
     }
     

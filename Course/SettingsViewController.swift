@@ -145,7 +145,7 @@ class SettingsViewController: UITableViewController, MFMailComposeViewController
         let systemVersion = UIDevice.current.systemVersion
         
         // 设置邮件地址、主题及正文
-        mailComposeVC.setToRecipients(["yuyq96@gmail.com"])
+        mailComposeVC.setToRecipients(["slothstudio@126.com"])
         mailComposeVC.setSubject("Course 意见反馈")
         mailComposeVC.setMessageBody("< 反馈内容 >\n\n\n 应用名称：Course\n 应用版本：\(appVersion)\n 设备型号：\(modelName)\n 系统版本：\(systemVersion)", isHTML: false)
         

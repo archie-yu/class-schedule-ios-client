@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.isStatusBarHidden = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
-        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+        let userDefault = UserDefaults(suiteName: "group.studio.sloth.Course")
         saturday = userDefault!.integer(forKey: "Saturday")
         sunday = userDefault!.integer(forKey: "Sunday")
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,27 +23,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="37" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cca-t5-Qcl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="667" id="LNc-vx-JPZ"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodayCourseCell" rowHeight="37" id="geM-SE-8rb" customClass="CourseCell" customModule="TodayCourse" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="37"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="37"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="geM-SE-8rb" id="Nux-JM-xn0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBp-jP-cxh">
-                                                    <rect key="frame" x="8" y="10" width="309" height="16"/>
+                                                    <rect key="frame" x="8" y="10" width="277" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 - 00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-RR-BfF">
-                                                    <rect key="frame" x="317" y="10.5" width="50" height="15"/>
+                                                    <rect key="frame" x="285" y="10.5" width="50" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="QIv-SO-OEk"/>
                                                     </constraints>
@@ -69,9 +66,10 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="cca-t5-Qcl" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="3cM-mm-boJ"/>
-                            <constraint firstItem="cca-t5-Qcl" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" id="a1F-U2-leM"/>
-                            <constraint firstItem="cca-t5-Qcl" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="vmW-dT-IL4"/>
+                            <constraint firstItem="cca-t5-Qcl" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="8uj-HP-C3X"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="cca-t5-Qcl" secondAttribute="bottom" id="HsE-iv-VkH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cca-t5-Qcl" secondAttribute="trailing" id="KCd-Ed-Xm3"/>
+                            <constraint firstItem="cca-t5-Qcl" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="pOc-WL-9AD"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

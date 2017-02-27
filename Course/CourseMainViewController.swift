@@ -137,7 +137,7 @@ class CourseMainViewController: UIViewController, UIPageViewControllerDelegate, 
             })
             courseWeek = pickerView.selectedRow(inComponent: 0) + 1
             relevantWeek = Calendar.current.dateComponents([.weekOfYear], from: Date()).weekOfYear!
-            let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+            let userDefault = UserDefaults(suiteName: "group.studio.sloth.Course")
             userDefault?.set(courseWeek, forKey: "CourseWeek")
             userDefault?.set(relevantWeek, forKey: "RelevantWeek")
             userDefault?.synchronize()

@@ -44,6 +44,6 @@ public class Assignment: NSObject, NSCoding {
 
 public func assignmentDataFilePath() -> String {
     let manager = FileManager()
-    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.cn.nju.edu.Course")
+    let containerURL = manager.containerURL(forSecurityApplicationGroupIdentifier: "group.studio.sloth.Course")
     return (containerURL?.appendingPathComponent("assignment.dat").path)!
 }

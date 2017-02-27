@@ -14,8 +14,10 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
     
     @IBOutlet weak var todayCourseTable: UITableView!
     
-    var courseList : [Course] = []
-    var todayCourseList : [Course] = []
+    var courseList: [Course] = []
+    var todayLessonList: [Lesson] = []
+    
+    var isOldVersion = false
     
     override func viewDidLoad() {
         
@@ -25,12 +27,6 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         todayCourseTable.delegate = self
         todayCourseTable.dataSource = self
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-        } else {
-            // Fallback on earlier versions
-        }
-        
         let filePath = courseDataFilePath()
         if (FileManager.default.fileExists(atPath: filePath)) {
             courseList = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as! [Course]
@@ -38,13 +34,27 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
 
         let curDate = Date()
         let calendar = Calendar.current
-        let weekday = calendar.dateComponents([.weekday], from: curDate).weekday
-//        for course in courseList {
-//            if course.weekday == weekday {
-//                todayCourseList.append(course)
-//            }
-//        }
+        let weekday = (calendar.dateComponents([.weekday], from: curDate).weekday! + 5) % 7
+        for course in courseList {
+            for lesson in course.lessons {
+                if lesson.weekday == weekday {
+                    todayLessonList.append(lesson)
+                }
+            }
+        }
+        todayLessonList.sort() { $0.firstClass < $1.firstClass }
         
+        if #available(iOSApplicationExtension 10.0, *) {
+            self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        } else {
+            isOldVersion = true
+            self.preferredContentSize = CGSize(width: 0, height: CGFloat(37 * (todayLessonList.count > 3 ? todayLessonList.count : 3) - 1))
+        }
+        
+    }
+    
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
     }
     
     @available(iOSApplicationExtension 10.0, *)
@@ -57,7 +67,7 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
         case .expanded:
             self.preferredContentSize = CGSize(
                 width: self.view.bounds.size.width,
-                height: CGFloat(37 * (todayCourseList.count > 6 ? todayCourseList.count : 6)))
+                height: CGFloat(37 * (todayLessonList.count > 6 ? todayLessonList.count : 6)))
         }
     }
     
@@ -66,16 +76,16 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todayCourseList.count
+        return todayLessonList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodayCourseCell", for: indexPath) as! CourseCell
         
-        let course = todayCourseList[indexPath.row]
-//        cell.courseName.text = "\(course.course)(\(course.location))"
-//        cell.courseTime.text = "\(course.begin) - \(course.end)"
+        let lesson = todayLessonList[indexPath.row]
+        cell.courseName.text = "\(lesson.course)(\(lesson.room))"
+        cell.courseTime.text = "\(lesson.firstClass) - \(lesson.lastClass)"
         
         return cell
         

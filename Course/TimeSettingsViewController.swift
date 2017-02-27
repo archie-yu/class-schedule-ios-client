@@ -80,7 +80,7 @@ class TimeSettingsViewController: UITableViewController {
         // 取消选中
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+        let userDefault = UserDefaults(suiteName: "group.studio.sloth.Course")
         
         // 跳转
         switch indexPath.section {

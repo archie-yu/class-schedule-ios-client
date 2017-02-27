@@ -9,7 +9,7 @@
 import UIKit
 import CourseModel
 
-class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
+class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     var editingItem = ""
     
@@ -123,12 +123,10 @@ class AddCourseViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    //set the col nums of the pickerview
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 6
     }
     
-    //set the row nums of the pickerview
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0, 1: return weekNum

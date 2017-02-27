@@ -75,22 +75,26 @@ class AddCourseFromWebViewController: UIViewController, UITextFieldDelegate {
                 let dataStr = String(data: d, encoding: .utf8)
                 let offset = dataStr?.range(of: "[")?.lowerBound
                 let rawData = dataStr?.substring(from: offset!).data(using: .utf8)
-                let jsonArr = try! JSONSerialization.jsonObject(
+                let courseJsonArr = try! JSONSerialization.jsonObject(
                     with: rawData!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [[String: Any]]
-                for json in jsonArr {
-                    let course = json["Course"] as! String
-                    let teacher = json["Teacher"] as! String
-                    let room = json["Room"] as! String
-                    let weekday = json["Weekday"] as! Int
-                    let firstClass = json["FirstClass"] as! Int
-                    let lastClass = json["LastClass"] as! Int
-                    let firstWeek = json["FirstWeek"] as! Int
-                    let lastWeek = json["LastWeek"] as! Int
-                    let alternate = json["Alternate"] as! Int
+                for courseJson in courseJsonArr {
+                    let course = courseJson["course"] as! String
+                    let teacher = courseJson["teacher"] as! String
                     let newCourse = Course(course: course, teacher: teacher)
-                    let newLesson = Lesson(course: course, inRoom: room, fromWeek: firstWeek, toWeek: lastWeek, alternate: alternate, on: weekday, fromClass: firstClass, toClass: lastClass)
+                    var newLessons: [Lesson] = []
+                    let lessonJsonArr = courseJson["lessons"] as! [[String: Any]]
+                    for lessonJson in lessonJsonArr {
+                        let room = lessonJson["room"] as! String
+                        let weekday = lessonJson["weekday"] as! Int
+                        let firstClass = lessonJson["first_class"] as! Int
+                        let lastClass = lessonJson["last_class"] as! Int
+                        let firstWeek = lessonJson["first_week"] as! Int
+                        let lastWeek = lessonJson["last_week"] as! Int
+                        let alternate = lessonJson["alternate"] as! Int
+                        newLessons.append(Lesson(course: course, inRoom: room, fromWeek: firstWeek, toWeek: lastWeek, alternate: alternate, on: weekday, fromClass: firstClass, toClass: lastClass))
+                    }
                     courseFromWebList.append(newCourse)
-                    lessonFromWebList.append([newLesson])
+                    lessonFromWebList.append(newLessons)
                 }
                 DispatchQueue.main.async(execute: {
                     self.fetchingIndicator.stopAnimating()

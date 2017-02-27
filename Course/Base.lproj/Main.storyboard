@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1519,6 +1519,7 @@
                                     <constraint firstItem="0SP-mB-Nfm" firstAttribute="leading" secondItem="dcE-di-H8s" secondAttribute="leading" constant="8" id="kbz-ho-Tnd"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="card" destination="0SP-mB-Nfm" id="G9R-6R-Om9"/>
                                     <outlet property="courseLabel" destination="r1S-nK-bQD" id="yoS-B6-3qU"/>
                                     <outlet property="locationLabel" destination="qML-pO-nHV" id="h4A-bB-Gty"/>
                                     <outlet property="teacherLabel" destination="2GS-FW-4Oh" id="Pg3-Gt-giI"/>
@@ -1650,7 +1651,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="359" height="138"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uJ-es-52K">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5uJ-es-52K">
                                 <rect key="frame" x="6" y="32" width="347" height="100"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>

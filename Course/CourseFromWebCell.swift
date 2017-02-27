@@ -10,6 +10,7 @@ import UIKit
 
 class CourseFromWebCell: UITableViewCell {
 
+    @IBOutlet weak var card: UILabel!
     @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var teacherLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!

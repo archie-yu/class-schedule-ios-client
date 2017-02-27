@@ -22,7 +22,7 @@ var relevantWeek = 0
 var currenWeek = 0
 
 func resumeWeek() {
-    let userDefault = UserDefaults(suiteName: "group.cn.nju.edu.Course")
+    let userDefault = UserDefaults(suiteName: "group.studio.sloth.Course")
     courseWeek = userDefault!.integer(forKey: "CourseWeek")
     relevantWeek = userDefault!.integer(forKey: "RelevantWeek")
     if courseWeek == 0 {
