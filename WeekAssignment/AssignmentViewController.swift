@@ -81,14 +81,15 @@ class WeekAssignmentViewController: UIViewController, NCWidgetProviding, UITable
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeekAssignmentCell", for: indexPath) as! WeekAssignmentCell
         
+        if isOldVersion {
+            cell.assignmentContent.textColor = .white
+            cell.assignmentTime.textColor = .white
+        }
+        
         if indexPath.row >= weekAssignmentList.count {
             cell.assignmentContent.text = ""
             cell.assignmentTime.text = ""
         } else {
-            if isOldVersion {
-                cell.assignmentContent.textColor = .white
-                cell.assignmentTime.textColor = .white
-            }
             let assignment = weekAssignmentList[indexPath.row]
             cell.assignmentContent.text = assignment.course + "：" + assignment.content
             let calender = Calendar.current

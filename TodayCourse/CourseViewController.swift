@@ -76,16 +76,26 @@ class CourseViewController: UIViewController, NCWidgetProviding, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todayLessonList.count
+        return todayLessonList.count > 6 ? todayLessonList.count : 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodayCourseCell", for: indexPath) as! CourseCell
         
-        let lesson = todayLessonList[indexPath.row]
-        cell.courseName.text = "\(lesson.course)(\(lesson.room))"
-        cell.courseTime.text = "\(lesson.firstClass) - \(lesson.lastClass)"
+        if isOldVersion {
+            cell.courseName.textColor = .white
+            cell.courseTime.textColor = .white
+        }
+        
+        if indexPath.row >= todayLessonList.count {
+            cell.courseName.text = ""
+            cell.courseTime.text = ""
+        } else {
+            let lesson = todayLessonList[indexPath.row]
+            cell.courseName.text = "\(lesson.course)(\(lesson.room))"
+            cell.courseTime.text = "\(lesson.firstClass) - \(lesson.lastClass)"
+        }
         
         return cell
         
