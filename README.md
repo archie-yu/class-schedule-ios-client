@@ -9,7 +9,7 @@ An iOS application which automatically get & display your class schedule, also s
 
 ## Server
 
-Server is available here: [https://github.com/archie-yu/class-schedule-server](https://github.com/archie-yu/class-schedule-server)
+Server is available [here](https://github.com/archie-yu/class-schedule-server).
 
 ## Getting started
 
