@@ -1,6 +1,8 @@
 # Class Schedule Client for iOS
 
-![](https://img.shields.io/badge/swift-3.0-orage.svg)
+![](https://img.shields.io/badge/swift-3.0-orange.svg)
+![](https://img.shields.io/badge/platform-iOS-lightgray.svg)
+![](https://img.shields.io/badge/iOS-8+-green.svg)
 [![](https://img.shields.io/badge/license-MIT-000000.svg)](https://github.com/archie-yu/class-schedule-ios-client/blob/master/LICENSE)
 
 An iOS application which automatically get & display your class schedule, also support assignment management.
