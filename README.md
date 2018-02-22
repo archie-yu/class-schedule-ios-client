@@ -13,7 +13,7 @@ Server is available [here](https://github.com/archie-yu/class-schedule-server).
 
 ## Getting started
 
-- Build the `CourseModel` framework, which is used for sharing data between main application and today extension;
+- Build the `CourseModel` framework, which is used for sharing data between main application and today extension.
 - Build the `Course` application.
 
 ## License
